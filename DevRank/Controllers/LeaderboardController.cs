@@ -1,5 +1,5 @@
 using System.Web.Mvc;
-using Db = DevRank.FakeDatabase.FakeDatabase;
+using Db = DevRank.Data.AppData;
 
 namespace DevRank.Controllers
 {

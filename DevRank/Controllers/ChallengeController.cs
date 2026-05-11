@@ -2,7 +2,7 @@ using System.Linq;
 using System.Web.Mvc;
 using DevRank.Models;
 using DevRank.Services;
-using Db = DevRank.FakeDatabase.FakeDatabase;
+using Db = DevRank.Data.AppData;
 
 namespace DevRank.Controllers
 {
