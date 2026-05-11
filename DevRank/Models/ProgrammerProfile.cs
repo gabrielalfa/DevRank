@@ -22,6 +22,9 @@ namespace DevRank.Models
         public int Wins { get; set; }
         public int Losses { get; set; }
         public int WinStreak { get; set; }
+        public int CommunityReputation { get; set; }
+        public int CommunityLevel { get; set; }
+        public int HelpfulReviews { get; set; }
         public string Season { get; set; }
         public string Level { get; set; }
         public string[] Badges { get; set; }

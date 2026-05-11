@@ -71,6 +71,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChallengeController.cs" />
+    <Compile Include="Controllers\CommunityController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
@@ -81,6 +82,11 @@
     </Compile>
     <Compile Include="Models\Challenge.cs" />
     <Compile Include="Models\ChallengeDetailsViewModel.cs" />
+    <Compile Include="Models\CommunityChallenge.cs" />
+    <Compile Include="Models\CommunityCreateChallengeViewModel.cs" />
+    <Compile Include="Models\CommunityHubViewModel.cs" />
+    <Compile Include="Models\CommunityLevel.cs" />
+    <Compile Include="Models\CommunityReview.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\EvolutionPoint.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
@@ -108,6 +114,9 @@
     <Content Include="Views\Challenge\Details.cshtml" />
     <Content Include="Views\Challenge\Index.cshtml" />
     <Content Include="Views\Challenge\Result.cshtml" />
+    <Content Include="Views\Community\CreateChallenge.cshtml" />
+    <Content Include="Views\Community\Index.cshtml" />
+    <Content Include="Views\Community\Moderation.cshtml" />
     <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Leaderboard\Index.cshtml" />

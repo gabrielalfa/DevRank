@@ -91,4 +91,27 @@
             profileCopyButton.textContent = "Link copiado";
         });
     }
+
+    var communityTexts = document.querySelectorAll("[data-community-text]");
+    var communityScore = document.querySelector("[data-community-score]");
+    var communityScoreLabel = document.querySelector("[data-community-score-label]");
+
+    if (communityTexts.length && communityScore && communityScoreLabel) {
+        var updateCommunityQuality = function () {
+            var total = 0;
+            communityTexts.forEach(function (field) {
+                total += field.value.length;
+            });
+
+            var score = Math.min(96, 42 + Math.floor(total / 18));
+            communityScore.style.width = score + "%";
+            communityScoreLabel.textContent = "Score estimado: " + score;
+        };
+
+        communityTexts.forEach(function (field) {
+            field.addEventListener("input", updateCommunityQuality);
+        });
+
+        updateCommunityQuality();
+    }
 })();

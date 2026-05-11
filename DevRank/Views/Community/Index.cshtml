@@ -1,0 +1,124 @@
+@model DevRank.Models.CommunityHubViewModel
+
+@{
+    ViewBag.Title = "Community Hub";
+    var nextProgress = Model.NextLevel == null ? 100 : (Model.Reputation * 100) / Model.NextLevel.MinimumReputation;
+}
+
+<section class="community-hero">
+    <div>
+        <span class="eyebrow">Developer Contribution Hub</span>
+        <h1>Construa a arena com reputação, curadoria e controle.</h1>
+        <p>
+            Crie desafios, revise cenários reais, ajude outros devs e ganhe autoridade técnica.
+            Toda contribuição passa por validação para evitar spam, superficialidade e farming.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="@Url.Action("CreateChallenge", "Community")">Criar desafio</a>
+            <a class="btn btn-secondary" href="@Url.Action("Moderation", "Community")">Painel de revisão</a>
+        </div>
+    </div>
+    <aside class="community-reputation-card">
+        <span class="eyebrow">Reputação comunitária</span>
+        <strong>@Model.Reputation</strong>
+        <p>@Model.CurrentLevel.Name</p>
+        <div class="skill-track"><span style="width:@Math.Min(100, nextProgress)%"></span></div>
+        <small>@(Model.NextLevel == null ? "Nível máximo alcançado" : "Próximo nível: " + Model.NextLevel.Name)</small>
+    </aside>
+</section>
+
+<section class="community-metrics">
+    <article><span>Desafios criados</span><strong>@Model.CreatedChallenges</strong></article>
+    <article><span>Aprovados</span><strong>@Model.ApprovedChallenges</strong></article>
+    <article><span>Rejeitados</span><strong>@Model.RejectedChallenges</strong></article>
+    <article><span>Fila de revisão</span><strong>@Model.PendingReviews</strong></article>
+    <article><span>Reviews úteis</span><strong>@Model.HelpfulReviews</strong></article>
+</section>
+
+<section class="community-layout">
+    <div class="community-main">
+        <article class="community-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Fluxo controlado</span>
+                    <h2>Contribuições não entram direto na arena.</h2>
+                </div>
+            </div>
+            <div class="governance-flow">
+                <div><span>01</span><strong>Criação</strong><p>Dev propõe um desafio com cenário, contexto e resposta esperada.</p></div>
+                <div><span>02</span><strong>Shadow review</strong><p>Validação fake bloqueia respostas curtas, genéricas ou superficiais.</p></div>
+                <div><span>03</span><strong>Revisão técnica</strong><p>Contribuidores confiáveis avaliam clareza, relevância e dificuldade.</p></div>
+                <div><span>04</span><strong>Publicação</strong><p>Conteúdo aprovado gera reputação e pode entrar na arena oficial.</p></div>
+            </div>
+        </article>
+
+        <article class="community-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Contribuições recentes</span>
+                    <h2>Fila viva da comunidade</h2>
+                </div>
+            </div>
+            <div class="community-challenge-list">
+                @foreach (var challenge in Model.RecentChallenges)
+                {
+                    <article>
+                        <div>
+                            <strong>@challenge.Title</strong>
+                            <span>@challenge.Category / @challenge.Type / por @challenge.AuthorName</span>
+                        </div>
+                        <em class="status-pill">@challenge.Status</em>
+                        <div class="quality-score">
+                            <small>Qualidade</small>
+                            <strong>@challenge.QualityScore</strong>
+                        </div>
+                    </article>
+                }
+            </div>
+        </article>
+    </div>
+
+    <aside class="community-side">
+        <article class="community-panel">
+            <span class="eyebrow">Níveis comunitários</span>
+            <h2>Progressão de autoridade</h2>
+            <div class="level-list">
+                @foreach (var level in Model.Levels)
+                {
+                    <div class="@(level.Level == Model.CurrentLevel.Level ? "is-current" : "")">
+                        <span>Nível @level.Level</span>
+                        <strong>@level.Name</strong>
+                        <small>@level.MinimumReputation rep</small>
+                    </div>
+                }
+            </div>
+        </article>
+
+        <article class="community-panel">
+            <span class="eyebrow">Badges</span>
+            <h2>Status que importa</h2>
+            <div class="badge-list public">
+                @foreach (var badge in Model.CommunityBadges)
+                {
+                    <span>@badge</span>
+                }
+            </div>
+        </article>
+
+        <article class="community-panel">
+            <span class="eyebrow">Ranking comunitário</span>
+            <h2>Top curadores</h2>
+            <div class="community-ranking">
+                @for (var index = 0; index < Model.CommunityLeaderboard.Count; index++)
+                {
+                    var programmer = Model.CommunityLeaderboard[index];
+                    <div>
+                        <span>#@(index + 1)</span>
+                        <strong>@programmer.Name</strong>
+                        <em>@programmer.CommunityReputation rep</em>
+                    </div>
+                }
+            </div>
+        </article>
+    </aside>
+</section>

@@ -1,0 +1,92 @@
+@model DevRank.Models.CommunityCreateChallengeViewModel
+
+@{
+    ViewBag.Title = "Criar desafio comunitário";
+}
+
+<section class="community-form-page">
+    <div class="section-heading split-heading">
+        <div>
+            <span class="eyebrow">Criar contribuição</span>
+            <h1>Novo desafio comunitário</h1>
+            <p>Contribuições boas parecem trabalho real: contexto, pressão, critérios e resposta esperada.</p>
+        </div>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Community")">Voltar ao Hub</a>
+    </div>
+
+    <form class="community-create-layout" method="post" action="@Url.Action("CreateChallenge", "Community")">
+        <div class="community-panel community-form">
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="alert-box">@Model.ErrorMessage</div>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.SuccessMessage))
+            {
+                <div class="success-box">@Model.SuccessMessage</div>
+            }
+
+            <label>
+                Título
+                <input type="text" name="Title" value="@Model.Title" placeholder="Ex: Incidente de API com timeout intermitente" />
+            </label>
+
+            <div class="form-grid two">
+                <label>
+                    Tipo
+                    <select name="Type">
+                        <option>Cenário real</option>
+                        <option>Desafio técnico</option>
+                        <option>Entrevista</option>
+                        <option>Review de código</option>
+                        <option>Comportamental</option>
+                    </select>
+                </label>
+                <label>
+                    Categoria
+                    <select name="Category">
+                        <option>Backend</option>
+                        <option>Frontend</option>
+                        <option>Arquitetura</option>
+                        <option>SQL</option>
+                        <option>DevOps</option>
+                        <option>Segurança</option>
+                        <option>Liderança</option>
+                        <option>Comunicação</option>
+                        <option>Debugging</option>
+                        <option>Performance</option>
+                        <option>Legado</option>
+                    </select>
+                </label>
+            </div>
+
+            <label>
+                Cenário real
+                <textarea name="Scenario" rows="8" data-community-text placeholder="Descreva contexto, restrições, pressão, impacto e o que o dev precisa decidir.">@Model.Scenario</textarea>
+            </label>
+
+            <label>
+                Resposta esperada
+                <textarea name="ExpectedAnswer" rows="6" data-community-text placeholder="Explique critérios de avaliação, trade-offs e sinais de uma boa resposta.">@Model.ExpectedAnswer</textarea>
+            </label>
+
+            <div class="anti-spam-strip">
+                <span>Cooldown ativo</span>
+                <span>@Model.DailyLimitRemaining envios restantes hoje</span>
+                <span>Rep mínima: @Model.MinimumReputationRequired</span>
+            </div>
+
+            <button class="btn btn-primary" type="submit">Enviar para revisão</button>
+        </div>
+
+        <aside class="community-panel quality-preview">
+            <span class="eyebrow">Quality gate fake</span>
+            <h2>O que será avaliado</h2>
+            <div class="quality-rule"><strong>Clareza</strong><span>Cenário compreensível e sem ambiguidade.</span></div>
+            <div class="quality-rule"><strong>Relevância</strong><span>Problema real de engenharia, não trivia.</span></div>
+            <div class="quality-rule"><strong>Dificuldade</strong><span>Atrito adequado para o nível técnico.</span></div>
+            <div class="quality-rule"><strong>Anti-genérico</strong><span>Bloqueia respostas curtas, vagas ou copiadas.</span></div>
+            <div class="quality-meter"><span data-community-score style="width:42%"></span></div>
+            <small data-community-score-label>Score estimado: 42</small>
+        </aside>
+    </form>
+</section>

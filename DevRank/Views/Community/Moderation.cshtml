@@ -1,0 +1,46 @@
+@model DevRank.Models.CommunityHubViewModel
+
+@{
+    ViewBag.Title = "Moderação Community";
+}
+
+<section class="community-form-page">
+    <div class="section-heading split-heading">
+        <div>
+            <span class="eyebrow">Painel de revisão</span>
+            <h1>Moderação e curadoria</h1>
+            <p>Aprovar pouco e bem é melhor do que publicar muito e diluir a reputação da arena.</p>
+        </div>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Community")">Voltar ao Hub</a>
+    </div>
+
+    <div class="moderation-layout">
+        @foreach (var challenge in Model.ReviewQueue)
+        {
+            <article class="moderation-card">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">@challenge.Category / @challenge.Type</span>
+                        <h2>@challenge.Title</h2>
+                    </div>
+                    <em class="status-pill">@challenge.Status</em>
+                </div>
+                <p>@challenge.Scenario</p>
+                <div class="review-score-grid">
+                    <div><span>Qualidade</span><strong>@challenge.QualityScore</strong></div>
+                    <div><span>Clareza</span><strong>@challenge.ClarityScore</strong></div>
+                    <div><span>Relevância</span><strong>@challenge.RelevanceScore</strong></div>
+                    <div><span>Dificuldade</span><strong>@challenge.DifficultyScore</strong></div>
+                    <div><span>Reports</span><strong>@challenge.Reports</strong></div>
+                </div>
+                <p class="moderator-note">@challenge.ModeratorNote</p>
+                <form class="moderation-actions" method="post" action="@Url.Action("Moderate", "Community")">
+                    <input type="hidden" name="id" value="@challenge.Id" />
+                    <button class="btn btn-primary" name="decision" value="Aprovado" type="submit">Aprovar</button>
+                    <button class="btn btn-secondary" name="decision" value="Devolvido para melhoria" type="submit">Devolver</button>
+                    <button class="btn btn-secondary danger-action" name="decision" value="Rejeitado" type="submit">Rejeitar</button>
+                </form>
+            </article>
+        }
+    </div>
+</section>

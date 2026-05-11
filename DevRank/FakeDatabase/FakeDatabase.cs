@@ -12,6 +12,8 @@ namespace DevRank.FakeDatabase
 
         private static int _nextProgrammerId = 6;
         private static int _nextMatchId = 1;
+        private static int _nextCommunityChallengeId = 7;
+        private static int _nextCommunityReviewId = 4;
 
         public static readonly List<ProgrammerProfile> Programmers = new List<ProgrammerProfile>
         {
@@ -35,6 +37,9 @@ namespace DevRank.FakeDatabase
                 Wins = 48,
                 Losses = 12,
                 WinStreak = 7,
+                CommunityReputation = 1840,
+                CommunityLevel = 4,
+                HelpfulReviews = 88,
                 Season = "Season 01",
                 Badges = new[] { "Legacy Slayer", "MVC Elite", "Clean Fix" }
             },
@@ -58,6 +63,9 @@ namespace DevRank.FakeDatabase
                 Wins = 34,
                 Losses = 15,
                 WinStreak = 4,
+                CommunityReputation = 1320,
+                CommunityLevel = 3,
+                HelpfulReviews = 52,
                 Season = "Season 01",
                 Badges = new[] { "Perf Hunter", "Query Tamer" }
             },
@@ -81,6 +89,9 @@ namespace DevRank.FakeDatabase
                 Wins = 28,
                 Losses = 14,
                 WinStreak = 2,
+                CommunityReputation = 980,
+                CommunityLevel = 3,
+                HelpfulReviews = 37,
                 Season = "Season 01",
                 Badges = new[] { "Race Detector", "Service Mind" }
             },
@@ -104,6 +115,9 @@ namespace DevRank.FakeDatabase
                 Wins = 19,
                 Losses = 11,
                 WinStreak = 3,
+                CommunityReputation = 520,
+                CommunityLevel = 2,
+                HelpfulReviews = 18,
                 Season = "Season 01",
                 Badges = new[] { "UI Fixer", "Vanilla JS" }
             },
@@ -127,6 +141,9 @@ namespace DevRank.FakeDatabase
                 Wins = 14,
                 Losses = 13,
                 WinStreak = 1,
+                CommunityReputation = 210,
+                CommunityLevel = 1,
+                HelpfulReviews = 9,
                 Season = "Season 01",
                 Badges = new[] { "Fast Ship", "Bug Basher" }
             }
@@ -210,6 +227,32 @@ namespace DevRank.FakeDatabase
 
         public static readonly List<MatchHistory> MatchHistories = new List<MatchHistory>();
 
+        public static readonly List<CommunityLevel> CommunityLevels = new List<CommunityLevel>
+        {
+            new CommunityLevel { Level = 1, Name = "Contributor", MinimumReputation = 0, Permissions = new[] { "Sugerir desafios", "Comentar", "Reportar problemas" } },
+            new CommunityLevel { Level = 2, Name = "Trusted Contributor", MinimumReputation = 350, Permissions = new[] { "Criar desafios públicos", "Avaliar respostas simples", "Sugerir tags" } },
+            new CommunityLevel { Level = 3, Name = "Technical Reviewer", MinimumReputation = 850, Permissions = new[] { "Revisar desafios", "Validar respostas", "Aprovar conteúdo" } },
+            new CommunityLevel { Level = 4, Name = "Senior Curator", MinimumReputation = 1500, Permissions = new[] { "Editar desafios", "Organizar categorias", "Moderar abusos" } },
+            new CommunityLevel { Level = 5, Name = "Arena Architect", MinimumReputation = 2500, Permissions = new[] { "Criar desafios oficiais", "Validar rankings", "Destacar conteúdos" } }
+        };
+
+        public static readonly List<CommunityChallenge> CommunityChallenges = new List<CommunityChallenge>
+        {
+            new CommunityChallenge { Id = 1, AuthorId = 1, AuthorName = "Ana Byte", Title = "Incidente de API com timeout intermitente", Type = "Cenário real", Category = "Debugging", Scenario = "Uma API MVC começa a responder acima de 8s durante pico. O time precisa mitigar, comunicar e investigar sem derrubar produção.", ExpectedAnswer = "Diagnóstico incremental, logs, métricas, rollback controlado e comunicação objetiva.", Status = "Aprovado", QualityScore = 94, ClarityScore = 91, RelevanceScore = 96, DifficultyScore = 82, ApprovalRate = 88, AbandonRate = 11, TechnicalLevel = 4, Reports = 0, CreatedAt = DateTime.Now.AddDays(-12), ModeratorNote = "Excelente cenário de produção." },
+            new CommunityChallenge { Id = 2, AuthorId = 2, AuthorName = "Bruno Stack", Title = "Query N+1 em relatório financeiro", Type = "Desafio técnico", Category = "SQL", Scenario = "Relatório executa centenas de consultas por cliente e trava no fechamento mensal.", ExpectedAnswer = "Identificar N+1, projetar consulta agregada, paginar e medir antes/depois.", Status = "Em revisão", QualityScore = 86, ClarityScore = 78, RelevanceScore = 92, DifficultyScore = 74, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 3, Reports = 0, CreatedAt = DateTime.Now.AddDays(-2), ModeratorNote = "Precisa validar critérios de aceite." },
+            new CommunityChallenge { Id = 3, AuthorId = 3, AuthorName = "Carla Thread", Title = "Conflito entre dev sênior e produto", Type = "Comportamental", Category = "Liderança", Scenario = "Um dev sênior bloqueia uma decisão de produto em público. Como conduzir sem humilhar ninguém e sem perder prazo?", ExpectedAnswer = "Escuta, alinhamento privado, trade-offs, decisão documentada e restauração de confiança.", Status = "Em revisão", QualityScore = 82, ClarityScore = 85, RelevanceScore = 89, DifficultyScore = 80, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 3, Reports = 1, CreatedAt = DateTime.Now.AddDays(-1), ModeratorNote = "Bom potencial para entrevista de liderança." },
+            new CommunityChallenge { Id = 4, AuthorId = 4, AuthorName = "Diego Razor", Title = "Tela lenta com renderização pesada", Type = "Desafio técnico", Category = "Frontend", Scenario = "Dashboard carrega 2.000 linhas, filtros travam e o usuário acha que o sistema caiu.", ExpectedAnswer = "Paginação, virtualização, debounce, estados de loading e medição.", Status = "Devolvido para melhoria", QualityScore = 61, ClarityScore = 58, RelevanceScore = 75, DifficultyScore = 55, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 2, Reports = 0, CreatedAt = DateTime.Now.AddDays(-3), ModeratorNote = "Adicionar código base e critérios de aceite." },
+            new CommunityChallenge { Id = 5, AuthorId = 5, AuthorName = "Eva Commit", Title = "Resposta genérica sobre arquitetura limpa", Type = "Entrevista", Category = "Arquitetura", Scenario = "Candidato responde com buzzwords sobre Clean Architecture sem explicar trade-offs.", ExpectedAnswer = "Pressionar por contexto, custo, simplicidade e decisões pragmáticas.", Status = "Rejeitado", QualityScore = 42, ClarityScore = 46, RelevanceScore = 55, DifficultyScore = 35, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 1, Reports = 2, CreatedAt = DateTime.Now.AddDays(-4), ModeratorNote = "Muito genérico, precisa de cenário concreto." },
+            new CommunityChallenge { Id = 6, AuthorId = 1, AuthorName = "Ana Byte", Title = "PR com regra crítica escondida no controller", Type = "Review de código", Category = "Legado", Scenario = "Pull request move uma regra fiscal para dentro do controller para 'resolver rápido'.", ExpectedAnswer = "Apontar risco, sugerir extração incremental e proteger comportamento com testes.", Status = "Aprovado", QualityScore = 91, ClarityScore = 88, RelevanceScore = 94, DifficultyScore = 70, ApprovalRate = 84, AbandonRate = 13, TechnicalLevel = 3, Reports = 0, CreatedAt = DateTime.Now.AddDays(-9), ModeratorNote = "Ótimo para revisão prática." }
+        };
+
+        public static readonly List<CommunityReview> CommunityReviews = new List<CommunityReview>
+        {
+            new CommunityReview { Id = 1, ChallengeId = 4, ReviewerName = "Ana Byte", Decision = "Devolvido", Comment = "Cenário bom, mas falta código inicial e métrica de sucesso.", ReputationDelta = 12, Date = DateTime.Now.AddDays(-2) },
+            new CommunityReview { Id = 2, ChallengeId = 5, ReviewerName = "Bruno Stack", Decision = "Rejeitado", Comment = "Muito abstrato. Precisa de conflito real e resposta esperada mais objetiva.", ReputationDelta = 8, Date = DateTime.Now.AddDays(-3) },
+            new CommunityReview { Id = 3, ChallengeId = 2, ReviewerName = "Carla Thread", Decision = "Em análise", Comment = "Bom desafio, aguardando critérios de aceite.", ReputationDelta = 6, Date = DateTime.Now.AddHours(-12) }
+        };
+
         public static List<ProgrammerProfile> GetTopProgrammers(int count)
         {
             ApplyComputedRanks();
@@ -248,6 +291,9 @@ namespace DevRank.FakeDatabase
                 Wins = 0,
                 Losses = 0,
                 WinStreak = 0,
+                CommunityReputation = 80,
+                CommunityLevel = 1,
+                HelpfulReviews = 0,
                 Season = "Season 01",
                 Level = "Bronze",
                 Badges = new[] { "Rookie", "Arena Ready" }
@@ -340,6 +386,139 @@ namespace DevRank.FakeDatabase
             return match;
         }
 
+        public static CommunityHubViewModel GetCommunityHub(ProgrammerProfile programmer)
+        {
+            ApplyCommunityLevels();
+
+            var currentLevel = GetCommunityLevel(programmer.CommunityReputation);
+            var nextLevel = CommunityLevels.FirstOrDefault(level => level.MinimumReputation > programmer.CommunityReputation);
+            var authored = CommunityChallenges.Where(challenge => challenge.AuthorId == programmer.Id).ToList();
+
+            return new CommunityHubViewModel
+            {
+                CurrentProgrammer = programmer,
+                Reputation = programmer.CommunityReputation,
+                CurrentLevel = currentLevel,
+                NextLevel = nextLevel,
+                CreatedChallenges = authored.Count,
+                ApprovedChallenges = authored.Count(challenge => challenge.Status == "Aprovado"),
+                RejectedChallenges = authored.Count(challenge => challenge.Status == "Rejeitado"),
+                PendingReviews = CommunityChallenges.Count(challenge => challenge.Status == "Em revisão"),
+                HelpfulReviews = programmer.HelpfulReviews,
+                RecentChallenges = CommunityChallenges.OrderByDescending(challenge => challenge.CreatedAt).Take(6).ToList(),
+                ReviewQueue = CommunityChallenges.Where(challenge => challenge.Status == "Em revisão").OrderByDescending(challenge => challenge.QualityScore).ToList(),
+                RecentReviews = CommunityReviews.OrderByDescending(review => review.Date).Take(5).ToList(),
+                CommunityLeaderboard = Programmers.OrderByDescending(item => item.CommunityReputation).Take(10).ToList(),
+                Levels = CommunityLevels,
+                CommunityBadges = new[] { "Bug Hunter", "SQL Master", "Interview Mentor", "Legacy Slayer", "Clean Architect", "Performance Expert", "Community Helper", "Elite Reviewer", "Trusted Engineer" }
+            };
+        }
+
+        public static string ValidateCommunityChallenge(CommunityCreateChallengeViewModel model, ProgrammerProfile programmer)
+        {
+            if (programmer.CommunityReputation < 120)
+            {
+                return "Reputação comunitária insuficiente para publicar. Continue comentando e revisando antes de sugerir desafios.";
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Title) || string.IsNullOrWhiteSpace(model.Scenario))
+            {
+                return "Informe título e cenário real. Contribuições vagas entram em shadow review automaticamente.";
+            }
+
+            if (model.Scenario.Trim().Length < 160)
+            {
+                return "O cenário está curto demais. Descreva contexto, restrição, pressão e critério de avaliação.";
+            }
+
+            if (LooksGeneric(model.Scenario) || LooksGeneric(model.ExpectedAnswer))
+            {
+                return "A contribuição parece genérica. Adicione detalhes concretos, trade-offs e sinais de avaliação.";
+            }
+
+            return string.Empty;
+        }
+
+        public static CommunityChallenge SubmitCommunityChallenge(CommunityCreateChallengeViewModel model, ProgrammerProfile programmer)
+        {
+            var quality = CalculateQualityScore(model);
+            var challenge = new CommunityChallenge
+            {
+                Id = _nextCommunityChallengeId++,
+                AuthorId = programmer.Id,
+                AuthorName = programmer.Name,
+                Title = model.Title,
+                Type = model.Type,
+                Category = model.Category,
+                Scenario = model.Scenario,
+                ExpectedAnswer = model.ExpectedAnswer,
+                Status = "Em revisão",
+                QualityScore = quality,
+                ClarityScore = Math.Min(96, quality - 3),
+                RelevanceScore = Math.Min(98, quality + 5),
+                DifficultyScore = 72,
+                ApprovalRate = 0,
+                AbandonRate = 0,
+                TechnicalLevel = 3,
+                Reports = 0,
+                CreatedAt = DateTime.Now,
+                ModeratorNote = "Shadow review automático: aguardando validação humana."
+            };
+
+            CommunityChallenges.Add(challenge);
+            programmer.CommunityReputation += 15;
+            ApplyCommunityLevels();
+
+            return challenge;
+        }
+
+        public static void ModerateCommunityChallenge(int id, string decision, ProgrammerProfile reviewer)
+        {
+            var challenge = CommunityChallenges.FirstOrDefault(item => item.Id == id);
+
+            if (challenge == null || reviewer == null)
+            {
+                return;
+            }
+
+            var normalizedDecision = string.IsNullOrWhiteSpace(decision) ? "Devolvido para melhoria" : decision;
+            challenge.Status = normalizedDecision;
+            challenge.ModeratorNote = "Moderação fake aplicada por " + reviewer.Name + ".";
+
+            var author = Programmers.FirstOrDefault(item => item.Id == challenge.AuthorId);
+            if (author != null)
+            {
+                if (normalizedDecision == "Aprovado")
+                {
+                    author.CommunityReputation += 80;
+                }
+                else if (normalizedDecision == "Rejeitado")
+                {
+                    author.CommunityReputation = Math.Max(0, author.CommunityReputation - 35);
+                }
+                else
+                {
+                    author.CommunityReputation += 5;
+                }
+            }
+
+            reviewer.HelpfulReviews += 1;
+            reviewer.CommunityReputation += 12;
+
+            CommunityReviews.Add(new CommunityReview
+            {
+                Id = _nextCommunityReviewId++,
+                ChallengeId = id,
+                ReviewerName = reviewer.Name,
+                Decision = normalizedDecision,
+                Comment = challenge.ModeratorNote,
+                ReputationDelta = 12,
+                Date = DateTime.Now
+            });
+
+            ApplyCommunityLevels();
+        }
+
         private static void ApplyComputedRanks()
         {
             foreach (var programmer in Programmers)
@@ -347,6 +526,39 @@ namespace DevRank.FakeDatabase
                 programmer.Level = EloService.GetRank(programmer.EloRating);
                 HydrateAdvancedProfile(programmer);
             }
+
+            ApplyCommunityLevels();
+        }
+
+        private static void ApplyCommunityLevels()
+        {
+            foreach (var programmer in Programmers)
+            {
+                programmer.CommunityLevel = GetCommunityLevel(programmer.CommunityReputation).Level;
+            }
+        }
+
+        private static CommunityLevel GetCommunityLevel(int reputation)
+        {
+            return CommunityLevels
+                .Where(level => level.MinimumReputation <= reputation)
+                .OrderByDescending(level => level.MinimumReputation)
+                .First();
+        }
+
+        private static int CalculateQualityScore(CommunityCreateChallengeViewModel model)
+        {
+            var score = 55;
+            score += Math.Min(20, (model.Scenario ?? string.Empty).Length / 35);
+            score += Math.Min(15, (model.ExpectedAnswer ?? string.Empty).Length / 30);
+            score += string.IsNullOrWhiteSpace(model.Category) ? 0 : 8;
+            return Math.Min(96, score);
+        }
+
+        private static bool LooksGeneric(string value)
+        {
+            var text = (value ?? string.Empty).ToLower();
+            return text.Contains("boas práticas") && text.Contains("melhorar") && text.Length < 240;
         }
 
         private static void HydrateAdvancedProfile(ProgrammerProfile programmer)
