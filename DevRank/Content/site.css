@@ -29,6 +29,7 @@ body {
         radial-gradient(circle at 15% 10%, rgba(50, 245, 255, 0.16), transparent 28rem),
         radial-gradient(circle at 85% 25%, rgba(255, 79, 216, 0.12), transparent 26rem),
         linear-gradient(135deg, #070a12 0%, #0d1320 46%, #080b14 100%);
+    overflow-x: hidden;
 }
 
 a {
@@ -141,6 +142,7 @@ a {
     margin: 18px 0;
     font-size: 4.8rem;
     line-height: 0.98;
+    overflow-wrap: anywhere;
 }
 
 .hero-copy p {
@@ -846,6 +848,15 @@ a {
 }
 
 @media (max-width: 900px) {
+    .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        padding: 14px 0;
+        backdrop-filter: blur(14px);
+        background: rgba(7, 10, 18, 0.82);
+    }
+
     .nav-links {
         display: none;
     }
@@ -860,6 +871,12 @@ a {
         grid-template-columns: 1fr;
     }
 
+    .hero-section {
+        gap: 24px;
+        min-height: auto;
+        padding: 34px 0 54px;
+    }
+
     .challenge-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -871,32 +888,92 @@ a {
     .arena-card {
         min-height: 340px;
     }
+
+    .conviction-section {
+        padding: 26px;
+    }
+
+    .plans-grid,
+    .proof-grid,
+    .value-section {
+        gap: 14px;
+    }
+
+    .plan-card {
+        min-height: auto;
+    }
+
+    .profile-card,
+    .sticky-panel {
+        position: static;
+    }
 }
 
 @media (max-width: 620px) {
     .shell {
-        width: min(100% - 22px, 1180px);
+        width: min(100% - 20px, 1180px);
     }
 
     .topbar {
         gap: 12px;
+        align-items: center;
     }
 
     .btn-ghost {
         display: none;
     }
 
+    .brand {
+        min-width: 0;
+    }
+
+    .brand span:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
     .hero-section {
         min-height: auto;
-        padding-top: 34px;
+        padding: 24px 0 42px;
     }
 
     .hero-copy h1 {
-        font-size: 2.42rem;
+        font-size: 2.28rem;
+        line-height: 1.04;
     }
 
     .hero-copy p {
         font-size: 1rem;
+    }
+
+    .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 22px;
+    }
+
+    .hero-actions .btn,
+    .form-panel .btn,
+    .challenge-card .btn,
+    .plan-card .btn {
+        width: 100%;
+    }
+
+    .trust-strip {
+        gap: 8px;
+        margin-top: 18px;
+    }
+
+    .trust-strip span {
+        flex: 1 1 100%;
+        text-align: center;
+    }
+
+    .arena-card {
+        min-height: auto;
+        padding: 22px;
     }
 
     .mini-grid,
@@ -906,11 +983,63 @@ a {
     }
 
     .rating-display {
-        font-size: 4.6rem;
+        margin-top: 34px;
+        font-size: 4rem;
     }
 
     .page-section h1 {
         font-size: 2.25rem;
+    }
+
+    .page-section {
+        padding: 36px 0 56px;
+    }
+
+    .proof-section,
+    .plans-section,
+    .conviction-section,
+    .final-cta,
+    .leaderboard-section {
+        padding-top: 28px;
+        padding-bottom: 54px;
+    }
+
+    .value-section {
+        padding-bottom: 54px;
+    }
+
+    .value-section article,
+    .proof-grid article,
+    .plan-card,
+    .form-panel,
+    .profile-card,
+    .result-panel,
+    .empty-state {
+        padding: 20px;
+    }
+
+    .conviction-section {
+        margin-bottom: 54px;
+        padding: 20px;
+    }
+
+    .conviction-copy h2,
+    .section-heading h2,
+    .final-cta h2 {
+        font-size: 1.82rem;
+        line-height: 1.16;
+    }
+
+    .section-heading {
+        margin-bottom: 16px;
+    }
+
+    .plan-card {
+        gap: 12px;
+    }
+
+    .price {
+        font-size: 1.8rem;
     }
 
     .split-heading,
@@ -927,6 +1056,37 @@ a {
         grid-template-columns: 1fr;
     }
 
+    .challenge-card {
+        min-height: auto;
+    }
+
+    .challenge-meta,
+    .challenge-footer,
+    .editor-status {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .challenge-meta span,
+    .challenge-footer span {
+        width: 100%;
+    }
+
+    .code-panel {
+        max-width: 100%;
+        padding: 16px;
+        font-size: 0.88rem;
+    }
+
+    .solution-editor {
+        min-height: 220px;
+    }
+
+    .leader-row {
+        gap: 10px;
+        padding: 14px;
+    }
+
     .position,
     .elo,
     .winrate,
@@ -934,5 +1094,38 @@ a {
         width: 100%;
         min-width: 0;
         text-align: left;
+    }
+
+    .rank-pill {
+        display: inline-flex;
+        justify-content: center;
+    }
+
+    .final-cta {
+        margin-bottom: 54px;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-copy h1 {
+        font-size: 2rem;
+    }
+
+    .brand-mark {
+        width: 34px;
+        height: 34px;
+        font-size: 0.88rem;
+    }
+
+    .rating-display {
+        font-size: 3.3rem;
+    }
+
+    .page-section h1 {
+        font-size: 1.95rem;
+    }
+
+    .btn {
+        padding: 0 14px;
     }
 }
