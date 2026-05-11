@@ -28,12 +28,11 @@ ON DUPLICATE KEY UPDATE
     description = VALUES(description);
 
 INSERT INTO community_challenges
-    (id, author_id, author_name, title, type, category, scenario, expected_answer, status, homologation_stage, required_approvals, approval_votes, rejection_votes, confidence_score, quality_score, clarity_score, relevance_score, difficulty_score, approval_rate, abandon_rate, technical_level, reports, moderator_note, is_official_candidate)
+    (id, author_id, author_name, title, challenge_type, category, scenario, expected_answer, status, homologation_stage, required_approvals, approval_votes, rejection_votes, confidence_score, quality_score, clarity_score, relevance_score, difficulty_score, approval_rate, abandon_rate, technical_level, reports, moderator_note, is_official_candidate)
 VALUES
-    (1, 1, 'Ana Byte', 'Incidente de API com timeout intermitente', 'Cenário real', 'Debugging', 'Uma API MVC começa a responder acima de 8s durante pico. O time precisa mitigar, comunicar e investigar sem derrubar produção.', 'Diagnóstico incremental, logs, métricas, rollback controlado e comunicação objetiva.', 'Homologado', 'Homologado pela comunidade', 3, 5, 0, 94, 94, 91, 96, 82, 88, 11, 4, 0, 'Excelente cenário de produção.', b'1'),
-    (2, 2, 'Bruno Stack', 'Query N+1 em relatório financeiro', 'Desafio técnico', 'SQL', 'Relatório executa centenas de consultas por cliente e trava no fechamento mensal.', 'Identificar N+1, projetar consulta agregada, paginar e medir antes/depois.', 'Em homologação', 'Community Review', 3, 2, 0, 76, 86, 78, 92, 74, 0, 0, 3, 0, 'Precisa validar critérios de aceite.', b'1')
+    (1, 1, 'Ana Byte', 'Incidente de API com timeout intermitente', 'Cenário real', 'Debugging', 'Uma API MVC começa a responder acima de 8s durante pico. O time precisa mitigar, comunicar e investigar sem derrubar produção.', 'Diagnóstico incremental, logs, métricas, rollback controlado e comunicação objetiva.', 'Homologado', 'Homologado pela comunidade', 3, 5, 0, 94, 94, 91, 96, 82, 88, 11, 4, 0, 'Excelente cenário de produção.', 1),
+    (2, 2, 'Bruno Stack', 'Query N+1 em relatório financeiro', 'Desafio técnico', 'SQL', 'Relatório executa centenas de consultas por cliente e trava no fechamento mensal.', 'Identificar N+1, projetar consulta agregada, paginar e medir antes/depois.', 'Em homologação', 'Community Review', 3, 2, 0, 76, 86, 78, 92, 74, 0, 0, 3, 0, 'Precisa validar critérios de aceite.', 1)
 ON DUPLICATE KEY UPDATE
     status = VALUES(status),
     homologation_stage = VALUES(homologation_stage),
     confidence_score = VALUES(confidence_score);
-

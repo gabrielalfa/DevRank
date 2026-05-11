@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS challenges (
     estimated_time VARCHAR(80) NULL,
     fake_code TEXT NULL,
     challenge_rating INT NOT NULL DEFAULT 1200,
-    is_active BIT NOT NULL DEFAULT b'1',
+    is_active TINYINT(1) NOT NULL DEFAULT 1,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS community_challenges (
     author_id INT NOT NULL,
     author_name VARCHAR(160) NOT NULL,
     title VARCHAR(180) NOT NULL,
-    type VARCHAR(100) NOT NULL,
+    challenge_type VARCHAR(100) NOT NULL,
     category VARCHAR(100) NOT NULL,
     scenario TEXT NOT NULL,
     expected_answer TEXT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS community_challenges (
     technical_level INT NOT NULL DEFAULT 1,
     reports INT NOT NULL DEFAULT 0,
     moderator_note TEXT NULL,
-    is_official_candidate BIT NOT NULL DEFAULT b'0',
+    is_official_candidate TINYINT(1) NOT NULL DEFAULT 0,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME NULL,
     PRIMARY KEY (id),
@@ -146,4 +146,3 @@ CREATE TABLE IF NOT EXISTS tech_elos (
     CONSTRAINT fk_tech_elos_programmer
         FOREIGN KEY (programmer_id) REFERENCES programmers(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
