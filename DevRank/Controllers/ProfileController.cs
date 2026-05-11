@@ -31,5 +31,23 @@ namespace DevRank.Controllers
 
             return View(model);
         }
+
+        public ActionResult Public(string username)
+        {
+            var programmer = Db.GetProgrammerByUsername(username);
+
+            if (programmer == null)
+            {
+                return RedirectToAction("Index", "Leaderboard");
+            }
+
+            var model = new ProfileViewModel
+            {
+                Programmer = programmer,
+                History = Db.GetHistoryForProgrammer(programmer.Id)
+            };
+
+            return View(model);
+        }
     }
 }

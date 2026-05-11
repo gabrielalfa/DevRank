@@ -268,6 +268,13 @@ namespace DevRank.FakeDatabase
             return Programmers.FirstOrDefault(programmer => programmer.Id == id);
         }
 
+        public static ProgrammerProfile GetProgrammerByUsername(string username)
+        {
+            ApplyComputedRanks();
+            return Programmers.FirstOrDefault(programmer =>
+                programmer.Username.ToLower() == (username ?? string.Empty).ToLower());
+        }
+
         public static Challenge GetChallenge(int id)
         {
             return Challenges.FirstOrDefault(challenge => challenge.Id == id);

@@ -7,6 +7,36 @@
     <link rel="stylesheet" href="~/Content/site.css" />
 </head>
 <body>
+    <div class="mobile-scrim" data-mobile-close></div>
+    <aside class="mobile-drawer" aria-label="Menu mobile" aria-hidden="true">
+        <div class="drawer-head">
+            <a class="brand" href="@Url.Action("Index", "Home")">
+                <span class="brand-mark">DR</span>
+                <span>DevRank</span>
+            </a>
+            <button class="icon-button" type="button" data-mobile-close aria-label="Fechar menu">x</button>
+        </div>
+        <nav class="drawer-nav">
+            <a href="@Url.Action("Index", "Home")">Home</a>
+            <a href="@Url.Action("Index", "Dashboard")">Dashboard</a>
+            <a href="@Url.Action("Index", "Challenge")">Arena</a>
+            <a href="@Url.Action("Index", "Leaderboard")">Leaderboard</a>
+            <a href="@Url.Action("Index", "Profile")">Perfil</a>
+        </nav>
+        <div class="drawer-cta">
+            @if (Session["UserId"] == null)
+            {
+                <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Criar perfil tecnico</a>
+                <a class="btn btn-secondary" href="@Url.Action("Login", "Account")">Entrar</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Entrar na arena</a>
+                <a class="btn btn-secondary" href="@Url.Action("Logout", "Account")">Sair</a>
+            }
+        </div>
+    </aside>
+
     <div class="shell">
         <header class="topbar">
             <a class="brand" href="@Url.Action("Index", "Home")">
@@ -16,23 +46,76 @@
             <nav class="nav-links" aria-label="Navegacao principal">
                 <a href="@Url.Action("Index", "Home")">Home</a>
                 <a href="@Url.Action("Index", "Dashboard")">Dashboard</a>
-                <a href="@Url.Action("Index", "Challenge")">Desafios</a>
+                <a href="@Url.Action("Index", "Challenge")">Arena</a>
                 <a href="@Url.Action("Index", "Leaderboard")">Leaderboard</a>
                 <a href="@Url.Action("Index", "Profile")">Perfil</a>
             </nav>
-            @if (Session["UserId"] == null)
-            {
-                <a class="btn btn-ghost" href="@Url.Action("Login", "Account")">Login</a>
-            }
-            else
-            {
-                <a class="btn btn-ghost" href="@Url.Action("Logout", "Account")">Sair</a>
-            }
+            <div class="topbar-actions">
+                @if (Session["UserId"] == null)
+                {
+                    <a class="btn btn-ghost" href="@Url.Action("Login", "Account")">Login</a>
+                    <a class="btn btn-primary nav-cta" href="@Url.Action("Register", "Account")">Comecar</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary nav-cta" href="@Url.Action("Index", "Challenge")">Arena</a>
+                    <a class="btn btn-ghost" href="@Url.Action("Logout", "Account")">Sair</a>
+                }
+                <button class="hamburger" type="button" data-mobile-open aria-label="Abrir menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
         </header>
 
         <main>
             @RenderBody()
         </main>
+
+        <footer class="premium-footer">
+            <div class="footer-brand">
+                <a class="brand" href="@Url.Action("Index", "Home")">
+                    <span class="brand-mark">DR</span>
+                    <span>DevRank</span>
+                </a>
+                <p>
+                    Uma arena de evolucao profissional criada pela Tornfy para medir pratica,
+                    comunicacao, maturidade e reputacao tecnica.
+                </p>
+                <strong>Discover your real developer level.</strong>
+            </div>
+            <div class="footer-links">
+                <div>
+                    <span>Produto</span>
+                    <a href="@Url.Action("Index", "Dashboard")">Dashboard</a>
+                    <a href="@Url.Action("Index", "Challenge")">Arena</a>
+                    <a href="@Url.Action("Index", "Leaderboard")">Ranking</a>
+                </div>
+                <div>
+                    <span>Ecossistema</span>
+                    <a href="#">Tornfy Labs</a>
+                    <a href="#">Hiring Signal</a>
+                    <a href="#">Talent Graph</a>
+                </div>
+                <div>
+                    <span>Empresa</span>
+                    <a href="#">Sobre</a>
+                    <a href="#">Contato</a>
+                    <a href="#">Carreiras</a>
+                </div>
+                <div>
+                    <span>Legal</span>
+                    <a href="#">Termos</a>
+                    <a href="#">Privacidade</a>
+                    <a href="#">Seguranca</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>© @DateTime.Now.Year Tornfy. DevRank prototype.</span>
+                <span>LinkedIn / GitHub / X</span>
+            </div>
+        </footer>
     </div>
 
     <script src="~/Scripts/devrank.js"></script>

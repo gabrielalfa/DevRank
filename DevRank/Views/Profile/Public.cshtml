@@ -1,0 +1,116 @@
+@model DevRank.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "Perfil publico de " + Model.Programmer.Name;
+    var publicUrl = Url.Action("Public", "Profile", new { username = Model.Programmer.Username }, Request.Url.Scheme);
+}
+
+<section class="public-profile-hero">
+    <div class="public-identity">
+        <div class="fake-avatar large">@Model.Programmer.Name.Substring(0, 1)</div>
+        <div>
+            <span class="eyebrow">DevRank public profile</span>
+            <h1>@Model.Programmer.Name</h1>
+            <p>@Model.Programmer.Bio</p>
+            <div class="profile-tags">
+                <span>@("@" + Model.Programmer.Username)</span>
+                <span>@Model.Programmer.MainStack</span>
+                <span>@Model.Programmer.PerceivedSeniority</span>
+                <span>@Model.Programmer.Level</span>
+            </div>
+        </div>
+    </div>
+    <aside class="share-panel">
+        <span class="eyebrow">Compartilhavel</span>
+        <h2>Identidade tecnica publica</h2>
+        <p>Um snapshot de reputacao, evolucao, skills e maturidade profissional.</p>
+        <input type="text" value="@publicUrl" readonly data-share-url />
+        <button class="btn btn-primary" type="button" data-copy-share>Copiar link</button>
+        <span class="copy-feedback" data-copy-feedback>Link pronto para compartilhar</span>
+    </aside>
+</section>
+
+<section class="public-score-grid">
+    <article>
+        <span>Elo geral</span>
+        <strong>@Model.Programmer.EloRating</strong>
+        <em>@Model.Programmer.Level</em>
+    </article>
+    <article>
+        <span>Winrate</span>
+        <strong>@Model.Programmer.WinRate%</strong>
+        <em>@Model.Programmer.TotalMatches partidas</em>
+    </article>
+    <article>
+        <span>Streak</span>
+        <strong>@Model.Programmer.WinStreak</strong>
+        <em>@Model.Programmer.Season</em>
+    </article>
+    <article>
+        <span>Stack</span>
+        <strong>@Model.Programmer.MainStack</strong>
+        <em>@Model.Programmer.SecondaryStack</em>
+    </article>
+</section>
+
+<section class="public-profile-grid">
+    <div class="dashboard-panel">
+        <div class="panel-heading">
+            <div>
+                <span class="eyebrow">Skill cards</span>
+                <h2>Como esse dev performa</h2>
+            </div>
+        </div>
+        <div class="public-skill-cards">
+            @foreach (var skill in Model.Programmer.Skills)
+            {
+                <article>
+                    <span>@skill.Group</span>
+                    <strong>@skill.Name</strong>
+                    <div class="skill-track"><span style="width:@skill.Score%"></span></div>
+                    <em>@skill.Score/100</em>
+                </article>
+            }
+        </div>
+    </div>
+
+    <aside class="dashboard-panel public-medals">
+        <span class="eyebrow">Conquistas</span>
+        <h2>Medalhas e sinais</h2>
+        <div class="badge-list public">
+            @foreach (var badge in Model.Programmer.Badges)
+            {
+                <span>@badge</span>
+            }
+        </div>
+        <div class="mini-grid stack">
+            <div>
+                <strong>@Model.Programmer.Wins</strong>
+                <span>vitorias</span>
+            </div>
+            <div>
+                <strong>@Model.Programmer.Losses</strong>
+                <span>derrotas</span>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="dashboard-panel public-evolution">
+    <div class="panel-heading">
+        <div>
+            <span class="eyebrow">Evolucao publica</span>
+            <h2>Trajetoria de confianca e Elo</h2>
+        </div>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Leaderboard")">Comparar ranking</a>
+    </div>
+    <div class="evolution-bars public-bars">
+        @foreach (var point in Model.Programmer.Evolution)
+        {
+            <div>
+                <span style="height:@point.Confidence%"></span>
+                <small>@point.Label<br />@point.Elo Elo</small>
+            </div>
+        }
+    </div>
+</section>

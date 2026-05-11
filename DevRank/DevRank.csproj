@@ -111,6 +111,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Leaderboard\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Public.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />

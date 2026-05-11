@@ -1,199 +1,194 @@
 @model DevRank.Models.HomeViewModel
 
 @{
-    ViewBag.Title = "Arena de Ranking para Devs";
+    ViewBag.Title = "Descubra seu nivel real";
 }
 
-<section class="hero-section">
-    <div class="hero-copy">
-        <span class="eyebrow">Hiring signal / Dev assessment arena</span>
-        <h1>Ranking tecnico para separar discurso de pratica.</h1>
-        <p>
-            DevRank transforma desafios reais de engenharia em partidas ranqueadas.
-            Em vez de confiar apenas em curriculo, entrevista subjetiva ou teste teorico,
-            voce acompanha performance pratica, evolucao de Elo e historico tecnico.
-        </p>
-        <div class="hero-actions">
-            <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Entrar na Arena</a>
-            <a class="btn btn-secondary" href="#plans">Ver planos</a>
-        </div>
-        <div class="trust-strip" aria-label="Casos de uso">
-            <span>Triagem tecnica</span>
-            <span>Treinamento interno</span>
-            <span>Ranking de squads</span>
-        </div>
+<section class="premium-hero">
+    <div class="hero-signal">
+        <span class="live-dot"></span>
+        <span>2.418 devs calibrando reputacao tecnica nesta season</span>
     </div>
-
-    <aside class="arena-card" aria-label="Resumo competitivo">
-        <div class="arena-glow"></div>
-        <div class="rank-badge">Diamante</div>
-        <div class="rating-display">2310</div>
-        <p>Elo atual do lider</p>
-        <div class="mini-grid">
-            <div>
-                <strong>@Model.TotalDevelopers</strong>
-                <span>devs</span>
+    <div class="premium-hero-grid">
+        <div class="premium-hero-copy">
+            <span class="eyebrow">Developer reputation arena</span>
+            <h1>Descubra seu nivel real como desenvolvedor.</h1>
+            <p>
+                DevRank avalia pratica, comunicacao, arquitetura, debugging e maturidade sob pressao.
+                Nao e quiz. Nao e prova decorada. E uma arena para provar engenharia no mundo real.
+            </p>
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Criar perfil tecnico</a>
+                <a class="btn btn-secondary" href="@Url.Action("Index", "Leaderboard")">Ver ranking mundial</a>
             </div>
-            <div>
-                <strong>@Model.TotalChallenges</strong>
-                <span>desafios</span>
-            </div>
-            <div>
-                <strong>@Model.TotalMatches</strong>
-                <span>partidas</span>
-            </div>
-        </div>
-    </aside>
-</section>
-
-<section class="proof-section" aria-label="Por que usar">
-    <div class="section-heading">
-        <span class="eyebrow">Problema que resolve</span>
-        <h2>Entrevista tecnica ainda mede muito teatro.</h2>
-        <p>
-            Bons devs nem sempre brilham em conversa cronometrada. E candidatos confiantes
-            nem sempre sustentam uma decisao tecnica quando o codigo aperta.
-        </p>
-    </div>
-    <div class="proof-grid">
-        <article>
-            <strong>Menos achismo</strong>
-            <p>Historico de partidas, Elo e feedback tecnico criam um sinal comparavel entre pessoas.</p>
-        </article>
-        <article>
-            <strong>Mais contexto real</strong>
-            <p>Desafios de MVC, performance, concorrencia e legado simulam decisoes do dia a dia.</p>
-        </article>
-        <article>
-            <strong>Melhor evolucao</strong>
-            <p>O ranking mostra progresso ao longo do tempo, nao apenas um teste isolado.</p>
-        </article>
-    </div>
-</section>
-
-<section class="value-section" aria-label="Como funciona">
-    <article>
-        <span>01</span>
-        <h2>Escolha um desafio</h2>
-        <p>Casos curtos de engenharia: endpoint MVC, performance, service mal dividido ou bug dificil.</p>
-    </article>
-    <article>
-        <span>02</span>
-        <h2>Envie a solucao</h2>
-        <p>Um editor simples recebe sua proposta. Para o MVP, a avaliacao sera fake e controlada.</p>
-    </article>
-    <article>
-        <span>03</span>
-        <h2>Suba no Elo</h2>
-        <p>Vitorias aumentam rating, derrotas ensinam. Bronze, Prata, Ouro, Platina e Diamante.</p>
-    </article>
-</section>
-
-<section class="conviction-section" aria-label="Beneficios da plataforma">
-    <div class="conviction-copy">
-        <span class="eyebrow">Para times e devs</span>
-        <h2>Uma camada competitiva para desenvolvimento profissional.</h2>
-        <p>
-            Use o DevRank para simular entrevistas, calibrar senioridade, treinar tomada de decisao
-            e criar uma cultura de melhoria continua sem montar um processo pesado.
-        </p>
-    </div>
-    <div class="benefit-list">
-        <div>
-            <span>01</span>
-            <strong>Contratacao com evidencias</strong>
-            <p>Compare candidatos por desempenho pratico em problemas equivalentes.</p>
-        </div>
-        <div>
-            <span>02</span>
-            <strong>Treino continuo</strong>
-            <p>Transforme refatoracao, revisao e performance em desafios curtos e repetiveis.</p>
-        </div>
-        <div>
-            <span>03</span>
-            <strong>Gamificacao saudavel</strong>
-            <p>Elo, ranks e badges dao clareza de evolucao sem precisar de processo enterprise.</p>
-        </div>
-    </div>
-</section>
-
-<section id="plans" class="plans-section" aria-label="Planos">
-    <div class="section-heading">
-        <span class="eyebrow">Planos para validar mercado</span>
-        <h2>Comece pequeno, prove valor, escale depois.</h2>
-    </div>
-
-    <div class="plans-grid">
-        <article class="plan-card">
-            <span class="plan-label">Solo</span>
-            <h3>Dev Arena</h3>
-            <p class="price">R$ 0</p>
-            <p>Para devs testarem habilidades e montarem historico publico.</p>
-            <ul>
-                <li>Desafios fake do MVP</li>
-                <li>Perfil com Elo e badges</li>
-                <li>Historico de partidas</li>
-            </ul>
-            <a class="btn btn-secondary" href="@Url.Action("Register", "Account")">Criar perfil</a>
-        </article>
-
-        <article class="plan-card featured">
-            <span class="plan-label">Validacao</span>
-            <h3>Team Trial</h3>
-            <p class="price">R$ 99</p>
-            <p>Para pequenas equipes validarem ranking tecnico interno.</p>
-            <ul>
-                <li>Leaderboard por time</li>
-                <li>Desafios por categoria</li>
-                <li>Feedback tecnico simulado</li>
-            </ul>
-            <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Testar agora</a>
-        </article>
-
-        <article class="plan-card">
-            <span class="plan-label">Empresas</span>
-            <h3>Hiring Lab</h3>
-            <p class="price">Sob consulta</p>
-            <p>Para recrutamento tecnico com trilhas por stack e senioridade.</p>
-            <ul>
-                <li>Rankings privados</li>
-                <li>Relatorios por candidato</li>
-                <li>Desafios customizados</li>
-            </ul>
-            <a class="btn btn-secondary" href="@Url.Action("Index", "Leaderboard")">Ver ranking</a>
-        </article>
-    </div>
-</section>
-
-<section id="ranking" class="leaderboard-section">
-    <div class="section-heading">
-        <span class="eyebrow">Leaderboard inicial</span>
-        <h2>Melhores programadores</h2>
-    </div>
-
-    <div class="leaderboard">
-        @for (var index = 0; index < Model.TopProgrammers.Count; index++)
-        {
-            var programmer = Model.TopProgrammers[index];
-            <article class="leader-row">
-                <div class="position">#@(index + 1)</div>
-                <div class="player">
-                    <strong>@programmer.Name</strong>
-                    <span>@programmer.MainStack</span>
+            <div class="hero-proof">
+                <div>
+                    <strong>91%</strong>
+                    <span>sentem mais confianca em entrevistas</span>
                 </div>
-                <div class="rank-pill rank-@programmer.Level.ToLower()">@programmer.Level</div>
-                <div class="elo">@programmer.EloRating Elo</div>
-                <div class="winrate">@programmer.WinRate% WR</div>
-            </article>
-        }
+                <div>
+                    <strong>14k</strong>
+                    <span>desafios praticos simulados</span>
+                </div>
+                <div>
+                    <strong>38</strong>
+                    <span>empresas observando talentos</span>
+                </div>
+            </div>
+        </div>
+
+        <aside class="hero-console" aria-label="Preview da arena">
+            <div class="console-top">
+                <span>Live assessment</span>
+                <strong>Production Incident #42</strong>
+            </div>
+            <div class="console-code">
+                <span>01</span><p>API em producao com latencia alta.</p>
+                <span>02</span><p>Explique diagnostico, mitigacao e comunicacao.</p>
+                <span>03</span><p>Avaliando clareza, criterio e pressao...</p>
+            </div>
+            <div class="console-score">
+                <div>
+                    <small>Score tecnico</small>
+                    <strong>87</strong>
+                </div>
+                <div>
+                    <small>Comunicacao</small>
+                    <strong>79</strong>
+                </div>
+                <div>
+                    <small>Elo ganho</small>
+                    <strong class="delta-positive">+24</strong>
+                </div>
+            </div>
+        </aside>
     </div>
 </section>
 
-<section class="final-cta" aria-label="Chamada final">
-    <span class="eyebrow">MVP pronto para testar</span>
-    <h2>Entre, resolva um desafio e veja seu Elo mudar.</h2>
+<section class="observer-strip" aria-label="Empresas fake observando talentos">
+    <span>Talentos observados por times fake de</span>
+    <strong>Tornfy Labs</strong>
+    <strong>Northwind</strong>
+    <strong>Contoso Cloud</strong>
+    <strong>Arcadia Systems</strong>
+    <strong>PixelForge</strong>
+</section>
+
+<section class="arena-story">
+    <div class="section-heading">
+        <span class="eyebrow">Por que isso existe?</span>
+        <h2>Porque muita gente boa trava quando precisa provar valor.</h2>
+        <p>
+            Desenvolvedores reais resolvem problemas reais, mas entrevistas ainda confundem memoria,
+            nervosismo e performance. DevRank cria um ambiente progressivo para treinar, competir e
+            construir reputacao tecnica com contexto.
+        </p>
+    </div>
+    <div class="story-grid">
+        <article>
+            <span>01</span>
+            <h3>Treine entrevistas reais</h3>
+            <p>Perguntas tecnicas, emocionais e arquiteturais com pressao simulada.</p>
+        </article>
+        <article>
+            <span>02</span>
+            <h3>Resolva cenarios de mercado</h3>
+            <p>Incidentes, legado, PR review, conflitos, performance e comunicacao com cliente.</p>
+        </article>
+        <article>
+            <span>03</span>
+            <h3>Construa reputacao</h3>
+            <p>Perfil publico, Elo por skill, conquistas, historico e sinais para recrutadores.</p>
+        </article>
+    </div>
+</section>
+
+<section class="live-board-section">
+    <div class="section-heading split-heading">
+        <div>
+            <span class="eyebrow">Ranking ao vivo fake</span>
+            <h2>O mercado observa quem evolui.</h2>
+        </div>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Leaderboard")">Leaderboard completo</a>
+    </div>
+    <div class="live-layout">
+        <div class="leaderboard premium-board">
+            @for (var index = 0; index < Model.TopProgrammers.Count; index++)
+            {
+                var programmer = Model.TopProgrammers[index];
+                <a class="leader-row" href="@Url.Action("Public", "Profile", new { username = programmer.Username })">
+                    <div class="position">#@(index + 1)</div>
+                    <div class="fake-avatar mini">@programmer.Name.Substring(0, 1)</div>
+                    <div class="player">
+                        <strong>@programmer.Name</strong>
+                        <span>@programmer.MainStack</span>
+                    </div>
+                    <div class="rank-pill rank-@programmer.Level.ToLower()">@programmer.Level</div>
+                    <div class="elo">@programmer.EloRating Elo</div>
+                </a>
+            }
+        </div>
+        <aside class="public-preview-card">
+            <span class="eyebrow">Perfil publico</span>
+            <h3>Uma identidade tecnica para compartilhar.</h3>
+            <p>Mostre stack, badges, evolucao, comunicacao, areas fortes e ranking. O dev sente orgulho. O recrutador entende contexto.</p>
+            <a class="btn btn-primary" href="@Url.Action("Public", "Profile", new { username = Model.TopProgrammers[0].Username })">Ver preview publico</a>
+        </aside>
+    </div>
+</section>
+
+<section class="differentiator-section">
+    <div class="section-heading">
+        <span class="eyebrow">Nao e mais uma plataforma de teste</span>
+        <h2>DevRank mede o que aparece quando o codigo encontra pressao.</h2>
+    </div>
+    <div class="compare-grid">
+        <article>
+            <h3>Teste comum</h3>
+            <p>Quiz, algoritmo isolado, resposta decorada, pouca leitura de maturidade.</p>
+        </article>
+        <article class="featured">
+            <h3>DevRank</h3>
+            <p>Cenarios reais, explicacao de decisoes, pressao simulada, Elo vivo e perfil publico.</p>
+        </article>
+        <article>
+            <h3>Entrevista tradicional</h3>
+            <p>Subjetiva, dificil de comparar e dependente do humor do dia.</p>
+        </article>
+    </div>
+</section>
+
+<section class="timeline-section">
+    <div class="section-heading">
+        <span class="eyebrow">Evolucao progressiva</span>
+        <h2>De medo de entrevista para reputacao tecnica.</h2>
+    </div>
+    <div class="timeline-track">
+        <article><span>Semana 1</span><strong>Diagnostico real</strong><p>Mapeie lacunas tecnicas e comportamentais.</p></article>
+        <article><span>Semana 2</span><strong>Treino sem punicao</strong><p>Ganhe clareza antes de competir por Elo.</p></article>
+        <article><span>Semana 3</span><strong>Arena ranqueada</strong><p>Resolva desafios sob pressao simulada.</p></article>
+        <article><span>Semana 4</span><strong>Perfil publico</strong><p>Compartilhe sua evolucao com orgulho.</p></article>
+    </div>
+</section>
+
+<section class="testimonial-section">
+    <div class="testimonial-card">
+        <p>"Pela primeira vez um teste tecnico pareceu trabalho real, nao pegadinha. O feedback me ajudou a explicar melhor minhas decisoes."</p>
+        <strong>Marina Lopes</strong>
+        <span>Backend Developer / Perfil fake</span>
+    </div>
+    <div class="testimonial-card">
+        <p>"Como recrutador, eu olharia esse ranking antes de chamar alguem. Ele mostra evolucao, nao so curriculo bonito."</p>
+        <strong>Rafael Torres</strong>
+        <span>Tech Recruiter / Depoimento fake</span>
+    </div>
+</section>
+
+<section class="final-cta premium-final">
+    <span class="eyebrow">A arena esta aberta</span>
+    <h2>Crie seu perfil, resolva um desafio e descubra onde voce realmente esta.</h2>
     <div class="hero-actions center">
-        <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Entrar na Arena</a>
-        <a class="btn btn-secondary" href="@Url.Action("Register", "Account")">Criar programador</a>
+        <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Entrar agora</a>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Challenge")">Explorar desafios</a>
     </div>
 </section>
