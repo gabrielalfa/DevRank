@@ -24,12 +24,12 @@ namespace DevRank.FakeDatabase
                 MainStack = "ASP.NET MVC",
                 SecondaryStack = "Arquitetura / SQL",
                 PerceivedSeniority = "Senior",
-                Bio = "Especialista em refatoracao de sistemas legados.",
+                Bio = "Especialista em refatoração de sistemas legados.",
                 ExperienceTime = "8 anos",
                 FakeGitHub = "github.com/anabyte",
                 FakeLinkedIn = "linkedin.com/in/anabyte",
                 FakePortfolio = "anabyte.dev",
-                Languages = new[] { "Portugues", "Ingles tecnico" },
+                Languages = new[] { "Português", "Inglês técnico" },
                 EloRating = 2310,
                 Wins = 48,
                 Losses = 12,
@@ -47,12 +47,12 @@ namespace DevRank.FakeDatabase
                 MainStack = "C# / SQL",
                 SecondaryStack = "Performance",
                 PerceivedSeniority = "Pleno+",
-                Bio = "Resolve gargalos antes do cafe esfriar.",
+                Bio = "Resolve gargalos antes do café esfriar.",
                 ExperienceTime = "6 anos",
                 FakeGitHub = "github.com/brunostack",
                 FakeLinkedIn = "linkedin.com/in/brunostack",
                 FakePortfolio = "brunostack.dev",
-                Languages = new[] { "Portugues" },
+                Languages = new[] { "Português" },
                 EloRating = 1975,
                 Wins = 34,
                 Losses = 15,
@@ -68,14 +68,14 @@ namespace DevRank.FakeDatabase
                 Name = "Carla Thread",
                 FakePhotoUrl = "avatar://carla-thread",
                 MainStack = "Backend",
-                SecondaryStack = "Concorrencia / Incidentes",
+                SecondaryStack = "Concorrência / Incidentes",
                 PerceivedSeniority = "Senior",
-                Bio = "Boa em concorrencia, filas e bugs intermitentes.",
+                Bio = "Boa em concorrência, filas e bugs intermitentes.",
                 ExperienceTime = "7 anos",
                 FakeGitHub = "github.com/carlathread",
                 FakeLinkedIn = "linkedin.com/in/carlathread",
                 FakePortfolio = "carlathread.io",
-                Languages = new[] { "Portugues", "Ingles" },
+                Languages = new[] { "Português", "Inglês" },
                 EloRating = 1740,
                 Wins = 28,
                 Losses = 14,
@@ -93,12 +93,12 @@ namespace DevRank.FakeDatabase
                 MainStack = "Razor / JavaScript",
                 SecondaryStack = "UX / Frontend",
                 PerceivedSeniority = "Pleno",
-                Bio = "Transforma tela quebrada em fluxo usavel.",
+                Bio = "Transforma tela quebrada em fluxo usável.",
                 ExperienceTime = "4 anos",
                 FakeGitHub = "github.com/diegorazor",
                 FakeLinkedIn = "linkedin.com/in/diegorazor",
                 FakePortfolio = "diegorazor.dev",
-                Languages = new[] { "Portugues", "Espanhol" },
+                Languages = new[] { "Português", "Espanhol" },
                 EloRating = 1510,
                 Wins = 19,
                 Losses = 11,
@@ -114,14 +114,14 @@ namespace DevRank.FakeDatabase
                 Name = "Eva Commit",
                 FakePhotoUrl = "avatar://eva-commit",
                 MainStack = "Full Stack",
-                SecondaryStack = "Produto / Comunicacao",
+                SecondaryStack = "Produto / Comunicação",
                 PerceivedSeniority = "Junior+",
-                Bio = "Entrega solucoes simples, testaveis e diretas.",
+                Bio = "Entrega soluções simples, testáveis e diretas.",
                 ExperienceTime = "2 anos",
                 FakeGitHub = "github.com/evacommit",
                 FakeLinkedIn = "linkedin.com/in/evacommit",
                 FakePortfolio = "evacommit.dev",
-                Languages = new[] { "Portugues" },
+                Languages = new[] { "Português" },
                 EloRating = 1320,
                 Wins = 14,
                 Losses = 13,
@@ -137,8 +137,8 @@ namespace DevRank.FakeDatabase
             {
                 Id = 1,
                 Title = "Refatorar endpoint MVC",
-                Description = "Um endpoint mistura regra de negocio, validacao e acesso a dados. Proponha uma refatoracao simples para melhorar manutencao.",
-                Difficulty = "Medio",
+                Description = "Um endpoint mistura regra de negócio, validação e acesso a dados. Proponha uma refatoração simples para melhorar manutenção.",
+                Difficulty = "Médio",
                 Category = "ASP.NET MVC",
                 MinimumRating = 900,
                 EstimatedTime = "20 min",
@@ -149,8 +149,8 @@ namespace DevRank.FakeDatabase
             {
                 Id = 2,
                 Title = "Corrigir query lenta",
-                Description = "Uma listagem esta lenta em horario de pico. Explique como reduzir consultas repetidas e melhorar a leitura dos dados.",
-                Difficulty = "Medio",
+                Description = "Uma listagem está lenta em horário de pico. Explique como reduzir consultas repetidas e melhorar a leitura dos dados.",
+                Difficulty = "Médio",
                 Category = "Performance",
                 MinimumRating = 1000,
                 EstimatedTime = "25 min",
@@ -160,10 +160,10 @@ namespace DevRank.FakeDatabase
             new Challenge
             {
                 Id = 3,
-                Title = "Detectar bug de concorrencia",
-                Description = "Dois usuarios podem consumir o mesmo cupom ao mesmo tempo. Identifique o risco e proponha uma correcao pragmatica.",
-                Difficulty = "Dificil",
-                Category = "Concorrencia",
+                Title = "Detectar bug de concorrência",
+                Description = "Dois usuários podem consumir o mesmo cupom ao mesmo tempo. Identifique o risco e proponha uma correção pragmática.",
+                Difficulty = "Difícil",
+                Category = "Concorrência",
                 MinimumRating = 1300,
                 EstimatedTime = "30 min",
                 ChallengeRating = 1750,
@@ -173,8 +173,8 @@ namespace DevRank.FakeDatabase
             {
                 Id = 4,
                 Title = "Melhorar arquitetura de service",
-                Description = "Um service concentra validacao, persistencia, notificacao e logs. Quebre responsabilidades sem criar arquitetura exagerada.",
-                Difficulty = "Medio",
+                Description = "Um service concentra validação, persistência, notificação e logs. Quebre responsabilidades sem criar arquitetura exagerada.",
+                Difficulty = "Médio",
                 Category = "Arquitetura",
                 MinimumRating = 1100,
                 EstimatedTime = "25 min",
@@ -185,8 +185,8 @@ namespace DevRank.FakeDatabase
             {
                 Id = 5,
                 Title = "Resolver problema de performance",
-                Description = "Uma tela carrega tudo de uma vez e trava o navegador. Proponha paginacao, filtros ou carregamento sob demanda.",
-                Difficulty = "Facil",
+                Description = "Uma tela carrega tudo de uma vez e trava o navegador. Proponha paginação, filtros ou carregamento sob demanda.",
+                Difficulty = "Fácil",
                 Category = "Frontend",
                 MinimumRating = 800,
                 EstimatedTime = "15 min",
@@ -196,9 +196,9 @@ namespace DevRank.FakeDatabase
             new Challenge
             {
                 Id = 6,
-                Title = "Revisar codigo legado",
-                Description = "Avalie um trecho legado com nomes ruins, duplicacao e regras escondidas. Sugira uma melhoria incremental.",
-                Difficulty = "Facil",
+                Title = "Revisar código legado",
+                Description = "Avalie um trecho legado com nomes ruins, duplicação e regras escondidas. Sugira uma melhoria incremental.",
+                Difficulty = "Fácil",
                 Category = "Code Review",
                 MinimumRating = 800,
                 EstimatedTime = "15 min",
@@ -238,11 +238,11 @@ namespace DevRank.FakeDatabase
                 SecondaryStack = "Em descoberta",
                 PerceivedSeniority = "Em calibragem",
                 Bio = model.Bio,
-                ExperienceTime = "Nao informado",
+                ExperienceTime = "Não informado",
                 FakeGitHub = "github.com/" + model.Username,
                 FakeLinkedIn = "linkedin.com/in/" + model.Username,
                 FakePortfolio = model.Username + ".dev",
-                Languages = new[] { "Portugues" },
+                Languages = new[] { "Português" },
                 EloRating = 1000,
                 Wins = 0,
                 Losses = 0,
@@ -331,17 +331,17 @@ namespace DevRank.FakeDatabase
 
             return new List<SkillScore>
             {
-                new SkillScore { Name = "Comunicacao", Score = System.Math.Min(96, baseScore - 2), Group = "Humana" },
-                new SkillScore { Name = "Lideranca", Score = System.Math.Min(96, baseScore - 8), Group = "Humana" },
-                new SkillScore { Name = "Arquitetura", Score = System.Math.Min(96, baseScore + 4), Group = "Tecnica" },
-                new SkillScore { Name = "Backend", Score = System.Math.Min(96, baseScore + 8), Group = "Tecnica" },
-                new SkillScore { Name = "Frontend", Score = System.Math.Min(96, baseScore - 5), Group = "Tecnica" },
-                new SkillScore { Name = "Banco de dados", Score = System.Math.Min(96, baseScore + 2), Group = "Tecnica" },
-                new SkillScore { Name = "DevOps", Score = System.Math.Min(96, baseScore - 10), Group = "Tecnica" },
-                new SkillScore { Name = "Resolucao de problemas", Score = System.Math.Min(98, baseScore + 10), Group = "Pratica" },
-                new SkillScore { Name = "Inteligencia emocional", Score = System.Math.Min(94, baseScore - 4), Group = "Humana" },
+                new SkillScore { Name = "Comunicação", Score = System.Math.Min(96, baseScore - 2), Group = "Humana" },
+                new SkillScore { Name = "Liderança", Score = System.Math.Min(96, baseScore - 8), Group = "Humana" },
+                new SkillScore { Name = "Arquitetura", Score = System.Math.Min(96, baseScore + 4), Group = "Técnica" },
+                new SkillScore { Name = "Backend", Score = System.Math.Min(96, baseScore + 8), Group = "Técnica" },
+                new SkillScore { Name = "Frontend", Score = System.Math.Min(96, baseScore - 5), Group = "Técnica" },
+                new SkillScore { Name = "Banco de dados", Score = System.Math.Min(96, baseScore + 2), Group = "Técnica" },
+                new SkillScore { Name = "DevOps", Score = System.Math.Min(96, baseScore - 10), Group = "Técnica" },
+                new SkillScore { Name = "Resolução de problemas", Score = System.Math.Min(98, baseScore + 10), Group = "Prática" },
+                new SkillScore { Name = "Inteligência emocional", Score = System.Math.Min(94, baseScore - 4), Group = "Humana" },
                 new SkillScore { Name = "Trabalho em equipe", Score = System.Math.Min(95, baseScore + 1), Group = "Humana" },
-                new SkillScore { Name = "Performance sob pressao", Score = System.Math.Min(96, baseScore - 1), Group = "Pratica" }
+                new SkillScore { Name = "Performance sob pressão", Score = System.Math.Min(96, baseScore - 1), Group = "Prática" }
             };
         }
 
@@ -353,7 +353,7 @@ namespace DevRank.FakeDatabase
                 new TechElo { Technology = ".NET", Rating = programmer.EloRating - 80, Rank = EloService.GetRank(programmer.EloRating - 80) },
                 new TechElo { Technology = "JavaScript", Rating = programmer.EloRating - 180, Rank = EloService.GetRank(programmer.EloRating - 180) },
                 new TechElo { Technology = "Arquitetura", Rating = programmer.EloRating - 40, Rank = EloService.GetRank(programmer.EloRating - 40) },
-                new TechElo { Technology = "Comunicacao", Rating = programmer.EloRating - 130, Rank = EloService.GetRank(programmer.EloRating - 130) }
+                new TechElo { Technology = "Comunicação", Rating = programmer.EloRating - 130, Rank = EloService.GetRank(programmer.EloRating - 130) }
             };
         }
 
@@ -361,10 +361,10 @@ namespace DevRank.FakeDatabase
         {
             return new List<IntegrationLink>
             {
-                new IntegrationLink { Name = "GitHub", Url = programmer.FakeGitHub, Status = "Simulado", Description = "Futuro: importar repos e sinais de contribuicao." },
+                new IntegrationLink { Name = "GitHub", Url = programmer.FakeGitHub, Status = "Simulado", Description = "Futuro: importar repos e sinais de contribuição." },
                 new IntegrationLink { Name = "LinkedIn", Url = programmer.FakeLinkedIn, Status = "Simulado", Description = "Futuro: comparar narrativa profissional com performance real." },
-                new IntegrationLink { Name = "Portfolio", Url = programmer.FakePortfolio, Status = "Simulado", Description = "Futuro: anexar projetos, cases e evidencias." },
-                new IntegrationLink { Name = "Curriculo", Url = "curriculo-" + programmer.Username + ".pdf", Status = "Pendente", Description = "Futuro: gerar relatorio tecnico exportavel." }
+                new IntegrationLink { Name = "Portfólio", Url = programmer.FakePortfolio, Status = "Simulado", Description = "Futuro: anexar projetos, cases e evidências." },
+                new IntegrationLink { Name = "Currículo", Url = "currículo-" + programmer.Username + ".pdf", Status = "Pendente", Description = "Futuro: gerar relatório técnico exportável." }
             };
         }
 

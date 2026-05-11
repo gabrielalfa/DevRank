@@ -37,17 +37,17 @@
     <article class="metric-card">
         <span>Win streak</span>
         <strong>@Model.Programmer.WinStreak</strong>
-        <small>@Model.Programmer.Wins vitorias / @Model.Programmer.Losses derrotas</small>
+        <small>@Model.Programmer.Wins vitórias / @Model.Programmer.Losses derrotas</small>
     </article>
     <article class="metric-card">
         <span>Winrate</span>
         <strong>@Model.Programmer.WinRate%</strong>
-        <small>Partidas praticas avaliadas</small>
+        <small>Partidas práticas avaliadas</small>
     </article>
     <article class="metric-card">
         <span>Modulos mapeados</span>
         <strong>@Model.CompletedModules/@Model.TotalModules</strong>
-        <small>Visao futura da plataforma</small>
+        <small>Visão futura da plataforma</small>
     </article>
 </section>
 
@@ -57,7 +57,7 @@
             <div class="panel-heading">
                 <div>
                     <span class="eyebrow">Mapa de skills</span>
-                    <h2>Seu nivel real nao e uma nota unica.</h2>
+                    <h2>Seu nível real não é uma nota única.</h2>
                 </div>
                 <a class="inline-link" href="@Url.Action("Index", "Profile")">Ver perfil completo</a>
             </div>
@@ -82,7 +82,7 @@
             <div class="panel-heading">
                 <div>
                     <span class="eyebrow">Arena recomendada</span>
-                    <h2>Proximos desafios com bom atrito.</h2>
+                    <h2>Próximos desafios com bom atrito.</h2>
                 </div>
             </div>
             <div class="recommendation-list">
@@ -103,14 +103,14 @@
     <aside class="dashboard-column">
         <article class="dashboard-panel">
             <span class="eyebrow">Entrevista simulada</span>
-            <h2>Proxima pergunta</h2>
+            <h2>Próxima pergunta</h2>
             <p>@Model.NextInterviewPrompt</p>
             <a class="btn btn-secondary" href="#">Modulo futuro</a>
         </article>
 
         <article class="dashboard-panel">
-            <span class="eyebrow">Evolucao</span>
-            <h2>Confiança sob pressao</h2>
+            <span class="eyebrow">Evolução</span>
+            <h2>Confiança sob pressão</h2>
             <div class="evolution-bars">
                 @foreach (var point in Model.Programmer.Evolution)
                 {
@@ -123,8 +123,8 @@
         </article>
 
         <article class="dashboard-panel">
-            <span class="eyebrow">Historico recente</span>
-            <h2>Ultimas partidas</h2>
+            <span class="eyebrow">Histórico recente</span>
+            <h2>Últimas partidas</h2>
             @if (Model.RecentHistory.Count == 0)
             {
                 <p>Nenhuma partida ainda. Complete um desafio para alimentar sua curva.</p>

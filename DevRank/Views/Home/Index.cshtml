@@ -1,24 +1,24 @@
 @model DevRank.Models.HomeViewModel
 
 @{
-    ViewBag.Title = "Descubra seu nivel real";
+    ViewBag.Title = "Descubra seu nível real";
 }
 
 <section class="premium-hero">
     <div class="hero-signal">
         <span class="live-dot"></span>
-        <span>2.418 devs calibrando reputacao tecnica nesta season</span>
+        <span>2.418 devs calibrando reputação técnica nesta season</span>
     </div>
     <div class="premium-hero-grid">
         <div class="premium-hero-copy">
             <span class="eyebrow">Developer reputation arena</span>
-            <h1>Descubra seu nivel como desenvolvedor.</h1>
+            <h1>Descubra seu nível como desenvolvedor.</h1>
             <p>
-                DevRank avalia pratica, comunicacao, arquitetura, debugging e maturidade sob pressao.
-                Nao e quiz. Nao e prova decorada. E uma arena para provar engenharia no mundo real.
+                DevRank avalia prática, comunicação, arquitetura, debugging e maturidade sob pressão.
+                Não é quiz. Não é prova decorada. É uma arena para provar engenharia no mundo real.
             </p>
             <div class="hero-actions">
-                <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Criar perfil tecnico</a>
+                <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Criar perfil técnico</a>
                 <a class="btn btn-secondary" href="@Url.Action("Index", "Leaderboard")">Ver ranking mundial</a>
             </div>
             <div class="hero-proof">
@@ -44,16 +44,16 @@
             </div>
             <div class="console-code">
                 <span>01</span><p>API em producao com latencia alta.</p>
-                <span>02</span><p>Explique diagnostico, mitigacao e comunicacao.</p>
-                <span>03</span><p>Avaliando clareza, criterio e pressao...</p>
+                <span>02</span><p>Explique diagnóstico, mitigação e comunicação.</p>
+                <span>03</span><p>Avaliando clareza, critério e pressão...</p>
             </div>
             <div class="console-score">
                 <div>
-                    <small>Score tecnico</small>
+                    <small>Score técnico</small>
                     <strong>87</strong>
                 </div>
                 <div>
-                    <small>Comunicacao</small>
+                    <small>Comunicação</small>
                     <strong>79</strong>
                 </div>
                 <div>
@@ -81,24 +81,24 @@
         <p>
             Desenvolvedores reais resolvem problemas reais, mas entrevistas ainda confundem memoria,
             nervosismo e performance. DevRank cria um ambiente progressivo para treinar, competir e
-            construir reputacao tecnica com contexto.
+            construir reputação técnica com contexto.
         </p>
     </div>
     <div class="story-grid">
         <article>
             <span>01</span>
             <h3>Treine entrevistas reais</h3>
-            <p>Perguntas tecnicas, emocionais e arquiteturais com pressao simulada.</p>
+            <p>Perguntas técnicas, emocionais e arquiteturais com pressão simulada.</p>
         </article>
         <article>
             <span>02</span>
             <h3>Resolva cenarios de mercado</h3>
-            <p>Incidentes, legado, PR review, conflitos, performance e comunicacao com cliente.</p>
+            <p>Incidentes, legado, PR review, conflitos, performance e comunicação com cliente.</p>
         </article>
         <article>
             <span>03</span>
-            <h3>Construa reputacao</h3>
-            <p>Perfil publico, Elo por skill, conquistas, historico e sinais para recrutadores.</p>
+            <h3>Construa reputação</h3>
+            <p>Perfil público, Elo por skill, conquistas, histórico e sinais para recrutadores.</p>
         </article>
     </div>
 </section>
@@ -129,18 +129,18 @@
             }
         </div>
         <aside class="public-preview-card">
-            <span class="eyebrow">Perfil publico</span>
-            <h3>Uma identidade tecnica para compartilhar.</h3>
-            <p>Mostre stack, badges, evolucao, comunicacao, areas fortes e ranking. O dev sente orgulho. O recrutador entende contexto.</p>
-            <a class="btn btn-primary" href="@Url.Action("Public", "Profile", new { username = Model.TopProgrammers[0].Username })">Ver preview publico</a>
+            <span class="eyebrow">Perfil público</span>
+            <h3>Uma identidade técnica para compartilhar.</h3>
+            <p>Mostre stack, badges, evolução, comunicação, áreas fortes e ranking. O dev sente orgulho. O recrutador entende contexto.</p>
+            <a class="btn btn-primary" href="@Url.Action("Public", "Profile", new { username = Model.TopProgrammers[0].Username })">Ver preview público</a>
         </aside>
     </div>
 </section>
 
 <section class="differentiator-section">
     <div class="section-heading">
-        <span class="eyebrow">Nao e mais uma plataforma de teste</span>
-        <h2>DevRank mede o que aparece quando o codigo encontra pressao.</h2>
+        <span class="eyebrow">Não é mais uma plataforma de teste</span>
+        <h2>DevRank mede o que aparece quando o código encontra pressão.</h2>
     </div>
     <div class="compare-grid">
         <article>
@@ -149,7 +149,7 @@
         </article>
         <article class="featured">
             <h3>DevRank</h3>
-            <p>Cenarios reais, explicacao de decisoes, pressao simulada, Elo vivo e perfil publico.</p>
+            <p>Cenários reais, explicação de decisões, pressão simulada, Elo vivo e perfil público.</p>
         </article>
         <article>
             <h3>Entrevista tradicional</h3>
@@ -160,25 +160,25 @@
 
 <section class="timeline-section">
     <div class="section-heading">
-        <span class="eyebrow">Evolucao progressiva</span>
-        <h2>De medo de entrevista para reputacao tecnica.</h2>
+        <span class="eyebrow">Evolução progressiva</span>
+        <h2>De medo de entrevista para reputação técnica.</h2>
     </div>
     <div class="timeline-track">
-        <article><span>Semana 1</span><strong>Diagnostico real</strong><p>Mapeie lacunas tecnicas e comportamentais.</p></article>
+        <article><span>Semana 1</span><strong>Diagnóstico real</strong><p>Mapeie lacunas técnicas e comportamentais.</p></article>
         <article><span>Semana 2</span><strong>Treino sem punicao</strong><p>Ganhe clareza antes de competir por Elo.</p></article>
-        <article><span>Semana 3</span><strong>Arena ranqueada</strong><p>Resolva desafios sob pressao simulada.</p></article>
-        <article><span>Semana 4</span><strong>Perfil publico</strong><p>Compartilhe sua evolucao com orgulho.</p></article>
+        <article><span>Semana 3</span><strong>Arena ranqueada</strong><p>Resolva desafios sob pressão simulada.</p></article>
+        <article><span>Semana 4</span><strong>Perfil público</strong><p>Compartilhe sua evolução com orgulho.</p></article>
     </div>
 </section>
 
 <section class="testimonial-section">
     <div class="testimonial-card">
-        <p>"Pela primeira vez um teste tecnico pareceu trabalho real, nao pegadinha. O feedback me ajudou a explicar melhor minhas decisoes."</p>
+        <p>"Pela primeira vez um teste técnico pareceu trabalho real, não pegadinha. O feedback me ajudou a explicar melhor minhas decisões."</p>
         <strong>Marina Lopes</strong>
         <span>Backend Developer / Perfil fake</span>
     </div>
     <div class="testimonial-card">
-        <p>"Como recrutador, eu olharia esse ranking antes de chamar alguem. Ele mostra evolucao, nao so curriculo bonito."</p>
+        <p>"Como recrutador, eu olharia esse ranking antes de chamar alguém. Ele mostra evolução, não só currículo bonito."</p>
         <strong>Rafael Torres</strong>
         <span>Tech Recruiter / Depoimento fake</span>
     </div>

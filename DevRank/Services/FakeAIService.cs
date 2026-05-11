@@ -7,18 +7,18 @@ namespace DevRank.Services
     {
         private static readonly string[] PositiveFeedback =
         {
-            "Boa separacao de responsabilidades e solucao facil de revisar.",
-            "A solucao reduziu acoplamento e deixou o fluxo mais previsivel.",
-            "A proposta melhorou performance sem criar complexidade desnecessaria.",
-            "Bom raciocinio de engenharia, com trade-offs claros."
+            "Boa separação de responsabilidades e solução fácil de revisar.",
+            "A solução reduziu acoplamento e deixou o fluxo mais previsível.",
+            "A proposta melhorou performance sem criar complexidade desnecessária.",
+            "Bom raciocínio de engenharia, com trade-offs claros."
         };
 
         private static readonly string[] NegativeFeedback =
         {
             "Detectamos acoplamento excessivo entre camadas.",
-            "A solucao ainda deixa risco de concorrencia em cenarios paralelos.",
+            "A solução ainda deixa risco de concorrência em cenários paralelos.",
             "Faltou tratar caminho de erro e comportamento limite.",
-            "A abordagem resolve parte do problema, mas piora manutencao."
+            "A abordagem resolve parte do problema, mas piora manutenção."
         };
 
         public MatchHistory Evaluate(ProgrammerProfile programmer, Challenge challenge, string solution)

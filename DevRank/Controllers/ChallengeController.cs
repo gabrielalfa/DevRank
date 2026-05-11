@@ -62,7 +62,7 @@ namespace DevRank.Controllers
                 return View("Details", new ChallengeDetailsViewModel
                 {
                     Challenge = challenge,
-                    ErrorMessage = "Escreva uma proposta de solucao antes de enviar."
+                    ErrorMessage = "Escreva uma proposta de solução antes de enviar."
                 });
             }
 

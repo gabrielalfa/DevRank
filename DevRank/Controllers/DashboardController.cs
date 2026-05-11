@@ -32,8 +32,8 @@ namespace DevRank.Controllers
                 TopProgrammers = Db.GetTopProgrammers(5),
                 CompletedModules = 4,
                 TotalModules = 15,
-                NextInterviewPrompt = "Explique uma decisao arquitetural dificil sem soar defensivo.",
-                CoachInsight = "Seu perfil mostra boa entrega tecnica. O proximo salto e explicar trade-offs com mais clareza sob pressao."
+                NextInterviewPrompt = "Explique uma decisão arquitetural difícil sem soar defensivo.",
+                CoachInsight = "Seu perfil mostra boa entrega técnica. O próximo salto é explicar trade-offs com mais clareza sob pressão."
             };
 
             return View(model);

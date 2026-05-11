@@ -17,15 +17,15 @@
     </div>
 
     <form class="form-panel sticky-panel" method="post" action="@Url.Action("Submit", "Challenge", new { id = Model.Challenge.Id })">
-        <h2>Enviar solucao</h2>
-        <p>Descreva sua abordagem como faria em uma revisao tecnica objetiva.</p>
+        <h2>Enviar solução</h2>
+        <p>Descreva sua abordagem como faria em uma revisão técnica objetiva.</p>
 
         @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
         {
             <div class="alert-box">@Model.ErrorMessage</div>
         }
 
-        <textarea class="solution-editor" name="solution" rows="14" placeholder="Ex: Eu extrairia a regra para um service, isolaria validacao e protegeria a operacao critica..."></textarea>
+        <textarea class="solution-editor" name="solution" rows="14" placeholder="Ex: Eu extrairia a regra para um service, isolaria validação e protegeria a operação crítica..."></textarea>
         <div class="editor-status">
             <span data-counter>0 caracteres</span>
             <span>Rating do desafio: @Model.Challenge.ChallengeRating</span>

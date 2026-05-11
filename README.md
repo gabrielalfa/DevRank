@@ -1,40 +1,40 @@
 # DevRank
 
-DevRank e um prototipo funcional de uma plataforma de avaliacao tecnica, gamificacao competitiva e evolucao profissional para desenvolvedores.
+DevRank é um protótipo funcional de uma plataforma de avaliação técnica, gamificação competitiva e evolução profissional para desenvolvedores.
 
-O objetivo nao e ser um produto final. O objetivo e validar conceito, experiencia, engajamento e percepcao de valor.
+O objetivo não é ser um produto final. O objetivo é validar conceito, experiência, engajamento e percepção de valor.
 
-## Visao
+## Visão
 
-A proposta do DevRank e ajudar desenvolvedores a descobrirem seu nivel real por meio de desafios praticos, ranking Elo, feedback fake de IA e perfis tecnicos compartilhaveis.
+A proposta do DevRank é ajudar desenvolvedores a descobrirem seu nível real por meio de desafios práticos, ranking Elo, feedback fake de IA e perfis técnicos compartilháveis.
 
-A plataforma foi pensada para nao parecer uma prova academica, quiz escolar ou LeetCode generico. A experiencia busca simular um ambiente mais proximo de engenharia real:
+A plataforma foi pensada para não parecer uma prova acadêmica, quiz escolar ou LeetCode genérico. A experiência busca simular um ambiente mais próximo de engenharia real:
 
 - desafios de mercado;
 - debugging;
-- refatoracao;
+- refatoração;
 - performance;
-- comunicacao tecnica;
+- comunicação técnica;
 - entrevistas simuladas;
 - maturidade profissional;
-- competicao saudavel;
-- evolucao continua.
+- competição saudável;
+- evolução contínua.
 
 ## Stack
 
 - ASP.NET MVC 5
 - .NET Framework 4.8
 - Razor
-- Bootstrap 5 como referencia visual
+- Bootstrap 5 como referência visual
 - JavaScript Vanilla
 - CSS customizado
 - Visual Studio 2022
 
-## Restricoes do prototipo
+## Restrições do protótipo
 
 Este projeto foi criado propositalmente sem arquitetura pesada.
 
-Nao usa:
+Não usa:
 
 - SQL Server;
 - Entity Framework;
@@ -44,22 +44,22 @@ Nao usa:
 - Redis;
 - JWT;
 - OAuth;
-- microservicos.
+- microserviços.
 
-Os dados ficam em memoria usando `FakeDatabase`.
+Os dados ficam em memória usando `FakeDatabase`.
 
-## Modulos implementados
+## Módulos implementados
 
 ### Home Premium
 
-A Home foi evoluida para vender melhor a ideia do produto:
+A Home foi evoluída para vender melhor a ideia do produto:
 
 - hero forte com proposta de valor;
 - prova social fake;
 - ranking ao vivo fake;
 - preview de desafio real;
 - comparativo com testes comuns;
-- timeline de evolucao;
+- timeline de evolução;
 - depoimentos fake;
 - CTA para criar perfil e entrar na arena.
 
@@ -68,16 +68,16 @@ A Home foi evoluida para vender melhor a ideia do produto:
 Foi criado um header responsivo com:
 
 - menu mobile lateral/offcanvas;
-- botao hamburguer;
+- botão hamburguer;
 - scrim;
-- transicoes suaves;
-- navegacao adaptada para mobile.
+- transições suaves;
+- navegação adaptada para mobile.
 
 ### Footer Tornfy
 
 Footer profissional com marca Tornfy:
 
-- descricao da plataforma;
+- descrição da plataforma;
 - links de produto;
 - ecossistema fake;
 - links institucionais;
@@ -86,23 +86,23 @@ Footer profissional com marca Tornfy:
 
 ### Cadastro e Login Simples
 
-Fluxo simples para prototipo:
+Fluxo simples para protótipo:
 
 - `AccountController`;
-- login com usuario e senha fake;
+- login com usuário e senha fake;
 - cadastro de novo programador;
-- sessao usando `Session["UserId"]`.
+- sessão usando `Session["UserId"]`.
 
-Usuario inicial para teste:
+Usuário inicial para teste:
 
 ```text
-usuario: ana
+usuário: ana
 senha: 123
 ```
 
 ### Dashboard do Dev
 
-Painel de evolucao profissional com:
+Painel de evolução profissional com:
 
 - Elo geral;
 - rank;
@@ -111,10 +111,10 @@ Painel de evolucao profissional com:
 - coach insight fake;
 - mapa de skills;
 - desafios recomendados;
-- evolucao semanal fake;
-- historico recente.
+- evolução semanal fake;
+- histórico recente.
 
-### Perfil Tecnico Avancado
+### Perfil Técnico Avançado
 
 Perfil enriquecido com:
 
@@ -122,19 +122,19 @@ Perfil enriquecido com:
 - username;
 - avatar fake local;
 - stack principal;
-- stack secundaria;
+- stack secundária;
 - senioridade percebida;
-- experiencia;
+- experiência;
 - badges;
 - Elo geral;
 - Elo por tecnologia;
-- skills tecnicas e humanas;
-- integracoes fake;
-- historico de partidas.
+- skills técnicas e humanas;
+- integrações fake;
+- histórico de partidas.
 
-### Perfil Publico Compartilhavel
+### Perfil Público Compartilhável
 
-Pagina publica por username:
+Página pública por username:
 
 ```text
 /Profile/Public?username=ana
@@ -142,34 +142,34 @@ Pagina publica por username:
 
 Inclui:
 
-- identidade tecnica publica;
-- botao copiar link;
+- identidade técnica pública;
+- botão copiar link;
 - Elo;
 - rank;
 - winrate;
 - badges;
 - cards de skill;
-- evolucao fake.
+- evolução fake.
 
 ### Arena de Desafios
 
-Lista de desafios fake com cenarios como:
+Lista de desafios fake com cenários como:
 
 - refatorar endpoint MVC;
 - corrigir query lenta;
-- detectar bug de concorrencia;
+- detectar bug de concorrência;
 - melhorar arquitetura de service;
 - resolver problema de performance;
-- revisar codigo legado.
+- revisar código legado.
 
-### Avaliacao Fake por IA
+### Avaliação Fake por IA
 
 `FakeAIService` gera:
 
 - score controlado;
-- feedback tecnico fake;
-- aprovacao ou reprovacao;
-- alteracao de Elo.
+- feedback técnico fake;
+- aprovação ou reprovação;
+- alteração de Elo.
 
 ### Ranking Elo
 
@@ -207,37 +207,37 @@ DevRank/
 
 ## Fluxo sugerido de teste
 
-1. Abra a aplicacao.
+1. Abra a aplicação.
 2. Crie um perfil ou use `ana / 123`.
 3. Acesse o Dashboard.
 4. Entre na Arena.
 5. Abra um desafio.
-6. Escreva uma solucao.
+6. Escreva uma solução.
 7. Envie para a IA fake.
 8. Veja o resultado e o Elo atualizado.
 9. Acesse o Perfil.
-10. Abra o Perfil Publico.
+10. Abra o Perfil Público.
 
-## Observacoes importantes
+## Observações importantes
 
-Como o armazenamento e em memoria, novos usuarios, historico e partidas sao perdidos quando a aplicacao reinicia.
+Como o armazenamento é em memória, novos usuários, histórico e partidas são perdidos quando a aplicação reinicia.
 
-Isso e intencional para manter o projeto simples, rapido e focado em validacao de experiencia.
+Isso é intencional para manter o projeto simples, rápido e focado em validação de experiência.
 
 ## Status
 
-Prototipo em evolucao.
+Protótipo em evolução.
 
-Proximos modulos sugeridos:
+Próximos módulos sugeridos:
 
-- perfil editavel;
+- perfil editável;
 - simulador de entrevista;
-- modo treinamento sem punicao;
+- modo treinamento sem punição;
 - sistema anti-copy fake;
 - feedback inteligente mais rico;
-- estatisticas de skill mais detalhadas;
+- estatísticas de skill mais detalhadas;
 - match futuro de vagas.
 
-## Empresa ficticia
+## Empresa fictícia
 
-DevRank foi apresentado como um produto do ecossistema Tornfy para dar mais credibilidade visual ao prototipo.
+DevRank foi apresentado como um produto do ecossistema Tornfy para dar mais credibilidade visual ao protótipo.

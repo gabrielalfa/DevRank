@@ -1,7 +1,7 @@
 @model DevRank.Models.ProfileViewModel
 
 @{
-    ViewBag.Title = "Perfil publico de " + Model.Programmer.Name;
+    ViewBag.Title = "Perfil público de " + Model.Programmer.Name;
     var publicUrl = Url.Action("Public", "Profile", new { username = Model.Programmer.Username }, Request.Url.Scheme);
 }
 
@@ -22,8 +22,8 @@
     </div>
     <aside class="share-panel">
         <span class="eyebrow">Compartilhavel</span>
-        <h2>Identidade tecnica publica</h2>
-        <p>Um snapshot de reputacao, evolucao, skills e maturidade profissional.</p>
+        <h2>Identidade técnica pública</h2>
+        <p>Um snapshot de reputação, evolução, skills e maturidade profissional.</p>
         <input type="text" value="@publicUrl" readonly data-share-url />
         <button class="btn btn-primary" type="button" data-copy-share>Copiar link</button>
         <span class="copy-feedback" data-copy-feedback>Link pronto para compartilhar</span>
@@ -86,7 +86,7 @@
         <div class="mini-grid stack">
             <div>
                 <strong>@Model.Programmer.Wins</strong>
-                <span>vitorias</span>
+                <span>vitórias</span>
             </div>
             <div>
                 <strong>@Model.Programmer.Losses</strong>
@@ -99,7 +99,7 @@
 <section class="dashboard-panel public-evolution">
     <div class="panel-heading">
         <div>
-            <span class="eyebrow">Evolucao publica</span>
+            <span class="eyebrow">Evolução pública</span>
             <h2>Trajetoria de confianca e Elo</h2>
         </div>
         <a class="btn btn-secondary" href="@Url.Action("Index", "Leaderboard")">Comparar ranking</a>

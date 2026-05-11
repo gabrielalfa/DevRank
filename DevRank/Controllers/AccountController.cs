@@ -19,7 +19,7 @@ namespace DevRank.Controllers
 
             if (programmer == null)
             {
-                model.ErrorMessage = "Usuario ou senha invalidos. Para testar rapido: ana / 123.";
+                model.ErrorMessage = "Usuário ou senha inválidos. Para testar rápido: ana / 123.";
                 return View(model);
             }
 
@@ -40,13 +40,13 @@ namespace DevRank.Controllers
                 string.IsNullOrWhiteSpace(model.Password) ||
                 string.IsNullOrWhiteSpace(model.Name))
             {
-                model.ErrorMessage = "Informe nome, usuario e senha para entrar na arena.";
+                model.ErrorMessage = "Informe nome, usuário e senha para entrar na arena.";
                 return View(model);
             }
 
             if (Db.UsernameExists(model.Username))
             {
-                model.ErrorMessage = "Esse usuario ja existe. Escolha outro handle.";
+                model.ErrorMessage = "Esse usuário já existe. Escolha outro handle.";
                 return View(model);
             }
 
