@@ -157,6 +157,23 @@ a {
     flex-wrap: wrap;
 }
 
+.trust-strip {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+}
+
+.trust-strip span {
+    padding: 8px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.04);
+    font-size: 0.88rem;
+    font-weight: 800;
+}
+
 .arena-card {
     position: relative;
     overflow: hidden;
@@ -239,6 +256,51 @@ a {
     padding: 24px 0 70px;
 }
 
+.proof-section,
+.plans-section,
+.conviction-section,
+.final-cta {
+    padding: 34px 0 76px;
+}
+
+.proof-section .section-heading,
+.plans-section .section-heading {
+    max-width: 760px;
+}
+
+.proof-grid,
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-top: 22px;
+}
+
+.proof-grid article,
+.plan-card,
+.conviction-section,
+.final-cta {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(16, 21, 34, 0.78);
+}
+
+.proof-grid article {
+    padding: 22px;
+}
+
+.proof-grid strong {
+    display: block;
+    color: var(--text);
+    font-size: 1.1rem;
+}
+
+.proof-grid p {
+    margin-bottom: 0;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
 .value-section article {
     min-height: 210px;
     padding: 24px;
@@ -260,6 +322,130 @@ a {
 .value-section p {
     color: var(--muted);
     line-height: 1.6;
+}
+
+.conviction-section {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: 26px;
+    align-items: center;
+    padding: 34px;
+    margin-bottom: 72px;
+    background:
+        linear-gradient(135deg, rgba(50, 245, 255, 0.08), rgba(255, 79, 216, 0.06)),
+        rgba(16, 21, 34, 0.82);
+}
+
+.conviction-copy h2 {
+    margin: 12px 0;
+    font-size: 2.4rem;
+    line-height: 1.1;
+}
+
+.conviction-copy p,
+.benefit-list p,
+.plan-card p {
+    color: var(--muted);
+    line-height: 1.62;
+}
+
+.benefit-list {
+    display: grid;
+    gap: 12px;
+}
+
+.benefit-list div {
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: rgba(7, 10, 18, 0.42);
+}
+
+.benefit-list span {
+    color: var(--pink);
+    font-weight: 900;
+}
+
+.benefit-list strong {
+    display: block;
+    margin-top: 6px;
+    font-size: 1.05rem;
+}
+
+.benefit-list p {
+    margin: 8px 0 0;
+}
+
+.plan-card {
+    display: grid;
+    gap: 14px;
+    align-content: start;
+    min-height: 430px;
+    padding: 24px;
+    position: relative;
+}
+
+.plan-card.featured {
+    border-color: rgba(50, 245, 255, 0.55);
+    background:
+        linear-gradient(180deg, rgba(50, 245, 255, 0.12), rgba(16, 21, 34, 0.88)),
+        rgba(16, 21, 34, 0.84);
+    box-shadow: 0 0 34px rgba(50, 245, 255, 0.12);
+}
+
+.plan-label {
+    width: fit-content;
+    padding: 7px 10px;
+    border: 1px solid rgba(50, 245, 255, 0.28);
+    border-radius: 8px;
+    color: var(--cyan);
+    background: rgba(50, 245, 255, 0.08);
+    font-size: 0.8rem;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+.plan-card h3 {
+    margin: 0;
+    font-size: 1.45rem;
+}
+
+.price {
+    margin: 0;
+    color: var(--text) !important;
+    font-size: 2.1rem;
+    font-weight: 900;
+}
+
+.plan-card ul {
+    display: grid;
+    gap: 10px;
+    margin: 4px 0 10px;
+    padding: 0;
+    list-style: none;
+}
+
+.plan-card li {
+    position: relative;
+    padding-left: 20px;
+    color: var(--muted);
+}
+
+.plan-card li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.58em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 12px rgba(93, 255, 156, 0.4);
+}
+
+.plan-card .btn {
+    align-self: end;
+    margin-top: auto;
 }
 
 .leaderboard-section {
@@ -644,6 +830,21 @@ a {
     justify-content: center;
 }
 
+.final-cta {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    padding: 42px 24px;
+    margin-bottom: 80px;
+}
+
+.final-cta h2 {
+    max-width: 760px;
+    margin: 12px 0 0;
+    font-size: 2.6rem;
+    line-height: 1.12;
+}
+
 @media (max-width: 900px) {
     .nav-links {
         display: none;
@@ -651,6 +852,9 @@ a {
 
     .hero-section,
     .value-section,
+    .proof-grid,
+    .plans-grid,
+    .conviction-section,
     .profile-grid,
     .challenge-layout {
         grid-template-columns: 1fr;
