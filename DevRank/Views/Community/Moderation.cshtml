@@ -9,7 +9,7 @@
         <div>
             <span class="eyebrow">Painel de revisão</span>
             <h1>Moderação e curadoria</h1>
-            <p>Aprovar pouco e bem é melhor do que publicar muito e diluir a reputação da arena.</p>
+            <p>Aprovar pouco e bem é melhor do que publicar muito e diluir a reputação da arena. Aqui a curadoria é distribuída, mas depende de reputação.</p>
         </div>
         <a class="btn btn-secondary" href="@Url.Action("Index", "Community")">Voltar ao Hub</a>
     </div>
@@ -26,6 +26,24 @@
                     <em class="status-pill">@challenge.Status</em>
                 </div>
                 <p>@challenge.Scenario</p>
+                <div class="homologation-state">
+                    <div>
+                        <span>Etapa</span>
+                        <strong>@challenge.HomologationStage</strong>
+                    </div>
+                    <div>
+                        <span>Aprovações</span>
+                        <strong>@challenge.ApprovalVotes/@challenge.RequiredApprovals</strong>
+                    </div>
+                    <div>
+                        <span>Rejeições</span>
+                        <strong>@challenge.RejectionVotes</strong>
+                    </div>
+                    <div>
+                        <span>Confiança</span>
+                        <strong>@challenge.ConfidenceScore%</strong>
+                    </div>
+                </div>
                 <div class="review-score-grid">
                     <div><span>Qualidade</span><strong>@challenge.QualityScore</strong></div>
                     <div><span>Clareza</span><strong>@challenge.ClarityScore</strong></div>

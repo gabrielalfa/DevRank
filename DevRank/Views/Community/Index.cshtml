@@ -11,7 +11,7 @@
         <h1>Construa a arena com reputação, curadoria e controle.</h1>
         <p>
             Crie desafios, revise cenários reais, ajude outros devs e ganhe autoridade técnica.
-            Toda contribuição passa por validação para evitar spam, superficialidade e farming.
+            Toda contribuição passa por homologação comunitária para evitar spam, superficialidade e farming.
         </p>
         <div class="hero-actions">
             <a class="btn btn-primary" href="@Url.Action("CreateChallenge", "Community")">Criar desafio</a>
@@ -41,15 +41,39 @@
             <div class="panel-heading">
                 <div>
                     <span class="eyebrow">Fluxo controlado</span>
-                    <h2>Contribuições não entram direto na arena.</h2>
+                    <h2>Contribuições só viram oficiais após homologação.</h2>
                 </div>
             </div>
             <div class="governance-flow">
                 <div><span>01</span><strong>Criação</strong><p>Dev propõe um desafio com cenário, contexto e resposta esperada.</p></div>
                 <div><span>02</span><strong>Shadow review</strong><p>Validação fake bloqueia respostas curtas, genéricas ou superficiais.</p></div>
                 <div><span>03</span><strong>Revisão técnica</strong><p>Contribuidores confiáveis avaliam clareza, relevância e dificuldade.</p></div>
-                <div><span>04</span><strong>Publicação</strong><p>Conteúdo aprovado gera reputação e pode entrar na arena oficial.</p></div>
+                <div><span>04</span><strong>Homologação</strong><p>Conteúdo aprovado por votos suficientes pode entrar na arena oficial.</p></div>
             </div>
+        </article>
+
+        <article class="community-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">IA futura</span>
+                    <h2>Sem tokens agora. Preparado para análise híbrida depois.</h2>
+                </div>
+            </div>
+            <div class="ai-policy-card">
+                <div>
+                    <span>Modo atual</span>
+                    <strong>@Model.AiPolicy.Mode</strong>
+                </div>
+                <div>
+                    <span>Tokens mensais</span>
+                    <strong>@Model.AiPolicy.MonthlyTokenBudget</strong>
+                </div>
+                <div>
+                    <span>Status</span>
+                    <strong>@Model.AiPolicy.FundingStatus</strong>
+                </div>
+            </div>
+            <p>@Model.AiPolicy.Strategy</p>
         </article>
 
         <article class="community-panel">
@@ -71,6 +95,10 @@
                         <div class="quality-score">
                             <small>Qualidade</small>
                             <strong>@challenge.QualityScore</strong>
+                        </div>
+                        <div class="vote-score">
+                            <small>Votos</small>
+                            <strong>@challenge.ApprovalVotes/@challenge.RequiredApprovals</strong>
                         </div>
                     </article>
                 }
@@ -116,6 +144,21 @@
                         <span>#@(index + 1)</span>
                         <strong>@programmer.Name</strong>
                         <em>@programmer.CommunityReputation rep</em>
+                    </div>
+                }
+            </div>
+        </article>
+
+        <article class="community-panel">
+            <span class="eyebrow">Como pagar IA no futuro</span>
+            <h2>Token economy planejada</h2>
+            <div class="funding-list">
+                @foreach (var signal in Model.FundingSignals)
+                {
+                    <div>
+                        <strong>@signal.Name</strong>
+                        <span>@signal.Description</span>
+                        <em>@signal.Status / @signal.Confidence%</em>
                     </div>
                 }
             </div>

@@ -9,6 +9,9 @@ namespace DevRank.Models
         public string ReviewerName { get; set; }
         public string Decision { get; set; }
         public string Comment { get; set; }
+        public int ClarityScore { get; set; }
+        public int RelevanceScore { get; set; }
+        public int ReviewerReputation { get; set; }
         public int ReputationDelta { get; set; }
         public DateTime Date { get; set; }
     }

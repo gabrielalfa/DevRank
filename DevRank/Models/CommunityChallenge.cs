@@ -13,6 +13,11 @@ namespace DevRank.Models
         public string Scenario { get; set; }
         public string ExpectedAnswer { get; set; }
         public string Status { get; set; }
+        public string HomologationStage { get; set; }
+        public int RequiredApprovals { get; set; }
+        public int ApprovalVotes { get; set; }
+        public int RejectionVotes { get; set; }
+        public int ConfidenceScore { get; set; }
         public int QualityScore { get; set; }
         public int ClarityScore { get; set; }
         public int RelevanceScore { get; set; }
@@ -23,5 +28,6 @@ namespace DevRank.Models
         public int Reports { get; set; }
         public DateTime CreatedAt { get; set; }
         public string ModeratorNote { get; set; }
+        public bool IsOfficialCandidate { get; set; }
     }
 }

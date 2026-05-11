@@ -171,6 +171,52 @@ Lista de desafios fake com cenários como:
 - aprovação ou reprovação;
 - alteração de Elo.
 
+Hoje essa avaliação é fake e heurística. Ela existe para validar fluxo de produto, não para substituir avaliação técnica real.
+
+## Estratégia de Curadoria e IA
+
+O ponto fraco natural de uma plataforma como essa é a curadoria. O fundador não deve ser o gargalo de revisão.
+
+Por isso, o projeto passou a considerar um modelo de:
+
+- homologação comunitária;
+- reputação separada do Elo técnico;
+- níveis de confiança;
+- revisão distribuída;
+- qualidade por votos;
+- moderação fake;
+- IA futura como apoio, não como juiz absoluto.
+
+No momento, nenhuma API de IA é chamada e nenhum token é consumido.
+
+A direção futura está documentada em:
+
+```text
+docs/PRODUCT_STRATEGY.md
+```
+
+### Community Hub
+
+Módulo criado para validar contribuição controlada da comunidade:
+
+- criação de desafios;
+- fila de homologação;
+- painel de revisão;
+- níveis comunitários;
+- reputação comunitária;
+- badges;
+- ranking de curadores;
+- quality gate fake;
+- estratégia de financiamento futuro para tokens.
+
+Níveis comunitários:
+
+- Contributor;
+- Trusted Contributor;
+- Technical Reviewer;
+- Senior Curator;
+- Arena Architect.
+
 ### Ranking Elo
 
 `EloService` calcula rating e define ranks:
@@ -234,7 +280,9 @@ Próximos módulos sugeridos:
 - simulador de entrevista;
 - modo treinamento sem punição;
 - sistema anti-copy fake;
-- feedback inteligente mais rico;
+- feedback inteligente mais rico por rubricas;
+- homologação comunitária mais profunda;
+- política futura de uso de IA com créditos;
 - estatísticas de skill mais detalhadas;
 - match futuro de vagas.
 

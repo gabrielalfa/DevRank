@@ -238,19 +238,19 @@ namespace DevRank.FakeDatabase
 
         public static readonly List<CommunityChallenge> CommunityChallenges = new List<CommunityChallenge>
         {
-            new CommunityChallenge { Id = 1, AuthorId = 1, AuthorName = "Ana Byte", Title = "Incidente de API com timeout intermitente", Type = "Cenário real", Category = "Debugging", Scenario = "Uma API MVC começa a responder acima de 8s durante pico. O time precisa mitigar, comunicar e investigar sem derrubar produção.", ExpectedAnswer = "Diagnóstico incremental, logs, métricas, rollback controlado e comunicação objetiva.", Status = "Aprovado", QualityScore = 94, ClarityScore = 91, RelevanceScore = 96, DifficultyScore = 82, ApprovalRate = 88, AbandonRate = 11, TechnicalLevel = 4, Reports = 0, CreatedAt = DateTime.Now.AddDays(-12), ModeratorNote = "Excelente cenário de produção." },
-            new CommunityChallenge { Id = 2, AuthorId = 2, AuthorName = "Bruno Stack", Title = "Query N+1 em relatório financeiro", Type = "Desafio técnico", Category = "SQL", Scenario = "Relatório executa centenas de consultas por cliente e trava no fechamento mensal.", ExpectedAnswer = "Identificar N+1, projetar consulta agregada, paginar e medir antes/depois.", Status = "Em revisão", QualityScore = 86, ClarityScore = 78, RelevanceScore = 92, DifficultyScore = 74, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 3, Reports = 0, CreatedAt = DateTime.Now.AddDays(-2), ModeratorNote = "Precisa validar critérios de aceite." },
-            new CommunityChallenge { Id = 3, AuthorId = 3, AuthorName = "Carla Thread", Title = "Conflito entre dev sênior e produto", Type = "Comportamental", Category = "Liderança", Scenario = "Um dev sênior bloqueia uma decisão de produto em público. Como conduzir sem humilhar ninguém e sem perder prazo?", ExpectedAnswer = "Escuta, alinhamento privado, trade-offs, decisão documentada e restauração de confiança.", Status = "Em revisão", QualityScore = 82, ClarityScore = 85, RelevanceScore = 89, DifficultyScore = 80, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 3, Reports = 1, CreatedAt = DateTime.Now.AddDays(-1), ModeratorNote = "Bom potencial para entrevista de liderança." },
-            new CommunityChallenge { Id = 4, AuthorId = 4, AuthorName = "Diego Razor", Title = "Tela lenta com renderização pesada", Type = "Desafio técnico", Category = "Frontend", Scenario = "Dashboard carrega 2.000 linhas, filtros travam e o usuário acha que o sistema caiu.", ExpectedAnswer = "Paginação, virtualização, debounce, estados de loading e medição.", Status = "Devolvido para melhoria", QualityScore = 61, ClarityScore = 58, RelevanceScore = 75, DifficultyScore = 55, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 2, Reports = 0, CreatedAt = DateTime.Now.AddDays(-3), ModeratorNote = "Adicionar código base e critérios de aceite." },
-            new CommunityChallenge { Id = 5, AuthorId = 5, AuthorName = "Eva Commit", Title = "Resposta genérica sobre arquitetura limpa", Type = "Entrevista", Category = "Arquitetura", Scenario = "Candidato responde com buzzwords sobre Clean Architecture sem explicar trade-offs.", ExpectedAnswer = "Pressionar por contexto, custo, simplicidade e decisões pragmáticas.", Status = "Rejeitado", QualityScore = 42, ClarityScore = 46, RelevanceScore = 55, DifficultyScore = 35, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 1, Reports = 2, CreatedAt = DateTime.Now.AddDays(-4), ModeratorNote = "Muito genérico, precisa de cenário concreto." },
-            new CommunityChallenge { Id = 6, AuthorId = 1, AuthorName = "Ana Byte", Title = "PR com regra crítica escondida no controller", Type = "Review de código", Category = "Legado", Scenario = "Pull request move uma regra fiscal para dentro do controller para 'resolver rápido'.", ExpectedAnswer = "Apontar risco, sugerir extração incremental e proteger comportamento com testes.", Status = "Aprovado", QualityScore = 91, ClarityScore = 88, RelevanceScore = 94, DifficultyScore = 70, ApprovalRate = 84, AbandonRate = 13, TechnicalLevel = 3, Reports = 0, CreatedAt = DateTime.Now.AddDays(-9), ModeratorNote = "Ótimo para revisão prática." }
+            new CommunityChallenge { Id = 1, AuthorId = 1, AuthorName = "Ana Byte", Title = "Incidente de API com timeout intermitente", Type = "Cenário real", Category = "Debugging", Scenario = "Uma API MVC começa a responder acima de 8s durante pico. O time precisa mitigar, comunicar e investigar sem derrubar produção.", ExpectedAnswer = "Diagnóstico incremental, logs, métricas, rollback controlado e comunicação objetiva.", Status = "Homologado", HomologationStage = "Homologado pela comunidade", RequiredApprovals = 3, ApprovalVotes = 5, RejectionVotes = 0, ConfidenceScore = 94, QualityScore = 94, ClarityScore = 91, RelevanceScore = 96, DifficultyScore = 82, ApprovalRate = 88, AbandonRate = 11, TechnicalLevel = 4, Reports = 0, CreatedAt = DateTime.Now.AddDays(-12), ModeratorNote = "Excelente cenário de produção.", IsOfficialCandidate = true },
+            new CommunityChallenge { Id = 2, AuthorId = 2, AuthorName = "Bruno Stack", Title = "Query N+1 em relatório financeiro", Type = "Desafio técnico", Category = "SQL", Scenario = "Relatório executa centenas de consultas por cliente e trava no fechamento mensal.", ExpectedAnswer = "Identificar N+1, projetar consulta agregada, paginar e medir antes/depois.", Status = "Em homologação", HomologationStage = "Community Review", RequiredApprovals = 3, ApprovalVotes = 2, RejectionVotes = 0, ConfidenceScore = 76, QualityScore = 86, ClarityScore = 78, RelevanceScore = 92, DifficultyScore = 74, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 3, Reports = 0, CreatedAt = DateTime.Now.AddDays(-2), ModeratorNote = "Precisa validar critérios de aceite.", IsOfficialCandidate = true },
+            new CommunityChallenge { Id = 3, AuthorId = 3, AuthorName = "Carla Thread", Title = "Conflito entre dev sênior e produto", Type = "Comportamental", Category = "Liderança", Scenario = "Um dev sênior bloqueia uma decisão de produto em público. Como conduzir sem humilhar ninguém e sem perder prazo?", ExpectedAnswer = "Escuta, alinhamento privado, trade-offs, decisão documentada e restauração de confiança.", Status = "Em homologação", HomologationStage = "Community Review", RequiredApprovals = 3, ApprovalVotes = 1, RejectionVotes = 0, ConfidenceScore = 68, QualityScore = 82, ClarityScore = 85, RelevanceScore = 89, DifficultyScore = 80, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 3, Reports = 1, CreatedAt = DateTime.Now.AddDays(-1), ModeratorNote = "Bom potencial para entrevista de liderança.", IsOfficialCandidate = true },
+            new CommunityChallenge { Id = 4, AuthorId = 4, AuthorName = "Diego Razor", Title = "Tela lenta com renderização pesada", Type = "Desafio técnico", Category = "Frontend", Scenario = "Dashboard carrega 2.000 linhas, filtros travam e o usuário acha que o sistema caiu.", ExpectedAnswer = "Paginação, virtualização, debounce, estados de loading e medição.", Status = "Devolvido para melhoria", HomologationStage = "Aguardando autor", RequiredApprovals = 3, ApprovalVotes = 0, RejectionVotes = 1, ConfidenceScore = 41, QualityScore = 61, ClarityScore = 58, RelevanceScore = 75, DifficultyScore = 55, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 2, Reports = 0, CreatedAt = DateTime.Now.AddDays(-3), ModeratorNote = "Adicionar código base e critérios de aceite.", IsOfficialCandidate = false },
+            new CommunityChallenge { Id = 5, AuthorId = 5, AuthorName = "Eva Commit", Title = "Resposta genérica sobre arquitetura limpa", Type = "Entrevista", Category = "Arquitetura", Scenario = "Candidato responde com buzzwords sobre Clean Architecture sem explicar trade-offs.", ExpectedAnswer = "Pressionar por contexto, custo, simplicidade e decisões pragmáticas.", Status = "Rejeitado", HomologationStage = "Reprovado por qualidade", RequiredApprovals = 3, ApprovalVotes = 0, RejectionVotes = 3, ConfidenceScore = 24, QualityScore = 42, ClarityScore = 46, RelevanceScore = 55, DifficultyScore = 35, ApprovalRate = 0, AbandonRate = 0, TechnicalLevel = 1, Reports = 2, CreatedAt = DateTime.Now.AddDays(-4), ModeratorNote = "Muito genérico, precisa de cenário concreto.", IsOfficialCandidate = false },
+            new CommunityChallenge { Id = 6, AuthorId = 1, AuthorName = "Ana Byte", Title = "PR com regra crítica escondida no controller", Type = "Review de código", Category = "Legado", Scenario = "Pull request move uma regra fiscal para dentro do controller para 'resolver rápido'.", ExpectedAnswer = "Apontar risco, sugerir extração incremental e proteger comportamento com testes.", Status = "Homologado", HomologationStage = "Homologado pela comunidade", RequiredApprovals = 3, ApprovalVotes = 4, RejectionVotes = 0, ConfidenceScore = 90, QualityScore = 91, ClarityScore = 88, RelevanceScore = 94, DifficultyScore = 70, ApprovalRate = 84, AbandonRate = 13, TechnicalLevel = 3, Reports = 0, CreatedAt = DateTime.Now.AddDays(-9), ModeratorNote = "Ótimo para revisão prática.", IsOfficialCandidate = true }
         };
 
         public static readonly List<CommunityReview> CommunityReviews = new List<CommunityReview>
         {
-            new CommunityReview { Id = 1, ChallengeId = 4, ReviewerName = "Ana Byte", Decision = "Devolvido", Comment = "Cenário bom, mas falta código inicial e métrica de sucesso.", ReputationDelta = 12, Date = DateTime.Now.AddDays(-2) },
-            new CommunityReview { Id = 2, ChallengeId = 5, ReviewerName = "Bruno Stack", Decision = "Rejeitado", Comment = "Muito abstrato. Precisa de conflito real e resposta esperada mais objetiva.", ReputationDelta = 8, Date = DateTime.Now.AddDays(-3) },
-            new CommunityReview { Id = 3, ChallengeId = 2, ReviewerName = "Carla Thread", Decision = "Em análise", Comment = "Bom desafio, aguardando critérios de aceite.", ReputationDelta = 6, Date = DateTime.Now.AddHours(-12) }
+            new CommunityReview { Id = 1, ChallengeId = 4, ReviewerName = "Ana Byte", Decision = "Devolvido", Comment = "Cenário bom, mas falta código inicial e métrica de sucesso.", ClarityScore = 58, RelevanceScore = 75, ReviewerReputation = 1840, ReputationDelta = 12, Date = DateTime.Now.AddDays(-2) },
+            new CommunityReview { Id = 2, ChallengeId = 5, ReviewerName = "Bruno Stack", Decision = "Rejeitado", Comment = "Muito abstrato. Precisa de conflito real e resposta esperada mais objetiva.", ClarityScore = 46, RelevanceScore = 55, ReviewerReputation = 1320, ReputationDelta = 8, Date = DateTime.Now.AddDays(-3) },
+            new CommunityReview { Id = 3, ChallengeId = 2, ReviewerName = "Carla Thread", Decision = "Em análise", Comment = "Bom desafio, aguardando critérios de aceite.", ClarityScore = 78, RelevanceScore = 92, ReviewerReputation = 980, ReputationDelta = 6, Date = DateTime.Now.AddHours(-12) }
         };
 
         public static List<ProgrammerProfile> GetTopProgrammers(int count)
@@ -403,13 +403,15 @@ namespace DevRank.FakeDatabase
                 CreatedChallenges = authored.Count,
                 ApprovedChallenges = authored.Count(challenge => challenge.Status == "Aprovado"),
                 RejectedChallenges = authored.Count(challenge => challenge.Status == "Rejeitado"),
-                PendingReviews = CommunityChallenges.Count(challenge => challenge.Status == "Em revisão"),
+                PendingReviews = CommunityChallenges.Count(challenge => challenge.Status == "Em homologação"),
                 HelpfulReviews = programmer.HelpfulReviews,
                 RecentChallenges = CommunityChallenges.OrderByDescending(challenge => challenge.CreatedAt).Take(6).ToList(),
-                ReviewQueue = CommunityChallenges.Where(challenge => challenge.Status == "Em revisão").OrderByDescending(challenge => challenge.QualityScore).ToList(),
+                ReviewQueue = CommunityChallenges.Where(challenge => challenge.Status == "Em homologação").OrderByDescending(challenge => challenge.QualityScore).ToList(),
                 RecentReviews = CommunityReviews.OrderByDescending(review => review.Date).Take(5).ToList(),
                 CommunityLeaderboard = Programmers.OrderByDescending(item => item.CommunityReputation).Take(10).ToList(),
                 Levels = CommunityLevels,
+                AiPolicy = GetAiEvaluationPolicy(),
+                FundingSignals = GetCommunityFundingSignals(),
                 CommunityBadges = new[] { "Bug Hunter", "SQL Master", "Interview Mentor", "Legacy Slayer", "Clean Architect", "Performance Expert", "Community Helper", "Elite Reviewer", "Trusted Engineer" }
             };
         }
@@ -452,7 +454,12 @@ namespace DevRank.FakeDatabase
                 Category = model.Category,
                 Scenario = model.Scenario,
                 ExpectedAnswer = model.ExpectedAnswer,
-                Status = "Em revisão",
+                Status = "Em homologação",
+                HomologationStage = "Community Review",
+                RequiredApprovals = 3,
+                ApprovalVotes = 0,
+                RejectionVotes = 0,
+                ConfidenceScore = Math.Max(35, quality - 12),
                 QualityScore = quality,
                 ClarityScore = Math.Min(96, quality - 3),
                 RelevanceScore = Math.Min(98, quality + 5),
@@ -462,7 +469,8 @@ namespace DevRank.FakeDatabase
                 TechnicalLevel = 3,
                 Reports = 0,
                 CreatedAt = DateTime.Now,
-                ModeratorNote = "Shadow review automático: aguardando validação humana."
+                ModeratorNote = "Shadow review automático: aguardando validação comunitária.",
+                IsOfficialCandidate = quality >= 75
             };
 
             CommunityChallenges.Add(challenge);
@@ -482,8 +490,8 @@ namespace DevRank.FakeDatabase
             }
 
             var normalizedDecision = string.IsNullOrWhiteSpace(decision) ? "Devolvido para melhoria" : decision;
-            challenge.Status = normalizedDecision;
-            challenge.ModeratorNote = "Moderação fake aplicada por " + reviewer.Name + ".";
+            ApplyCommunityVote(challenge, normalizedDecision);
+            challenge.ModeratorNote = "Voto comunitário aplicado por " + reviewer.Name + ".";
 
             var author = Programmers.FirstOrDefault(item => item.Id == challenge.AuthorId);
             if (author != null)
@@ -512,6 +520,9 @@ namespace DevRank.FakeDatabase
                 ReviewerName = reviewer.Name,
                 Decision = normalizedDecision,
                 Comment = challenge.ModeratorNote,
+                ClarityScore = challenge.ClarityScore,
+                RelevanceScore = challenge.RelevanceScore,
+                ReviewerReputation = reviewer.CommunityReputation,
                 ReputationDelta = 12,
                 Date = DateTime.Now
             });
@@ -559,6 +570,71 @@ namespace DevRank.FakeDatabase
         {
             var text = (value ?? string.Empty).ToLower();
             return text.Contains("boas práticas") && text.Contains("melhorar") && text.Length < 240;
+        }
+
+        private static void ApplyCommunityVote(CommunityChallenge challenge, string decision)
+        {
+            if (decision == "Aprovado")
+            {
+                challenge.ApprovalVotes += 1;
+            }
+            else if (decision == "Rejeitado")
+            {
+                challenge.RejectionVotes += 1;
+            }
+            else
+            {
+                challenge.Status = "Devolvido para melhoria";
+                challenge.HomologationStage = "Aguardando autor";
+                challenge.ConfidenceScore = Math.Max(20, challenge.ConfidenceScore - 10);
+                return;
+            }
+
+            challenge.ConfidenceScore = Math.Min(99, challenge.QualityScore + (challenge.ApprovalVotes * 6) - (challenge.RejectionVotes * 12));
+
+            if (challenge.ApprovalVotes >= challenge.RequiredApprovals && challenge.ConfidenceScore >= 78)
+            {
+                challenge.Status = "Homologado";
+                challenge.HomologationStage = "Homologado pela comunidade";
+                challenge.IsOfficialCandidate = true;
+                return;
+            }
+
+            if (challenge.RejectionVotes >= 2)
+            {
+                challenge.Status = "Rejeitado";
+                challenge.HomologationStage = "Reprovado por qualidade";
+                challenge.IsOfficialCandidate = false;
+                return;
+            }
+
+            challenge.Status = "Em homologação";
+            challenge.HomologationStage = "Community Review";
+        }
+
+        private static AiEvaluationPolicy GetAiEvaluationPolicy()
+        {
+            return new AiEvaluationPolicy
+            {
+                IsEnabled = false,
+                Mode = "Heurística local + homologação comunitária",
+                MonthlyTokenBudget = 0,
+                TokensUsed = 0,
+                EstimatedCostInCents = 0,
+                FundingStatus = "Aguardando tração e contribuição da comunidade",
+                Strategy = "Preparado para IA assistida no futuro, sem consumo de tokens no protótipo atual."
+            };
+        }
+
+        private static List<CommunityFundingSignal> GetCommunityFundingSignals()
+        {
+            return new List<CommunityFundingSignal>
+            {
+                new CommunityFundingSignal { Name = "Planos premium", Description = "Devs pagam por análises avançadas, histórico exportável e simulados ilimitados.", Status = "Futuro", Confidence = 68 },
+                new CommunityFundingSignal { Name = "Empresas observadoras", Description = "Times pagam para acompanhar rankings, perfis públicos e sinais de evolução.", Status = "Futuro", Confidence = 74 },
+                new CommunityFundingSignal { Name = "Créditos de avaliação", Description = "Usuários compram créditos para avaliações com IA quando o custo fizer sentido.", Status = "Futuro", Confidence = 61 },
+                new CommunityFundingSignal { Name = "Challenges patrocinados", Description = "Empresas patrocinam trilhas técnicas e ajudam a financiar tokens.", Status = "Futuro", Confidence = 57 }
+            };
         }
 
         private static void HydrateAdvancedProfile(ProgrammerProfile programmer)

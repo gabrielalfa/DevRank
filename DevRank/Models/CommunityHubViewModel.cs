@@ -18,6 +18,8 @@ namespace DevRank.Models
         public IList<CommunityReview> RecentReviews { get; set; }
         public IList<ProgrammerProfile> CommunityLeaderboard { get; set; }
         public IList<CommunityLevel> Levels { get; set; }
+        public AiEvaluationPolicy AiPolicy { get; set; }
+        public IList<CommunityFundingSignal> FundingSignals { get; set; }
         public string[] CommunityBadges { get; set; }
     }
 }

@@ -82,8 +82,10 @@
     </Compile>
     <Compile Include="Models\Challenge.cs" />
     <Compile Include="Models\ChallengeDetailsViewModel.cs" />
+    <Compile Include="Models\AiEvaluationPolicy.cs" />
     <Compile Include="Models\CommunityChallenge.cs" />
     <Compile Include="Models\CommunityCreateChallengeViewModel.cs" />
+    <Compile Include="Models\CommunityFundingSignal.cs" />
     <Compile Include="Models\CommunityHubViewModel.cs" />
     <Compile Include="Models\CommunityLevel.cs" />
     <Compile Include="Models\CommunityReview.cs" />
