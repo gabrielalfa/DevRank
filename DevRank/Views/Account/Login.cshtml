@@ -1,0 +1,33 @@
+@model DevRank.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<section class="page-section narrow">
+    <div class="section-heading">
+        <span class="eyebrow">Acesso rapido</span>
+        <h1>Entrar na arena</h1>
+        <p>Use um usuario fake existente ou crie um novo desafiante.</p>
+    </div>
+
+    <form class="form-panel" method="post" action="@Url.Action("Login", "Account")">
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert-box">@Model.ErrorMessage</div>
+        }
+
+        <label>
+            Usuario
+            <input type="text" name="Username" value="@Model.Username" placeholder="ana" autofocus />
+        </label>
+
+        <label>
+            Senha
+            <input type="password" name="Password" placeholder="123" />
+        </label>
+
+        <button class="btn btn-primary" type="submit">Entrar</button>
+        <a class="inline-link" href="@Url.Action("Register", "Account")">Criar novo programador</a>
+    </form>
+</section>

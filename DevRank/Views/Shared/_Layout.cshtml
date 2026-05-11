@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - DevRank</title>
+    <link rel="stylesheet" href="~/Content/site.css" />
+</head>
+<body>
+    <div class="shell">
+        <header class="topbar">
+            <a class="brand" href="@Url.Action("Index", "Home")">
+                <span class="brand-mark">DR</span>
+                <span>DevRank</span>
+            </a>
+            <nav class="nav-links" aria-label="Navegacao principal">
+                <a href="@Url.Action("Index", "Home")">Home</a>
+                <a href="@Url.Action("Index", "Challenge")">Desafios</a>
+                <a href="@Url.Action("Index", "Leaderboard")">Leaderboard</a>
+                <a href="@Url.Action("Index", "Profile")">Perfil</a>
+            </nav>
+            @if (Session["UserId"] == null)
+            {
+                <a class="btn btn-ghost" href="@Url.Action("Login", "Account")">Login</a>
+            }
+            else
+            {
+                <a class="btn btn-ghost" href="@Url.Action("Logout", "Account")">Sair</a>
+            }
+        </header>
+
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/Scripts/devrank.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

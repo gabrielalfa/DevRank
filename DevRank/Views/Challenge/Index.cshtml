@@ -1,0 +1,44 @@
+@model System.Collections.Generic.IList<DevRank.Models.Challenge>
+
+@{
+    ViewBag.Title = "Desafios";
+    var currentRating = (int)ViewBag.CurrentRating;
+}
+
+<section class="page-section">
+    <div class="section-heading split-heading">
+        <div>
+            <span class="eyebrow">Arena pratica</span>
+            <h1>Lista de desafios</h1>
+            <p>Escolha um caso de engenharia, envie sua proposta e deixe a IA fake julgar seu Elo.</p>
+        </div>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Profile")">Meu perfil</a>
+    </div>
+
+    <div class="challenge-grid">
+        @foreach (var challenge in Model)
+        {
+            var locked = currentRating > 0 && currentRating < challenge.MinimumRating;
+            <article class="challenge-card">
+                <div class="challenge-meta">
+                    <span>@challenge.Category</span>
+                    <span>@challenge.Difficulty</span>
+                </div>
+                <h2>@challenge.Title</h2>
+                <p>@challenge.Description</p>
+                <div class="challenge-footer">
+                    <span>@challenge.EstimatedTime</span>
+                    <span>Min. @challenge.MinimumRating Elo</span>
+                </div>
+                @if (locked)
+                {
+                    <button class="btn btn-secondary" type="button" disabled>Bloqueado</button>
+                }
+                else
+                {
+                    <a class="btn btn-primary" href="@Url.Action("Details", "Challenge", new { id = challenge.Id })">Abrir desafio</a>
+                }
+            </article>
+        }
+    </div>
+</section>

@@ -1,0 +1,35 @@
+@model DevRank.Models.ChallengeDetailsViewModel
+
+@{
+    ViewBag.Title = Model.Challenge.Title;
+}
+
+<section class="page-section challenge-layout">
+    <div>
+        <a class="inline-link" href="@Url.Action("Index", "Challenge")">Voltar para desafios</a>
+        <div class="section-heading">
+            <span class="eyebrow">@Model.Challenge.Category / @Model.Challenge.Difficulty</span>
+            <h1>@Model.Challenge.Title</h1>
+            <p>@Model.Challenge.Description</p>
+        </div>
+
+        <pre class="code-panel"><code>@Model.Challenge.FakeCode</code></pre>
+    </div>
+
+    <form class="form-panel sticky-panel" method="post" action="@Url.Action("Submit", "Challenge", new { id = Model.Challenge.Id })">
+        <h2>Enviar solucao</h2>
+        <p>Descreva sua abordagem como faria em uma revisao tecnica objetiva.</p>
+
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert-box">@Model.ErrorMessage</div>
+        }
+
+        <textarea class="solution-editor" name="solution" rows="14" placeholder="Ex: Eu extrairia a regra para um service, isolaria validacao e protegeria a operacao critica..."></textarea>
+        <div class="editor-status">
+            <span data-counter>0 caracteres</span>
+            <span>Rating do desafio: @Model.Challenge.ChallengeRating</span>
+        </div>
+        <button class="btn btn-primary" type="submit">Enviar para IA fake</button>
+    </form>
+</section>

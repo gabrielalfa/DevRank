@@ -1,0 +1,74 @@
+@model DevRank.Models.ProfileViewModel
+
+@{
+    ViewBag.Title = "Perfil";
+}
+
+<section class="page-section profile-grid">
+    <aside class="profile-card">
+        <span class="eyebrow">Programador</span>
+        <h1>@Model.Programmer.Name</h1>
+        <p>@Model.Programmer.Bio</p>
+
+        <div class="rank-badge">@Model.Programmer.Level</div>
+        <div class="rating-display compact">@Model.Programmer.EloRating</div>
+
+        <div class="mini-grid stack">
+            <div>
+                <strong>@Model.Programmer.Wins</strong>
+                <span>vitorias</span>
+            </div>
+            <div>
+                <strong>@Model.Programmer.Losses</strong>
+                <span>derrotas</span>
+            </div>
+            <div>
+                <strong>@Model.Programmer.WinRate%</strong>
+                <span>winrate</span>
+            </div>
+        </div>
+
+        <div class="badge-list">
+            @foreach (var badge in Model.Programmer.Badges)
+            {
+                <span>@badge</span>
+            }
+        </div>
+    </aside>
+
+    <div>
+        <div class="section-heading">
+            <span class="eyebrow">@Model.Programmer.MainStack</span>
+            <h2>Historico de partidas</h2>
+        </div>
+
+        @if (Model.History.Count == 0)
+        {
+            <div class="empty-state">
+                Nenhuma partida ainda. Entre em um desafio para gerar seu primeiro resultado.
+                <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Ver desafios</a>
+            </div>
+        }
+        else
+        {
+            <div class="history-list">
+                @foreach (var match in Model.History)
+                {
+                    <article class="history-row">
+                        <div>
+                            <strong>@match.ChallengeTitle</strong>
+                            <span>@match.Date.ToString("dd/MM/yyyy HH:mm")</span>
+                        </div>
+                        <span class="result-pill @(match.Approved ? "approved" : "rejected")">
+                            @(match.Approved ? "Aprovado" : "Reprovado")
+                        </span>
+                        <span>@match.Score pts</span>
+                        <span class="@(match.EloDelta >= 0 ? "delta-positive" : "delta-negative")">
+                            @(match.EloDelta >= 0 ? "+" : "")@match.EloDelta Elo
+                        </span>
+                    </article>
+                }
+            </div>
+        }
+    </div>
+</section>

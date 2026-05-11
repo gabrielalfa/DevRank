@@ -1,0 +1,38 @@
+@model DevRank.Models.SubmissionResultViewModel
+
+@{
+    ViewBag.Title = "Resultado";
+}
+
+<section class="page-section narrow">
+    <div class="result-panel">
+        <span class="result-pill @(Model.Match.Approved ? "approved" : "rejected")">
+            @(Model.Match.Approved ? "Aprovado" : "Reprovado")
+        </span>
+        <h1>@Model.Challenge.Title</h1>
+        <div class="score-ring">@Model.Match.Score</div>
+        <p>@Model.Match.Feedback</p>
+
+        <div class="mini-grid">
+            <div>
+                <strong>@Model.Match.EloBefore</strong>
+                <span>Elo antes</span>
+            </div>
+            <div>
+                <strong class="@(Model.Match.EloDelta >= 0 ? "delta-positive" : "delta-negative")">
+                    @(Model.Match.EloDelta >= 0 ? "+" : "")@Model.Match.EloDelta
+                </strong>
+                <span>variacao</span>
+            </div>
+            <div>
+                <strong>@Model.Match.EloAfter</strong>
+                <span>Elo atual</span>
+            </div>
+        </div>
+
+        <div class="hero-actions center">
+            <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Novo desafio</a>
+            <a class="btn btn-secondary" href="@Url.Action("Index", "Profile")">Ver perfil</a>
+        </div>
+    </div>
+</section>

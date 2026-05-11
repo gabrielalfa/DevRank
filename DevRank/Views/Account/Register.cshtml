@@ -1,0 +1,48 @@
+@model DevRank.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Cadastro";
+}
+
+<section class="page-section narrow">
+    <div class="section-heading">
+        <span class="eyebrow">Novo perfil</span>
+        <h1>Criar programador</h1>
+        <p>Cadastro simples para prototipo. Sem criptografia, OAuth ou banco real.</p>
+    </div>
+
+    <form class="form-panel" method="post" action="@Url.Action("Register", "Account")">
+        @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+        {
+            <div class="alert-box">@Model.ErrorMessage</div>
+        }
+
+        <label>
+            Nome
+            <input type="text" name="Name" value="@Model.Name" placeholder="Seu nome" autofocus />
+        </label>
+
+        <label>
+            Usuario
+            <input type="text" name="Username" value="@Model.Username" placeholder="handle" />
+        </label>
+
+        <label>
+            Senha
+            <input type="password" name="Password" placeholder="123" />
+        </label>
+
+        <label>
+            Stack principal
+            <input type="text" name="MainStack" value="@Model.MainStack" placeholder="ASP.NET MVC / C#" />
+        </label>
+
+        <label>
+            Bio
+            <textarea name="Bio" rows="4" placeholder="Conte em uma frase seu estilo de engenharia">@Model.Bio</textarea>
+        </label>
+
+        <button class="btn btn-primary" type="submit">Criar e entrar</button>
+        <a class="inline-link" href="@Url.Action("Login", "Account")">Ja tenho login</a>
+    </form>
+</section>

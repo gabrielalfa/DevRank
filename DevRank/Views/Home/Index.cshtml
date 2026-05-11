@@ -1,0 +1,83 @@
+@model DevRank.Models.HomeViewModel
+
+@{
+    ViewBag.Title = "Arena de Ranking para Devs";
+}
+
+<section class="hero-section">
+    <div class="hero-copy">
+        <span class="eyebrow">Prototype Arena / Elo Ranking</span>
+        <h1>Prove engenharia de software na pratica.</h1>
+        <p>
+            DevRank mede conhecimento real de programadores com desafios de refatoracao,
+            performance, bugs de concorrencia e revisao de codigo legado.
+        </p>
+        <div class="hero-actions">
+            <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Entrar na Arena</a>
+            <a class="btn btn-secondary" href="#ranking">Ver Ranking</a>
+        </div>
+    </div>
+
+    <aside class="arena-card" aria-label="Resumo competitivo">
+        <div class="arena-glow"></div>
+        <div class="rank-badge">Diamante</div>
+        <div class="rating-display">2310</div>
+        <p>Elo atual do lider</p>
+        <div class="mini-grid">
+            <div>
+                <strong>@Model.TotalDevelopers</strong>
+                <span>devs</span>
+            </div>
+            <div>
+                <strong>@Model.TotalChallenges</strong>
+                <span>desafios</span>
+            </div>
+            <div>
+                <strong>@Model.TotalMatches</strong>
+                <span>partidas</span>
+            </div>
+        </div>
+    </aside>
+</section>
+
+<section class="value-section" aria-label="Como funciona">
+    <article>
+        <span>01</span>
+        <h2>Escolha um desafio</h2>
+        <p>Casos curtos de engenharia: endpoint MVC, performance, service mal dividido ou bug dificil.</p>
+    </article>
+    <article>
+        <span>02</span>
+        <h2>Envie a solucao</h2>
+        <p>Um editor simples recebe sua proposta. Para o MVP, a avaliacao sera fake e controlada.</p>
+    </article>
+    <article>
+        <span>03</span>
+        <h2>Suba no Elo</h2>
+        <p>Vitorias aumentam rating, derrotas ensinam. Bronze, Prata, Ouro, Platina e Diamante.</p>
+    </article>
+</section>
+
+<section id="ranking" class="leaderboard-section">
+    <div class="section-heading">
+        <span class="eyebrow">Leaderboard inicial</span>
+        <h2>Melhores programadores</h2>
+    </div>
+
+    <div class="leaderboard">
+        @for (var index = 0; index < Model.TopProgrammers.Count; index++)
+        {
+            var programmer = Model.TopProgrammers[index];
+            <article class="leader-row">
+                <div class="position">#@(index + 1)</div>
+                <div class="player">
+                    <strong>@programmer.Name</strong>
+                    <span>@programmer.MainStack</span>
+                </div>
+                <div class="rank-pill rank-@programmer.Level.ToLower()">@programmer.Level</div>
+                <div class="elo">@programmer.EloRating Elo</div>
+                <div class="winrate">@programmer.WinRate% WR</div>
+            </article>
+        }
+    </div>
+</section>

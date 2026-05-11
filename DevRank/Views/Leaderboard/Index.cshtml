@@ -1,0 +1,30 @@
+@model System.Collections.Generic.IList<DevRank.Models.ProgrammerProfile>
+
+@{
+    ViewBag.Title = "Leaderboard";
+}
+
+<section class="page-section">
+    <div class="section-heading">
+        <span class="eyebrow">Top 50</span>
+        <h1>Leaderboard DevRank</h1>
+        <p>Ranking fake em memoria, ordenado por Elo.</p>
+    </div>
+
+    <div class="leaderboard">
+        @for (var index = 0; index < Model.Count; index++)
+        {
+            var programmer = Model[index];
+            <article class="leader-row">
+                <div class="position">#@(index + 1)</div>
+                <div class="player">
+                    <strong>@programmer.Name</strong>
+                    <span>@programmer.MainStack</span>
+                </div>
+                <div class="rank-pill rank-@programmer.Level.ToLower()">@programmer.Level</div>
+                <div class="elo">@programmer.EloRating Elo</div>
+                <div class="winrate">@programmer.WinRate% WR</div>
+            </article>
+        }
+    </div>
+</section>
