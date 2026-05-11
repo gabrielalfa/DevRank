@@ -2,12 +2,13 @@
 
 @{
     ViewBag.Title = "Dashboard";
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.Programmer.FakePhotoUrl) && Model.Programmer.FakePhotoUrl.StartsWith("data:");
 }
 
 <section class="dashboard-hero">
     <div class="dashboard-profile">
-        <div class="fake-avatar" aria-label="Foto fake de @Model.Programmer.Name">
-            @Model.Programmer.Name.Substring(0, 1)
+        <div class="fake-avatar" aria-label="Foto fake de @Model.Programmer.Name" style="@(hasCustomAvatar ? "background-image:url('" + Model.Programmer.FakePhotoUrl + "')" : "")">
+            @(hasCustomAvatar ? "" : Model.Programmer.Name.Substring(0, 1))
         </div>
         <div>
             <span class="eyebrow">Dashboard do Dev</span>

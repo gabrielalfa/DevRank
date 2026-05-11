@@ -2,12 +2,14 @@
 
 @{
     ViewBag.Title = "Perfil Técnico";
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.Programmer.FakePhotoUrl) && Model.Programmer.FakePhotoUrl.StartsWith("data:");
 }
 
 <section class="advanced-profile">
     <aside class="advanced-identity">
-        <div class="fake-avatar large" aria-label="Foto fake de @Model.Programmer.Name">
-            @Model.Programmer.Name.Substring(0, 1)
+        <a class="profile-edit-button" href="@Url.Action("Edit", "Profile")" aria-label="Editar perfil">✎ Editar Perfil</a>
+        <div class="fake-avatar large" aria-label="Foto fake de @Model.Programmer.Name" style="@(hasCustomAvatar ? "background-image:url('" + Model.Programmer.FakePhotoUrl + "')" : "")">
+            @(hasCustomAvatar ? "" : Model.Programmer.Name.Substring(0, 1))
         </div>
         <span class="eyebrow">Perfil técnico avançado</span>
         <h1>@Model.Programmer.Name</h1>
@@ -28,6 +30,11 @@
                 <span>@badge</span>
             }
         </div>
+
+        <div class="profile-actions">
+            <a class="btn btn-primary" href="@Url.Action("Public", "Profile", new { username = Model.Programmer.Username })">Ver perfil público</a>
+            <button class="btn btn-secondary" type="button" data-copy-profile="@Url.Action("Public", "Profile", new { username = Model.Programmer.Username }, Request.Url.Scheme)">Copiar link</button>
+        </div>
     </aside>
 
     <div class="advanced-content">
@@ -37,7 +44,7 @@
                 <strong>@Model.Programmer.MainStack</strong>
             </article>
             <article>
-                <span>Stack secundaria</span>
+                <span>Stack secundária</span>
                 <strong>@Model.Programmer.SecondaryStack</strong>
             </article>
             <article>

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using DevRank.Models;
 using DevRank.Services;
 
@@ -262,6 +263,42 @@ namespace DevRank.FakeDatabase
             return Programmers.Any(programmer => programmer.Username.ToLower() == (username ?? string.Empty).ToLower());
         }
 
+        public static bool UsernameExistsForAnotherProgrammer(string username, int programmerId)
+        {
+            return Programmers.Any(programmer =>
+                programmer.Id != programmerId &&
+                programmer.Username.ToLower() == (username ?? string.Empty).ToLower());
+        }
+
+        public static void UpdateProgrammer(ProfileEditViewModel model)
+        {
+            var programmer = Programmers.FirstOrDefault(item => item.Id == model.Id);
+
+            if (programmer == null)
+            {
+                return;
+            }
+
+            programmer.Name = model.Name;
+            programmer.Username = model.Username;
+            programmer.Bio = model.Bio;
+            programmer.MainStack = model.MainStack;
+            programmer.SecondaryStack = model.SecondaryStack;
+            programmer.ExperienceTime = model.ExperienceTime;
+            programmer.FakeLinkedIn = model.FakeLinkedIn;
+            programmer.FakeGitHub = model.FakeGitHub;
+            programmer.FakePortfolio = model.FakePortfolio;
+            programmer.Languages = SplitCsv(model.LanguagesText);
+
+            if (!string.IsNullOrWhiteSpace(model.AvatarPreview))
+            {
+                programmer.FakePhotoUrl = model.AvatarPreview;
+            }
+
+            programmer.Integrations = null;
+            HydrateAdvancedProfile(programmer);
+        }
+
         public static ProgrammerProfile GetProgrammer(int id)
         {
             ApplyComputedRanks();
@@ -378,6 +415,20 @@ namespace DevRank.FakeDatabase
                 new EvolutionPoint { Label = "Semana 4", Elo = rating - 40, Confidence = 72 },
                 new EvolutionPoint { Label = "Hoje", Elo = rating, Confidence = 78 }
             };
+        }
+
+        private static string[] SplitCsv(string value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return new[] { "Português" };
+            }
+
+            return value
+                .Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(item => item.Trim())
+                .Where(item => item.Length > 0)
+                .ToArray();
         }
     }
 }

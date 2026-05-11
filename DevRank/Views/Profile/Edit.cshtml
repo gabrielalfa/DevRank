@@ -1,0 +1,108 @@
+@model DevRank.Models.ProfileEditViewModel
+
+@{
+    ViewBag.Title = "Editar Perfil";
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.AvatarPreview) && Model.AvatarPreview.StartsWith("data:");
+}
+
+<section class="edit-profile-page">
+    <div class="section-heading split-heading">
+        <div>
+            <span class="eyebrow">Identidade técnica</span>
+            <h1>Editar perfil</h1>
+            <p>Atualize sua presença pública, stacks, links e sinais de maturidade profissional.</p>
+        </div>
+        <a class="btn btn-secondary" href="@Url.Action("Index", "Profile")">Voltar ao perfil</a>
+    </div>
+
+    <form class="edit-profile-layout" method="post" action="@Url.Action("Edit", "Profile")">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="hidden" name="AvatarPreview" value="@Model.AvatarPreview" data-avatar-value />
+
+        <aside class="edit-avatar-panel">
+            <label class="avatar-upload">
+                <span class="fake-avatar large" data-avatar-preview style="@(hasCustomAvatar ? "background-image:url('" + Model.AvatarPreview + "')" : "")">
+                    @(hasCustomAvatar ? "" : Model.Name.Substring(0, 1))
+                </span>
+                <span class="avatar-overlay">Alterar foto</span>
+                <input type="file" accept="image/*" data-avatar-input />
+            </label>
+            <h2>@Model.Name</h2>
+            <p>Upload fake com preview local. A imagem não é enviada para servidor real.</p>
+            <div class="profile-tags">
+                <span>Preview público</span>
+                <span>DevRank ID</span>
+            </div>
+        </aside>
+
+        <div class="edit-form-panel">
+            @if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+            {
+                <div class="alert-box">@Model.ErrorMessage</div>
+            }
+
+            <div class="form-grid two">
+                <label>
+                    Nome
+                    <input type="text" name="Name" value="@Model.Name" />
+                </label>
+                <label>
+                    Username
+                    <input type="text" name="Username" value="@Model.Username" />
+                </label>
+            </div>
+
+            <label>
+                Bio
+                <textarea name="Bio" rows="5">@Model.Bio</textarea>
+            </label>
+
+            <div class="form-grid two">
+                <label>
+                    Stack principal
+                    <input type="text" name="MainStack" value="@Model.MainStack" />
+                </label>
+                <label>
+                    Stack secundária
+                    <input type="text" name="SecondaryStack" value="@Model.SecondaryStack" />
+                </label>
+            </div>
+
+            <div class="form-grid two">
+                <label>
+                    Tempo de experiência
+                    <input type="text" name="ExperienceTime" value="@Model.ExperienceTime" />
+                </label>
+                <label>
+                    Idiomas
+                    <input type="text" name="LanguagesText" value="@Model.LanguagesText" placeholder="Português, Inglês" />
+                </label>
+            </div>
+
+            <div class="form-grid three">
+                <label>
+                    GitHub
+                    <input type="text" name="FakeGitHub" value="@Model.FakeGitHub" />
+                </label>
+                <label>
+                    LinkedIn
+                    <input type="text" name="FakeLinkedIn" value="@Model.FakeLinkedIn" />
+                </label>
+                <label>
+                    Portfólio
+                    <input type="text" name="FakePortfolio" value="@Model.FakePortfolio" />
+                </label>
+            </div>
+
+            <label>
+                Soft skills
+                <input type="text" name="SoftSkillsText" value="@Model.SoftSkillsText" placeholder="Comunicação, liderança, negociação" />
+            </label>
+
+            <div class="edit-actions">
+                <button class="btn btn-primary" type="submit">Salvar alterações</button>
+                <a class="btn btn-secondary" href="@Url.Action("Index", "Profile")">Cancelar</a>
+            </div>
+        </div>
+    </form>
+</section>

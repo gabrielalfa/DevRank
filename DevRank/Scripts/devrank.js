@@ -49,4 +49,46 @@
             }
         });
     }
+
+    var avatarInput = document.querySelector("[data-avatar-input]");
+    var avatarPreview = document.querySelector("[data-avatar-preview]");
+    var avatarValue = document.querySelector("[data-avatar-value]");
+
+    if (avatarInput && avatarPreview) {
+        avatarInput.addEventListener("change", function () {
+            var file = avatarInput.files && avatarInput.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = function (event) {
+                var result = event.target.result;
+                avatarPreview.textContent = "";
+                avatarPreview.style.backgroundImage = "url('" + result + "')";
+
+                if (avatarValue) {
+                    avatarValue.value = result;
+                }
+            };
+
+            reader.readAsDataURL(file);
+        });
+    }
+
+    var profileCopyButton = document.querySelector("[data-copy-profile]");
+
+    if (profileCopyButton) {
+        profileCopyButton.addEventListener("click", function () {
+            var tempInput = document.createElement("input");
+            tempInput.value = profileCopyButton.getAttribute("data-copy-profile");
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            profileCopyButton.textContent = "Link copiado";
+        });
+    }
 })();
