@@ -4,6 +4,8 @@ namespace DevRank.Services
     {
         public string GetRank(int rating)
         {
+            if (rating >= 2600) return "Challenger";
+            if (rating >= 2400) return "Mestre";
             if (rating >= 2200) return "Diamante";
             if (rating >= 1850) return "Platina";
             if (rating >= 1550) return "Ouro";

@@ -1,31 +1,25 @@
 @model DevRank.Models.ProfileViewModel
 
 @{
-    ViewBag.Title = "Perfil";
+    ViewBag.Title = "Perfil Tecnico";
 }
 
-<section class="page-section profile-grid">
-    <aside class="profile-card">
-        <span class="eyebrow">Programador</span>
+<section class="advanced-profile">
+    <aside class="advanced-identity">
+        <div class="fake-avatar large" aria-label="Foto fake de @Model.Programmer.Name">
+            @Model.Programmer.Name.Substring(0, 1)
+        </div>
+        <span class="eyebrow">Perfil tecnico avancado</span>
         <h1>@Model.Programmer.Name</h1>
         <p>@Model.Programmer.Bio</p>
 
         <div class="rank-badge">@Model.Programmer.Level</div>
         <div class="rating-display compact">@Model.Programmer.EloRating</div>
 
-        <div class="mini-grid stack">
-            <div>
-                <strong>@Model.Programmer.Wins</strong>
-                <span>vitorias</span>
-            </div>
-            <div>
-                <strong>@Model.Programmer.Losses</strong>
-                <span>derrotas</span>
-            </div>
-            <div>
-                <strong>@Model.Programmer.WinRate%</strong>
-                <span>winrate</span>
-            </div>
+        <div class="profile-tags">
+            <span>@("@" + Model.Programmer.Username)</span>
+            <span>@Model.Programmer.PerceivedSeniority</span>
+            <span>@Model.Programmer.ExperienceTime</span>
         </div>
 
         <div class="badge-list">
@@ -36,39 +30,125 @@
         </div>
     </aside>
 
-    <div>
-        <div class="section-heading">
-            <span class="eyebrow">@Model.Programmer.MainStack</span>
-            <h2>Historico de partidas</h2>
-        </div>
+    <div class="advanced-content">
+        <section class="profile-summary-grid">
+            <article>
+                <span>Stack principal</span>
+                <strong>@Model.Programmer.MainStack</strong>
+            </article>
+            <article>
+                <span>Stack secundaria</span>
+                <strong>@Model.Programmer.SecondaryStack</strong>
+            </article>
+            <article>
+                <span>Winrate</span>
+                <strong>@Model.Programmer.WinRate%</strong>
+            </article>
+            <article>
+                <span>Season streak</span>
+                <strong>@Model.Programmer.WinStreak</strong>
+            </article>
+        </section>
 
-        @if (Model.History.Count == 0)
-        {
-            <div class="empty-state">
-                Nenhuma partida ainda. Entre em um desafio para gerar seu primeiro resultado.
-                <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Ver desafios</a>
+        <section class="dashboard-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Skill graph</span>
+                    <h2>Competencias tecnicas e humanas</h2>
+                </div>
+                <a class="btn btn-secondary" href="@Url.Action("Index", "Dashboard")">Abrir dashboard</a>
             </div>
-        }
-        else
-        {
-            <div class="history-list">
-                @foreach (var match in Model.History)
+            <div class="skill-radar-fake">
+                @foreach (var skill in Model.Programmer.Skills)
                 {
-                    <article class="history-row">
-                        <div>
-                            <strong>@match.ChallengeTitle</strong>
-                            <span>@match.Date.ToString("dd/MM/yyyy HH:mm")</span>
+                    <div class="radar-item">
+                        <span>@skill.Name</span>
+                        <div class="skill-track">
+                            <span style="width:@skill.Score%"></span>
                         </div>
-                        <span class="result-pill @(match.Approved ? "approved" : "rejected")">
-                            @(match.Approved ? "Aprovado" : "Reprovado")
-                        </span>
-                        <span>@match.Score pts</span>
-                        <span class="@(match.EloDelta >= 0 ? "delta-positive" : "delta-negative")">
-                            @(match.EloDelta >= 0 ? "+" : "")@match.EloDelta Elo
-                        </span>
+                        <strong>@skill.Score</strong>
+                    </div>
+                }
+            </div>
+        </section>
+
+        <section class="dashboard-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Elo por tecnologia</span>
+                    <h2>Onde o nivel esta mais forte</h2>
+                </div>
+            </div>
+            <div class="tech-elo-grid">
+                @foreach (var tech in Model.Programmer.TechnologyElos)
+                {
+                    <article>
+                        <span>@tech.Technology</span>
+                        <strong>@tech.Rating</strong>
+                        <em>@tech.Rank</em>
                     </article>
                 }
             </div>
-        }
+        </section>
+
+        <section class="dashboard-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Perfil integrado</span>
+                    <h2>Visao futura de evidencias</h2>
+                </div>
+            </div>
+            <div class="integration-grid">
+                @foreach (var integration in Model.Programmer.Integrations)
+                {
+                    <article>
+                        <div>
+                            <strong>@integration.Name</strong>
+                            <span>@integration.Url</span>
+                        </div>
+                        <em>@integration.Status</em>
+                        <p>@integration.Description</p>
+                    </article>
+                }
+            </div>
+        </section>
+
+        <section class="dashboard-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Historico de evolucao</span>
+                    <h2>Partidas e feedbacks</h2>
+                </div>
+            </div>
+
+            @if (Model.History.Count == 0)
+            {
+                <div class="empty-state">
+                    Nenhuma partida ainda. Entre em um desafio para gerar seu primeiro resultado.
+                    <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Ver desafios</a>
+                </div>
+            }
+            else
+            {
+                <div class="history-list">
+                    @foreach (var match in Model.History)
+                    {
+                        <article class="history-row">
+                            <div>
+                                <strong>@match.ChallengeTitle</strong>
+                                <span>@match.Date.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                            <span class="result-pill @(match.Approved ? "approved" : "rejected")">
+                                @(match.Approved ? "Aprovado" : "Reprovado")
+                            </span>
+                            <span>@match.Score pts</span>
+                            <span class="@(match.EloDelta >= 0 ? "delta-positive" : "delta-negative")">
+                                @(match.EloDelta >= 0 ? "+" : "")@match.EloDelta Elo
+                            </span>
+                        </article>
+                    }
+                </div>
+            }
+        </section>
     </div>
 </section>

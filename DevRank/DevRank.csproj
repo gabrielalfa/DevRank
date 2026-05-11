@@ -71,6 +71,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ChallengeController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
@@ -80,13 +81,18 @@
     </Compile>
     <Compile Include="Models\Challenge.cs" />
     <Compile Include="Models\ChallengeDetailsViewModel.cs" />
+    <Compile Include="Models\DashboardViewModel.cs" />
+    <Compile Include="Models\EvolutionPoint.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\IntegrationLink.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\MatchHistory.cs" />
     <Compile Include="Models\ProgrammerProfile.cs" />
     <Compile Include="Models\ProfileViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\SkillScore.cs" />
     <Compile Include="Models\SubmissionResultViewModel.cs" />
+    <Compile Include="Models\TechElo.cs" />
     <Compile Include="Services\EloService.cs" />
     <Compile Include="Services\FakeAIService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,6 +107,7 @@
     <Content Include="Views\Challenge\Details.cshtml" />
     <Content Include="Views\Challenge\Index.cshtml" />
     <Content Include="Views\Challenge\Result.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Leaderboard\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />

@@ -1,0 +1,146 @@
+@model DevRank.Models.DashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<section class="dashboard-hero">
+    <div class="dashboard-profile">
+        <div class="fake-avatar" aria-label="Foto fake de @Model.Programmer.Name">
+            @Model.Programmer.Name.Substring(0, 1)
+        </div>
+        <div>
+            <span class="eyebrow">Dashboard do Dev</span>
+            <h1>@Model.Programmer.Name</h1>
+            <p>@Model.Programmer.PerceivedSeniority em calibragem por desafios reais, entrevista simulada e sinais comportamentais.</p>
+            <div class="profile-tags">
+                <span>@Model.Programmer.MainStack</span>
+                <span>@Model.Programmer.SecondaryStack</span>
+                <span>@Model.Programmer.ExperienceTime</span>
+            </div>
+        </div>
+    </div>
+
+    <aside class="dashboard-coach">
+        <span class="eyebrow">Coach insight</span>
+        <p>@Model.CoachInsight</p>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Challenge")">Treinar agora</a>
+    </aside>
+</section>
+
+<section class="dashboard-grid">
+    <article class="metric-card highlight">
+        <span>Elo geral</span>
+        <strong>@Model.Programmer.EloRating</strong>
+        <small>@Model.Programmer.Level / @Model.Programmer.Season</small>
+    </article>
+    <article class="metric-card">
+        <span>Win streak</span>
+        <strong>@Model.Programmer.WinStreak</strong>
+        <small>@Model.Programmer.Wins vitorias / @Model.Programmer.Losses derrotas</small>
+    </article>
+    <article class="metric-card">
+        <span>Winrate</span>
+        <strong>@Model.Programmer.WinRate%</strong>
+        <small>Partidas praticas avaliadas</small>
+    </article>
+    <article class="metric-card">
+        <span>Modulos mapeados</span>
+        <strong>@Model.CompletedModules/@Model.TotalModules</strong>
+        <small>Visao futura da plataforma</small>
+    </article>
+</section>
+
+<section class="dashboard-main">
+    <div class="dashboard-column wide">
+        <article class="dashboard-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Mapa de skills</span>
+                    <h2>Seu nivel real nao e uma nota unica.</h2>
+                </div>
+                <a class="inline-link" href="@Url.Action("Index", "Profile")">Ver perfil completo</a>
+            </div>
+            <div class="skill-chart">
+                @foreach (var skill in Model.Programmer.Skills)
+                {
+                    <div class="skill-line">
+                        <div>
+                            <strong>@skill.Name</strong>
+                            <span>@skill.Group</span>
+                        </div>
+                        <div class="skill-track">
+                            <span style="width:@skill.Score%"></span>
+                        </div>
+                        <em>@skill.Score</em>
+                    </div>
+                }
+            </div>
+        </article>
+
+        <article class="dashboard-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">Arena recomendada</span>
+                    <h2>Proximos desafios com bom atrito.</h2>
+                </div>
+            </div>
+            <div class="recommendation-list">
+                @foreach (var challenge in Model.RecommendedChallenges)
+                {
+                    <a class="recommendation-row" href="@Url.Action("Details", "Challenge", new { id = challenge.Id })">
+                        <div>
+                            <strong>@challenge.Title</strong>
+                            <span>@challenge.Category / @challenge.Difficulty</span>
+                        </div>
+                        <em>@challenge.ChallengeRating Elo</em>
+                    </a>
+                }
+            </div>
+        </article>
+    </div>
+
+    <aside class="dashboard-column">
+        <article class="dashboard-panel">
+            <span class="eyebrow">Entrevista simulada</span>
+            <h2>Proxima pergunta</h2>
+            <p>@Model.NextInterviewPrompt</p>
+            <a class="btn btn-secondary" href="#">Modulo futuro</a>
+        </article>
+
+        <article class="dashboard-panel">
+            <span class="eyebrow">Evolucao</span>
+            <h2>Confiança sob pressao</h2>
+            <div class="evolution-bars">
+                @foreach (var point in Model.Programmer.Evolution)
+                {
+                    <div>
+                        <span style="height:@point.Confidence%"></span>
+                        <small>@point.Label</small>
+                    </div>
+                }
+            </div>
+        </article>
+
+        <article class="dashboard-panel">
+            <span class="eyebrow">Historico recente</span>
+            <h2>Ultimas partidas</h2>
+            @if (Model.RecentHistory.Count == 0)
+            {
+                <p>Nenhuma partida ainda. Complete um desafio para alimentar sua curva.</p>
+            }
+            else
+            {
+                foreach (var match in Model.RecentHistory)
+                {
+                    <div class="compact-history">
+                        <strong>@match.ChallengeTitle</strong>
+                        <span class="@(match.EloDelta >= 0 ? "delta-positive" : "delta-negative")">
+                            @(match.EloDelta >= 0 ? "+" : "")@match.EloDelta Elo
+                        </span>
+                    </div>
+                }
+            }
+        </article>
+    </aside>
+</section>
