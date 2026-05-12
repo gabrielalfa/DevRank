@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using DevRank.Models;
+using DevRank.Services;
 using Db = DevRank.Data.AppData;
 
 namespace DevRank.Controllers
@@ -9,7 +10,7 @@ namespace DevRank.Controllers
     {
         public ActionResult Index()
         {
-            var userId = Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            var userId = AuthSessionService.GetCurrentUserId(this);
 
             if (!userId.HasValue)
             {

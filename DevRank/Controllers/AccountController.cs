@@ -1,5 +1,6 @@
 using System;
 using System.Web.Mvc;
+using System.Web.Security;
 using DevRank.Models;
 using Db = DevRank.Data.AppData;
 
@@ -25,6 +26,7 @@ namespace DevRank.Controllers
 
             Session["UserId"] = programmer.Id;
             Session["UserName"] = programmer.Name;
+            FormsAuthentication.SetAuthCookie(programmer.Id.ToString(), model.RememberMe);
             return RedirectToAction("Index", "Profile");
         }
 
@@ -56,12 +58,14 @@ namespace DevRank.Controllers
             var programmer = Db.Register(model);
             Session["UserId"] = programmer.Id;
             Session["UserName"] = programmer.Name;
+            FormsAuthentication.SetAuthCookie(programmer.Id.ToString(), false);
 
             return RedirectToAction("Index", "Profile");
         }
 
         public ActionResult Logout()
         {
+            FormsAuthentication.SignOut();
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }

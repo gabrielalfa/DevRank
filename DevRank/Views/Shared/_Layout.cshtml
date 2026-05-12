@@ -1,3 +1,7 @@
+@{
+    var isLoggedIn = Session["UserId"] != null || Request.IsAuthenticated;
+}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -25,7 +29,7 @@
             <a href="@Url.Action("Index", "Profile")">Perfil</a>
         </nav>
         <div class="drawer-cta">
-            @if (Session["UserId"] == null)
+            @if (!isLoggedIn)
             {
                 <a class="btn btn-primary" href="@Url.Action("Register", "Account")">Criar perfil técnico</a>
                 <a class="btn btn-secondary" href="@Url.Action("Login", "Account")">Entrar</a>
@@ -53,7 +57,7 @@
                 <a href="@Url.Action("Index", "Profile")">Perfil</a>
             </nav>
             <div class="topbar-actions">
-                @if (Session["UserId"] == null)
+                @if (!isLoggedIn)
                 {
                     <a class="btn btn-ghost" href="@Url.Action("Login", "Account")">Login</a>
                     <a class="btn btn-primary nav-cta" href="@Url.Action("Register", "Account")">Comecar</a>

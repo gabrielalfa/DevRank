@@ -8,7 +8,7 @@ SET time_zone = '-03:00';
 CREATE TABLE IF NOT EXISTS programmers (
     id INT NOT NULL AUTO_INCREMENT,
     username VARCHAR(80) NOT NULL,
-    password VARCHAR(120) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     name VARCHAR(160) NOT NULL,
     fake_photo_url MEDIUMTEXT NULL,
     main_stack VARCHAR(120) NOT NULL,
@@ -80,6 +80,7 @@ CREATE TABLE IF NOT EXISTS community_challenges (
     challenge_type VARCHAR(100) NOT NULL,
     category VARCHAR(100) NOT NULL,
     scenario TEXT NOT NULL,
+    code_snippet MEDIUMTEXT NULL,
     expected_answer TEXT NULL,
     status VARCHAR(80) NOT NULL DEFAULT 'Em homologação',
     homologation_stage VARCHAR(120) NOT NULL DEFAULT 'Community Review',

@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Criar desafio comunitário";
+    var selectedType = string.IsNullOrWhiteSpace(Model.Type) ? "Cenário real" : Model.Type;
+    var selectedCategory = string.IsNullOrWhiteSpace(Model.Category) ? "Backend" : Model.Category;
 }
 
 <section class="community-form-page">
@@ -34,40 +36,54 @@
                 <label>
                     Tipo
                     <select name="Type">
-                        <option>Cenário real</option>
-                        <option>Desafio técnico</option>
-                        <option>Entrevista</option>
-                        <option>Review de código</option>
-                        <option>Comportamental</option>
+                        <option @(selectedType == "Cenário real" ? "selected" : "")>Cenário real</option>
+                        <option @(selectedType == "Desafio técnico" ? "selected" : "")>Desafio técnico</option>
+                        <option @(selectedType == "Entrevista" ? "selected" : "")>Entrevista</option>
+                        <option @(selectedType == "Review de código" ? "selected" : "")>Review de código</option>
+                        <option @(selectedType == "Comportamental" ? "selected" : "")>Comportamental</option>
                     </select>
                 </label>
                 <label>
                     Categoria
                     <select name="Category">
-                        <option>Backend</option>
-                        <option>Frontend</option>
-                        <option>Arquitetura</option>
-                        <option>SQL</option>
-                        <option>DevOps</option>
-                        <option>Segurança</option>
-                        <option>Liderança</option>
-                        <option>Comunicação</option>
-                        <option>Debugging</option>
-                        <option>Performance</option>
-                        <option>Legado</option>
+                        <option @(selectedCategory == "Backend" ? "selected" : "")>Backend</option>
+                        <option @(selectedCategory == "Frontend" ? "selected" : "")>Frontend</option>
+                        <option @(selectedCategory == "Arquitetura" ? "selected" : "")>Arquitetura</option>
+                        <option @(selectedCategory == "SQL" ? "selected" : "")>SQL</option>
+                        <option @(selectedCategory == "DevOps" ? "selected" : "")>DevOps</option>
+                        <option @(selectedCategory == "Segurança" ? "selected" : "")>Segurança</option>
+                        <option @(selectedCategory == "Liderança" ? "selected" : "")>Liderança</option>
+                        <option @(selectedCategory == "Comunicação" ? "selected" : "")>Comunicação</option>
+                        <option @(selectedCategory == "Debugging" ? "selected" : "")>Debugging</option>
+                        <option @(selectedCategory == "Performance" ? "selected" : "")>Performance</option>
+                        <option @(selectedCategory == "Legado" ? "selected" : "")>Legado</option>
                     </select>
                 </label>
             </div>
 
-            <label>
-                Cenário real
-                <textarea name="Scenario" rows="8" data-community-text placeholder="Descreva contexto, restrições, pressão, impacto e o que o dev precisa decidir.">@Model.Scenario</textarea>
-            </label>
+            <div class="challenge-builder-block">
+                <div>
+                    <strong>1. Descrição do problema</strong>
+                    <span>Contexto, impacto, restrições, pressão e decisão esperada do candidato.</span>
+                </div>
+                <textarea name="Scenario" rows="8" data-community-text placeholder="Ex: Em produção, um endpoint MVC começou a responder acima de 8s no pico. O time precisa reduzir impacto sem reescrever o sistema. Explique o cenário, logs disponíveis, restrições e o que o dev precisa decidir.">@Model.Scenario</textarea>
+            </div>
 
-            <label>
-                Resposta esperada
-                <textarea name="ExpectedAnswer" rows="6" data-community-text placeholder="Explique critérios de avaliação, trade-offs e sinais de uma boa resposta.">@Model.ExpectedAnswer</textarea>
-            </label>
+            <div class="challenge-builder-block">
+                <div>
+                    <strong>2. Código do desafio</strong>
+                    <span>Trecho base que o dev deve analisar, refatorar, depurar ou explicar.</span>
+                </div>
+                <textarea class="code-input" name="CodeSnippet" rows="10" data-community-text spellcheck="false" placeholder="public ActionResult Orders()&#10;{&#10;    var customers = db.Customers.ToList();&#10;    foreach (var customer in customers)&#10;    {&#10;        customer.LastOrder = db.Orders.Where(o => o.CustomerId == customer.Id).FirstOrDefault();&#10;    }&#10;    return View(customers);&#10;}">@Model.CodeSnippet</textarea>
+            </div>
+
+            <div class="challenge-builder-block">
+                <div>
+                    <strong>3. Resposta esperada</strong>
+                    <span>Critérios de avaliação, trade-offs aceitáveis e sinais de maturidade técnica.</span>
+                </div>
+                <textarea name="ExpectedAnswer" rows="7" data-community-text placeholder="Ex: Deve identificar N+1, propor consulta agregada ou projeção, medir antes/depois, evitar overengineering e explicar impacto em produção.">@Model.ExpectedAnswer</textarea>
+            </div>
 
             <div class="anti-spam-strip">
                 <span>Cooldown ativo</span>
@@ -82,6 +98,7 @@
             <span class="eyebrow">Quality gate fake</span>
             <h2>O que será avaliado</h2>
             <div class="quality-rule"><strong>Clareza</strong><span>Cenário compreensível e sem ambiguidade.</span></div>
+            <div class="quality-rule"><strong>Código-base</strong><span>Trecho suficiente para simular trabalho real.</span></div>
             <div class="quality-rule"><strong>Relevância</strong><span>Problema real de engenharia, não trivia.</span></div>
             <div class="quality-rule"><strong>Dificuldade</strong><span>Atrito adequado para o nível técnico.</span></div>
             <div class="quality-rule"><strong>Anti-genérico</strong><span>Bloqueia respostas curtas, vagas ou copiadas.</span></div>

@@ -13,7 +13,7 @@ namespace DevRank.Controllers
 
         public ActionResult Index()
         {
-            var userId = Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            var userId = AuthSessionService.GetCurrentUserId(this);
             var programmer = userId.HasValue ? Db.GetProgrammer(userId.Value) : null;
             var currentRating = programmer == null ? 0 : programmer.EloRating;
             ViewBag.CurrentRating = currentRating;
@@ -36,7 +36,7 @@ namespace DevRank.Controllers
         [HttpPost]
         public ActionResult Submit(int id, string solution)
         {
-            var userId = Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            var userId = AuthSessionService.GetCurrentUserId(this);
 
             if (!userId.HasValue)
             {

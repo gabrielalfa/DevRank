@@ -36,14 +36,31 @@ namespace DevRank.Data
             using (var connection = DbConnectionFactory.Create())
             {
                 connection.Open();
-                using (var command = new MySqlCommand("SELECT * FROM programmers WHERE username = @username AND password = @password LIMIT 1", connection))
+                using (var command = new MySqlCommand("SELECT * FROM programmers WHERE username = @username LIMIT 1", connection))
                 {
                     command.Parameters.AddWithValue("@username", username ?? string.Empty);
-                    command.Parameters.AddWithValue("@password", password ?? string.Empty);
 
                     using (var reader = command.ExecuteReader())
                     {
-                        return reader.Read() ? MapProgrammer(reader) : null;
+                        if (!reader.Read())
+                        {
+                            return null;
+                        }
+
+                        var programmer = MapProgrammer(reader);
+
+                        if (!PasswordHasher.Verify(password, programmer.Password))
+                        {
+                            return null;
+                        }
+
+                        if (PasswordHasher.NeedsUpgrade(programmer.Password))
+                        {
+                            reader.Close();
+                            UpdatePasswordHash(connection, programmer.Id, PasswordHasher.Hash(password));
+                        }
+
+                        return programmer;
                     }
                 }
             }
@@ -64,7 +81,7 @@ SELECT LAST_INSERT_ID();";
                 using (var command = new MySqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@username", model.Username);
-                    command.Parameters.AddWithValue("@password", model.Password);
+                    command.Parameters.AddWithValue("@password", PasswordHasher.Hash(model.Password));
                     command.Parameters.AddWithValue("@name", model.Name);
                     command.Parameters.AddWithValue("@fake_photo_url", "avatar://" + model.Username);
                     command.Parameters.AddWithValue("@main_stack", model.MainStack);
@@ -91,6 +108,16 @@ SELECT LAST_INSERT_ID();";
         public static bool UsernameExistsForAnotherProgrammer(string username, int programmerId)
         {
             return UsernameCount(username, programmerId) > 0;
+        }
+
+        private static void UpdatePasswordHash(MySqlConnection connection, int programmerId, string passwordHash)
+        {
+            using (var command = new MySqlCommand("UPDATE programmers SET password = @password, updated_at = CURRENT_TIMESTAMP WHERE id = @id", connection))
+            {
+                command.Parameters.AddWithValue("@id", programmerId);
+                command.Parameters.AddWithValue("@password", passwordHash);
+                command.ExecuteNonQuery();
+            }
         }
 
         public static void UpdateProgrammer(ProfileEditViewModel model)
@@ -193,6 +220,53 @@ WHERE id = @id";
         public static Challenge GetChallenge(int id)
         {
             return GetChallenges().FirstOrDefault(challenge => challenge.Id == id);
+        }
+
+        public static int CreateManualChallenges(IEnumerable<Challenge> challenges)
+        {
+            var inserted = 0;
+
+            using (var connection = DbConnectionFactory.Create())
+            {
+                connection.Open();
+
+                const string existsSql = "SELECT COUNT(*) FROM challenges WHERE title = @title";
+                const string insertSql = @"
+INSERT INTO challenges
+(title, description, difficulty, category, minimum_rating, estimated_time, fake_code, challenge_rating, is_active)
+VALUES
+(@title, @description, @difficulty, @category, @minimum_rating, @estimated_time, @fake_code, @challenge_rating, 1)";
+
+                foreach (var challenge in challenges)
+                {
+                    using (var existsCommand = new MySqlCommand(existsSql, connection))
+                    {
+                        existsCommand.Parameters.AddWithValue("@title", challenge.Title);
+                        var alreadyExists = Convert.ToInt32(existsCommand.ExecuteScalar()) > 0;
+
+                        if (alreadyExists)
+                        {
+                            continue;
+                        }
+                    }
+
+                    using (var insertCommand = new MySqlCommand(insertSql, connection))
+                    {
+                        insertCommand.Parameters.AddWithValue("@title", challenge.Title);
+                        insertCommand.Parameters.AddWithValue("@description", challenge.Description);
+                        insertCommand.Parameters.AddWithValue("@difficulty", challenge.Difficulty);
+                        insertCommand.Parameters.AddWithValue("@category", challenge.Category);
+                        insertCommand.Parameters.AddWithValue("@minimum_rating", challenge.MinimumRating);
+                        insertCommand.Parameters.AddWithValue("@estimated_time", challenge.EstimatedTime);
+                        insertCommand.Parameters.AddWithValue("@fake_code", challenge.FakeCode);
+                        insertCommand.Parameters.AddWithValue("@challenge_rating", challenge.ChallengeRating);
+                        insertCommand.ExecuteNonQuery();
+                        inserted++;
+                    }
+                }
+            }
+
+            return inserted;
         }
 
         public static List<Challenge> GetRecommendedChallenges(int rating, int count)
@@ -306,23 +380,25 @@ WHERE id = @id";
         public static string ValidateCommunityChallenge(CommunityCreateChallengeViewModel model, ProgrammerProfile programmer)
         {
             if (programmer.CommunityReputation < 120) return "Reputação comunitária insuficiente para publicar.";
-            if (string.IsNullOrWhiteSpace(model.Title) || string.IsNullOrWhiteSpace(model.Scenario)) return "Informe título e cenário real.";
-            if (model.Scenario.Trim().Length < 160) return "O cenário está curto demais. Descreva contexto, restrição, pressão e critério de avaliação.";
+            if (string.IsNullOrWhiteSpace(model.Title) || string.IsNullOrWhiteSpace(model.Scenario)) return "Informe título e descrição do problema.";
+            if (model.Scenario.Trim().Length < 160) return "A descrição está curta demais. Descreva contexto, restrição, pressão e critério de avaliação.";
+            if (string.IsNullOrWhiteSpace(model.CodeSnippet) && IsTechnicalChallenge(model)) return "Inclua o código-base do desafio para revisão técnica.";
+            if (string.IsNullOrWhiteSpace(model.ExpectedAnswer)) return "Informe a resposta esperada para orientar a homologação.";
             return string.Empty;
         }
 
         public static CommunityChallenge SubmitCommunityChallenge(CommunityCreateChallengeViewModel model, ProgrammerProfile programmer)
         {
-            var quality = Math.Min(96, 55 + ((model.Scenario ?? string.Empty).Length / 35) + ((model.ExpectedAnswer ?? string.Empty).Length / 30));
+            var quality = Math.Min(96, 50 + ((model.Scenario ?? string.Empty).Length / 35) + ((model.CodeSnippet ?? string.Empty).Length / 80) + ((model.ExpectedAnswer ?? string.Empty).Length / 30));
 
             using (var connection = DbConnectionFactory.Create())
             {
                 connection.Open();
                 const string sql = @"
 INSERT INTO community_challenges
-(author_id, author_name, title, challenge_type, category, scenario, expected_answer, status, homologation_stage, required_approvals, confidence_score, quality_score, clarity_score, relevance_score, difficulty_score, technical_level, moderator_note, is_official_candidate)
+(author_id, author_name, title, challenge_type, category, scenario, code_snippet, expected_answer, status, homologation_stage, required_approvals, confidence_score, quality_score, clarity_score, relevance_score, difficulty_score, technical_level, moderator_note, is_official_candidate)
 VALUES
-(@author_id, @author_name, @title, @challenge_type, @category, @scenario, @expected_answer, 'Em homologação', 'Community Review', 3, @confidence_score, @quality_score, @clarity_score, @relevance_score, 72, 3, 'Shadow review automático: aguardando validação comunitária.', @official);
+(@author_id, @author_name, @title, @challenge_type, @category, @scenario, @code_snippet, @expected_answer, 'Em homologação', 'Community Review', 3, @confidence_score, @quality_score, @clarity_score, @relevance_score, 72, 3, 'Shadow review automático: aguardando validação comunitária.', @official);
 SELECT LAST_INSERT_ID();";
 
                 using (var command = new MySqlCommand(sql, connection))
@@ -333,6 +409,7 @@ SELECT LAST_INSERT_ID();";
                     command.Parameters.AddWithValue("@challenge_type", model.Type);
                     command.Parameters.AddWithValue("@category", model.Category);
                     command.Parameters.AddWithValue("@scenario", model.Scenario);
+                    command.Parameters.AddWithValue("@code_snippet", string.IsNullOrWhiteSpace(model.CodeSnippet) ? (object)DBNull.Value : model.CodeSnippet);
                     command.Parameters.AddWithValue("@expected_answer", model.ExpectedAnswer);
                     command.Parameters.AddWithValue("@confidence_score", Math.Max(35, quality - 12));
                     command.Parameters.AddWithValue("@quality_score", quality);
@@ -441,30 +518,42 @@ VALUES
         private static List<CommunityReview> GetCommunityReviews()
         {
             var reviews = new List<CommunityReview>();
-            using (var connection = DbConnectionFactory.Create())
+
+            try
             {
-                connection.Open();
-                using (var command = new MySqlCommand("SELECT * FROM community_reviews ORDER BY date DESC", connection))
-                using (var reader = command.ExecuteReader())
+                using (var connection = DbConnectionFactory.Create())
                 {
-                    while (reader.Read())
+                    connection.Open();
+                    using (var command = new MySqlCommand("SELECT * FROM community_reviews ORDER BY date DESC", connection))
+                    using (var reader = command.ExecuteReader())
                     {
-                        reviews.Add(new CommunityReview
+                        while (reader.Read())
                         {
-                            Id = ReadInt(reader, "id"),
-                            ChallengeId = ReadInt(reader, "challenge_id"),
-                            ReviewerName = ReadString(reader, "reviewer_name"),
-                            Decision = ReadString(reader, "decision"),
-                            Comment = ReadString(reader, "comment"),
-                            ClarityScore = ReadInt(reader, "clarity_score"),
-                            RelevanceScore = ReadInt(reader, "relevance_score"),
-                            ReviewerReputation = ReadInt(reader, "reviewer_reputation"),
-                            ReputationDelta = ReadInt(reader, "reputation_delta"),
-                            Date = ReadDate(reader, "date")
-                        });
+                            reviews.Add(new CommunityReview
+                            {
+                                Id = ReadInt(reader, "id"),
+                                ChallengeId = ReadInt(reader, "challenge_id"),
+                                ReviewerName = ReadString(reader, "reviewer_name"),
+                                Decision = ReadString(reader, "decision"),
+                                Comment = ReadString(reader, "comment"),
+                                ClarityScore = ReadInt(reader, "clarity_score"),
+                                RelevanceScore = ReadInt(reader, "relevance_score"),
+                                ReviewerReputation = ReadInt(reader, "reviewer_reputation"),
+                                ReputationDelta = ReadInt(reader, "reputation_delta"),
+                                Date = ReadDate(reader, "date")
+                            });
+                        }
                     }
                 }
             }
+            catch (MySqlException exception)
+            {
+                if (exception.Number != 1146)
+                {
+                    throw;
+                }
+            }
+
             return reviews;
         }
 
@@ -559,6 +648,7 @@ VALUES
                 Type = ReadString(reader, "challenge_type"),
                 Category = ReadString(reader, "category"),
                 Scenario = ReadString(reader, "scenario"),
+                CodeSnippet = HasColumn(reader, "code_snippet") ? ReadString(reader, "code_snippet") : string.Empty,
                 ExpectedAnswer = ReadString(reader, "expected_answer"),
                 Status = ReadString(reader, "status"),
                 HomologationStage = ReadString(reader, "homologation_stage"),
@@ -696,6 +786,32 @@ VALUES
         {
             var value = reader[name];
             return value == DBNull.Value ? DateTime.Now : Convert.ToDateTime(value);
+        }
+
+        private static bool IsTechnicalChallenge(CommunityCreateChallengeViewModel model)
+        {
+            var type = model.Type ?? string.Empty;
+            var category = model.Category ?? string.Empty;
+            return type.IndexOf("técnico", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                type.IndexOf("código", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Backend", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Frontend", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("SQL", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Performance", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Legado", StringComparison.OrdinalIgnoreCase) >= 0;
+        }
+
+        private static bool HasColumn(MySqlDataReader reader, string columnName)
+        {
+            for (var index = 0; index < reader.FieldCount; index++)
+            {
+                if (string.Equals(reader.GetName(index), columnName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private static string[] SplitCsv(string value)

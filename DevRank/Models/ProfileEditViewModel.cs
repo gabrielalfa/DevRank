@@ -1,3 +1,5 @@
+using System.Web;
+
 namespace DevRank.Models
 {
     public class ProfileEditViewModel
@@ -15,6 +17,7 @@ namespace DevRank.Models
         public string LanguagesText { get; set; }
         public string SoftSkillsText { get; set; }
         public string AvatarPreview { get; set; }
+        public HttpPostedFileBase AvatarFile { get; set; }
         public string ErrorMessage { get; set; }
     }
 }

@@ -2,7 +2,9 @@
 
 @{
     ViewBag.Title = "Editar Perfil";
-    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.AvatarPreview) && Model.AvatarPreview.StartsWith("data:");
+    var avatarUrl = Model.AvatarPreview;
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(avatarUrl) && (avatarUrl.StartsWith("data:") || avatarUrl.StartsWith("~/"));
+    var avatarStyleUrl = hasCustomAvatar && avatarUrl.StartsWith("~/") ? Url.Content(avatarUrl) : avatarUrl;
 }
 
 <section class="edit-profile-page">
@@ -15,20 +17,27 @@
         <a class="btn btn-secondary" href="@Url.Action("Index", "Profile")">Voltar ao perfil</a>
     </div>
 
-    <form class="edit-profile-layout" method="post" action="@Url.Action("Edit", "Profile")">
+    <form class="edit-profile-layout" method="post" action="@Url.Action("Edit", "Profile")" enctype="multipart/form-data">
         <input type="hidden" name="Id" value="@Model.Id" />
         <input type="hidden" name="AvatarPreview" value="@Model.AvatarPreview" data-avatar-value />
 
         <aside class="edit-avatar-panel">
             <label class="avatar-upload">
-                <span class="fake-avatar large" data-avatar-preview style="@(hasCustomAvatar ? "background-image:url('" + Model.AvatarPreview + "')" : "")">
-                    @(hasCustomAvatar ? "" : Model.Name.Substring(0, 1))
+                <span class="fake-avatar large @(hasCustomAvatar ? "has-photo" : "")" data-avatar-preview>
+                    @if (hasCustomAvatar)
+                    {
+                        <img src="@avatarStyleUrl" alt="Foto de @Model.Name" data-avatar-preview-image />
+                    }
+                    else
+                    {
+                        <span data-avatar-initial>@Model.Name.Substring(0, 1)</span>
+                    }
                 </span>
                 <span class="avatar-overlay">Alterar foto</span>
-                <input type="file" accept="image/*" data-avatar-input />
+                <input type="file" name="AvatarFile" accept=".jpg,.jpeg,.png,.webp,.gif,image/*" data-avatar-input />
             </label>
             <h2>@Model.Name</h2>
-            <p>Upload fake com preview local. A imagem não é enviada para servidor real.</p>
+            <p>A foto é enviada para a pasta local de uploads do DevRank.</p>
             <div class="profile-tags">
                 <span>Preview público</span>
                 <span>DevRank ID</span>

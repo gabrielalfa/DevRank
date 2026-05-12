@@ -2,14 +2,23 @@
 
 @{
     ViewBag.Title = "Perfil Técnico";
-    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.Programmer.FakePhotoUrl) && Model.Programmer.FakePhotoUrl.StartsWith("data:");
+    var avatarUrl = Model.Programmer.FakePhotoUrl;
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(avatarUrl) && (avatarUrl.StartsWith("data:") || avatarUrl.StartsWith("~/"));
+    var avatarStyleUrl = hasCustomAvatar && avatarUrl.StartsWith("~/") ? Url.Content(avatarUrl) : avatarUrl;
 }
 
 <section class="advanced-profile">
     <aside class="advanced-identity">
         <a class="profile-edit-button" href="@Url.Action("Edit", "Profile")" aria-label="Editar perfil">✎ Editar Perfil</a>
-        <div class="fake-avatar large" aria-label="Foto fake de @Model.Programmer.Name" style="@(hasCustomAvatar ? "background-image:url('" + Model.Programmer.FakePhotoUrl + "')" : "")">
-            @(hasCustomAvatar ? "" : Model.Programmer.Name.Substring(0, 1))
+        <div class="fake-avatar large @(hasCustomAvatar ? "has-photo" : "")" aria-label="Foto de @Model.Programmer.Name">
+            @if (hasCustomAvatar)
+            {
+                <img src="@avatarStyleUrl" alt="Foto de @Model.Programmer.Name" />
+            }
+            else
+            {
+                @Model.Programmer.Name.Substring(0, 1)
+            }
         </div>
         <span class="eyebrow">Perfil técnico avançado</span>
         <h1>@Model.Programmer.Name</h1>

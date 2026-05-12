@@ -24,6 +24,10 @@ Temporary ASP.NET Files/
 # Logs
 *.log
 
+# Uploaded prototype files
+DevRank/Content/Uploads/Avatars/*
+!DevRank/Content/Uploads/Avatars/.gitkeep
+
 # Rider / ReSharper
 .idea/
 _ReSharper*/

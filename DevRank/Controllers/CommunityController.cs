@@ -1,6 +1,7 @@
 using System;
 using System.Web.Mvc;
 using DevRank.Models;
+using DevRank.Services;
 using Db = DevRank.Data.AppData;
 
 namespace DevRank.Controllers
@@ -123,7 +124,7 @@ namespace DevRank.Controllers
 
         private int? GetCurrentUserId()
         {
-            return Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            return AuthSessionService.GetCurrentUserId(this);
         }
     }
 }

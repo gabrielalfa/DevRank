@@ -79,6 +79,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderboardController.cs" />
+    <Compile Include="Controllers\ManutencaoController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Data\AppData.cs" />
     <Compile Include="Data\DbConnectionFactory.cs" />
@@ -110,10 +111,14 @@
     <Compile Include="Models\SubmissionResultViewModel.cs" />
     <Compile Include="Models\TechElo.cs" />
     <Compile Include="Services\EloService.cs" />
+    <Compile Include="Services\AuthSessionService.cs" />
+    <Compile Include="Services\AvatarStorageService.cs" />
     <Compile Include="Services\FakeAIService.cs" />
+    <Compile Include="Services\PasswordHasher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Uploads\Avatars\.gitkeep" />
     <Content Include="Content\site.css" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />

@@ -596,6 +596,22 @@ a {
     padding: 0 14px;
 }
 
+.form-panel .check-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    font-size: 0.92rem;
+}
+
+.form-panel .check-option input {
+    width: 18px;
+    min-height: 18px;
+    height: 18px;
+    flex: 0 0 18px;
+    accent-color: var(--cyan);
+}
+
 .form-panel textarea {
     min-height: 130px;
     padding: 14px;
@@ -888,14 +904,31 @@ a {
     place-items: center;
     width: 112px;
     height: 112px;
+    overflow: hidden;
     border: 2px solid rgba(50, 245, 255, 0.42);
     border-radius: 50%;
     color: #041016;
     background:
         linear-gradient(135deg, var(--cyan), var(--green) 52%, var(--pink));
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
     box-shadow: 0 0 28px rgba(50, 245, 255, 0.18);
     font-size: 3rem;
     font-weight: 900;
+}
+
+.fake-avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+}
+
+.fake-avatar.has-photo {
+    background: #08111d;
 }
 
 .fake-avatar.large {
@@ -1773,6 +1806,30 @@ a {
     font-weight: 800;
 }
 
+.challenge-builder-block {
+    display: grid;
+    gap: 12px;
+    padding: 16px;
+    border: 1px solid rgba(50, 245, 255, 0.12);
+    border-radius: 8px;
+    background: rgba(7, 10, 18, 0.28);
+}
+
+.challenge-builder-block > div {
+    display: grid;
+    gap: 4px;
+}
+
+.challenge-builder-block strong {
+    color: var(--text);
+    font-size: 1rem;
+}
+
+.challenge-builder-block span {
+    color: var(--muted);
+    line-height: 1.55;
+}
+
 .community-form input,
 .community-form textarea,
 .community-form select {
@@ -1794,6 +1851,16 @@ a {
 .community-form textarea {
     padding: 14px;
     resize: vertical;
+}
+
+.community-form .code-input {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    tab-size: 4;
+    background:
+        linear-gradient(180deg, rgba(5, 8, 15, 0.96), rgba(7, 10, 18, 0.96));
+    border-color: rgba(50, 245, 255, 0.22);
 }
 
 .success-box {
@@ -2723,7 +2790,8 @@ a {
 
 .avatar-upload .fake-avatar {
     overflow: hidden;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     transition: transform 160ms ease, box-shadow 160ms ease;
 }

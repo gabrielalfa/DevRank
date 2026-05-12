@@ -3,13 +3,22 @@
 @{
     ViewBag.Title = "Perfil público de " + Model.Programmer.Name;
     var publicUrl = Url.Action("Public", "Profile", new { username = Model.Programmer.Username }, Request.Url.Scheme);
-    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.Programmer.FakePhotoUrl) && Model.Programmer.FakePhotoUrl.StartsWith("data:");
+    var avatarUrl = Model.Programmer.FakePhotoUrl;
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(avatarUrl) && (avatarUrl.StartsWith("data:") || avatarUrl.StartsWith("~/"));
+    var avatarStyleUrl = hasCustomAvatar && avatarUrl.StartsWith("~/") ? Url.Content(avatarUrl) : avatarUrl;
 }
 
 <section class="public-profile-hero">
     <div class="public-identity">
-        <div class="fake-avatar large" style="@(hasCustomAvatar ? "background-image:url('" + Model.Programmer.FakePhotoUrl + "')" : "")">
-            @(hasCustomAvatar ? "" : Model.Programmer.Name.Substring(0, 1))
+        <div class="fake-avatar large @(hasCustomAvatar ? "has-photo" : "")">
+            @if (hasCustomAvatar)
+            {
+                <img src="@avatarStyleUrl" alt="Foto de @Model.Programmer.Name" />
+            }
+            else
+            {
+                @Model.Programmer.Name.Substring(0, 1)
+            }
         </div>
         <div>
             <span class="eyebrow">DevRank public profile</span>

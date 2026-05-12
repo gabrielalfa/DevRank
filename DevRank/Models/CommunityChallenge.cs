@@ -11,6 +11,7 @@ namespace DevRank.Models
         public string Type { get; set; }
         public string Category { get; set; }
         public string Scenario { get; set; }
+        public string CodeSnippet { get; set; }
         public string ExpectedAnswer { get; set; }
         public string Status { get; set; }
         public string HomologationStage { get; set; }

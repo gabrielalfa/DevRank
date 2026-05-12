@@ -116,9 +116,21 @@
             @for (var index = 0; index < Model.TopProgrammers.Count; index++)
             {
                 var programmer = Model.TopProgrammers[index];
+                var avatarUrl = programmer.FakePhotoUrl;
+                var hasCustomAvatar = !string.IsNullOrWhiteSpace(avatarUrl) && (avatarUrl.StartsWith("data:") || avatarUrl.StartsWith("~/"));
+                var avatarStyleUrl = hasCustomAvatar && avatarUrl.StartsWith("~/") ? Url.Content(avatarUrl) : avatarUrl;
                 <a class="leader-row" href="@Url.Action("Public", "Profile", new { username = programmer.Username })">
                     <div class="position">#@(index + 1)</div>
-                    <div class="fake-avatar mini">@programmer.Name.Substring(0, 1)</div>
+                    <div class="fake-avatar mini @(hasCustomAvatar ? "has-photo" : "")">
+                        @if (hasCustomAvatar)
+                        {
+                            <img src="@avatarStyleUrl" alt="Foto de @programmer.Name" />
+                        }
+                        else
+                        {
+                            @programmer.Name.Substring(0, 1)
+                        }
+                    </div>
                     <div class="player">
                         <strong>@programmer.Name</strong>
                         <span>@programmer.MainStack</span>

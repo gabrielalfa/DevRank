@@ -52,7 +52,7 @@
 
     var avatarInput = document.querySelector("[data-avatar-input]");
     var avatarPreview = document.querySelector("[data-avatar-preview]");
-    var avatarValue = document.querySelector("[data-avatar-value]");
+    var avatarPreviewImage = document.querySelector("[data-avatar-preview-image]");
 
     if (avatarInput && avatarPreview) {
         avatarInput.addEventListener("change", function () {
@@ -66,12 +66,21 @@
 
             reader.onload = function (event) {
                 var result = event.target.result;
-                avatarPreview.textContent = "";
-                avatarPreview.style.backgroundImage = "url('" + result + "')";
+                var initial = avatarPreview.querySelector("[data-avatar-initial]");
 
-                if (avatarValue) {
-                    avatarValue.value = result;
+                if (initial) {
+                    initial.parentNode.removeChild(initial);
                 }
+
+                if (!avatarPreviewImage) {
+                    avatarPreviewImage = document.createElement("img");
+                    avatarPreviewImage.setAttribute("alt", "Preview da foto");
+                    avatarPreviewImage.setAttribute("data-avatar-preview-image", "");
+                    avatarPreview.appendChild(avatarPreviewImage);
+                }
+
+                avatarPreview.classList.add("has-photo");
+                avatarPreviewImage.src = result;
             };
 
             reader.readAsDataURL(file);

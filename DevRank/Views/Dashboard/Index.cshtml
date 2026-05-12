@@ -2,13 +2,22 @@
 
 @{
     ViewBag.Title = "Dashboard";
-    var hasCustomAvatar = !string.IsNullOrWhiteSpace(Model.Programmer.FakePhotoUrl) && Model.Programmer.FakePhotoUrl.StartsWith("data:");
+    var avatarUrl = Model.Programmer.FakePhotoUrl;
+    var hasCustomAvatar = !string.IsNullOrWhiteSpace(avatarUrl) && (avatarUrl.StartsWith("data:") || avatarUrl.StartsWith("~/"));
+    var avatarStyleUrl = hasCustomAvatar && avatarUrl.StartsWith("~/") ? Url.Content(avatarUrl) : avatarUrl;
 }
 
 <section class="dashboard-hero">
     <div class="dashboard-profile">
-        <div class="fake-avatar" aria-label="Foto fake de @Model.Programmer.Name" style="@(hasCustomAvatar ? "background-image:url('" + Model.Programmer.FakePhotoUrl + "')" : "")">
-            @(hasCustomAvatar ? "" : Model.Programmer.Name.Substring(0, 1))
+        <div class="fake-avatar @(hasCustomAvatar ? "has-photo" : "")" aria-label="Foto de @Model.Programmer.Name">
+            @if (hasCustomAvatar)
+            {
+                <img src="@avatarStyleUrl" alt="Foto de @Model.Programmer.Name" />
+            }
+            else
+            {
+                @Model.Programmer.Name.Substring(0, 1)
+            }
         </div>
         <div>
             <span class="eyebrow">Dashboard do Dev</span>

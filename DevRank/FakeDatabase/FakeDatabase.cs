@@ -264,9 +264,20 @@ namespace DevRank.FakeDatabase
 
         public static ProgrammerProfile Authenticate(string username, string password)
         {
-            return Programmers.FirstOrDefault(programmer =>
-                programmer.Username.ToLower() == (username ?? string.Empty).ToLower() &&
-                programmer.Password == password);
+            var programmer = Programmers.FirstOrDefault(item =>
+                item.Username.ToLower() == (username ?? string.Empty).ToLower());
+
+            if (programmer == null || !PasswordHasher.Verify(password, programmer.Password))
+            {
+                return null;
+            }
+
+            if (PasswordHasher.NeedsUpgrade(programmer.Password))
+            {
+                programmer.Password = PasswordHasher.Hash(password);
+            }
+
+            return programmer;
         }
 
         public static ProgrammerProfile Register(RegisterViewModel model)
@@ -275,7 +286,7 @@ namespace DevRank.FakeDatabase
             {
                 Id = _nextProgrammerId++,
                 Username = model.Username,
-                Password = model.Password,
+                Password = PasswordHasher.Hash(model.Password),
                 Name = model.Name,
                 FakePhotoUrl = "avatar://" + model.Username,
                 MainStack = model.MainStack,
@@ -363,6 +374,26 @@ namespace DevRank.FakeDatabase
             return Challenges.FirstOrDefault(challenge => challenge.Id == id);
         }
 
+        public static int CreateManualChallenges(IEnumerable<Challenge> challenges)
+        {
+            var inserted = 0;
+            var nextId = Challenges.Any() ? Challenges.Max(challenge => challenge.Id) + 1 : 1;
+
+            foreach (var challenge in challenges)
+            {
+                if (Challenges.Any(item => item.Title.ToLower() == (challenge.Title ?? string.Empty).ToLower()))
+                {
+                    continue;
+                }
+
+                challenge.Id = nextId++;
+                Challenges.Add(challenge);
+                inserted++;
+            }
+
+            return inserted;
+        }
+
         public static List<Challenge> GetRecommendedChallenges(int rating, int count)
         {
             return Challenges
@@ -425,15 +456,25 @@ namespace DevRank.FakeDatabase
 
             if (string.IsNullOrWhiteSpace(model.Title) || string.IsNullOrWhiteSpace(model.Scenario))
             {
-                return "Informe título e cenário real. Contribuições vagas entram em shadow review automaticamente.";
+                return "Informe título e descrição do problema. Contribuições vagas entram em shadow review automaticamente.";
             }
 
             if (model.Scenario.Trim().Length < 160)
             {
-                return "O cenário está curto demais. Descreva contexto, restrição, pressão e critério de avaliação.";
+                return "A descrição está curta demais. Descreva contexto, restrição, pressão e critério de avaliação.";
             }
 
-            if (LooksGeneric(model.Scenario) || LooksGeneric(model.ExpectedAnswer))
+            if (string.IsNullOrWhiteSpace(model.CodeSnippet) && IsTechnicalChallenge(model))
+            {
+                return "Inclua o código-base do desafio para revisão técnica.";
+            }
+
+            if (string.IsNullOrWhiteSpace(model.ExpectedAnswer))
+            {
+                return "Informe a resposta esperada para orientar a homologação.";
+            }
+
+            if (LooksGeneric(model.Scenario) || LooksGeneric(model.CodeSnippet) || LooksGeneric(model.ExpectedAnswer))
             {
                 return "A contribuição parece genérica. Adicione detalhes concretos, trade-offs e sinais de avaliação.";
             }
@@ -453,6 +494,7 @@ namespace DevRank.FakeDatabase
                 Type = model.Type,
                 Category = model.Category,
                 Scenario = model.Scenario,
+                CodeSnippet = model.CodeSnippet,
                 ExpectedAnswer = model.ExpectedAnswer,
                 Status = "Em homologação",
                 HomologationStage = "Community Review",
@@ -561,9 +603,23 @@ namespace DevRank.FakeDatabase
         {
             var score = 55;
             score += Math.Min(20, (model.Scenario ?? string.Empty).Length / 35);
+            score += Math.Min(10, (model.CodeSnippet ?? string.Empty).Length / 80);
             score += Math.Min(15, (model.ExpectedAnswer ?? string.Empty).Length / 30);
             score += string.IsNullOrWhiteSpace(model.Category) ? 0 : 8;
             return Math.Min(96, score);
+        }
+
+        private static bool IsTechnicalChallenge(CommunityCreateChallengeViewModel model)
+        {
+            var type = model.Type ?? string.Empty;
+            var category = model.Category ?? string.Empty;
+            return type.IndexOf("técnico", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                type.IndexOf("código", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Backend", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Frontend", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("SQL", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Performance", StringComparison.OrdinalIgnoreCase) >= 0 ||
+                category.IndexOf("Legado", StringComparison.OrdinalIgnoreCase) >= 0;
         }
 
         private static bool LooksGeneric(string value)

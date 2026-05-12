@@ -12,7 +12,7 @@ namespace DevRank.Data
             get
             {
                 var value = ConfigurationManager.AppSettings["UseFakeDatabase"];
-                return string.IsNullOrWhiteSpace(value) || value.ToLower() == "true";
+                return string.IsNullOrWhiteSpace(value) || value.ToLower() == "false";
             }
         }
 
@@ -70,6 +70,11 @@ namespace DevRank.Data
         public static Challenge GetChallenge(int id)
         {
             return UseFakeDatabase ? FakeDb.GetChallenge(id) : MySqlDatabase.GetChallenge(id);
+        }
+
+        public static int CreateManualChallenges(IEnumerable<Challenge> challenges)
+        {
+            return UseFakeDatabase ? FakeDb.CreateManualChallenges(challenges) : MySqlDatabase.CreateManualChallenges(challenges);
         }
 
         public static List<Challenge> GetRecommendedChallenges(int rating, int count)

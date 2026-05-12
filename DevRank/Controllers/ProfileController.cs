@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using DevRank.Models;
+using DevRank.Services;
 using Db = DevRank.Data.AppData;
 
 namespace DevRank.Controllers
@@ -8,7 +9,7 @@ namespace DevRank.Controllers
     {
         public ActionResult Index()
         {
-            var userId = Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            var userId = AuthSessionService.GetCurrentUserId(this);
 
             if (!userId.HasValue)
             {
@@ -52,7 +53,7 @@ namespace DevRank.Controllers
 
         public ActionResult Edit()
         {
-            var userId = Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            var userId = AuthSessionService.GetCurrentUserId(this);
 
             if (!userId.HasValue)
             {
@@ -73,7 +74,7 @@ namespace DevRank.Controllers
         [HttpPost]
         public ActionResult Edit(ProfileEditViewModel model)
         {
-            var userId = Session["UserId"] == null ? (int?)null : (int)Session["UserId"];
+            var userId = AuthSessionService.GetCurrentUserId(this);
 
             if (!userId.HasValue)
             {
@@ -81,6 +82,13 @@ namespace DevRank.Controllers
             }
 
             model.Id = userId.Value;
+            var currentProgrammer = Db.GetProgrammer(model.Id);
+
+            if (currentProgrammer == null)
+            {
+                Session.Clear();
+                return RedirectToAction("Login", "Account");
+            }
 
             if (string.IsNullOrWhiteSpace(model.Name) ||
                 string.IsNullOrWhiteSpace(model.Username) ||
@@ -99,6 +107,18 @@ namespace DevRank.Controllers
             model.Bio = string.IsNullOrWhiteSpace(model.Bio) ? "Desenvolvedor em evolução na arena DevRank." : model.Bio;
             model.SecondaryStack = string.IsNullOrWhiteSpace(model.SecondaryStack) ? "Em descoberta" : model.SecondaryStack;
             model.ExperienceTime = string.IsNullOrWhiteSpace(model.ExperienceTime) ? "Não informado" : model.ExperienceTime;
+
+            try
+            {
+                var avatarPath = AvatarStorageService.Save(model.AvatarFile, model.Username, Server);
+                model.AvatarPreview = string.IsNullOrWhiteSpace(avatarPath) ? currentProgrammer.FakePhotoUrl : avatarPath;
+            }
+            catch (System.InvalidOperationException exception)
+            {
+                model.ErrorMessage = exception.Message;
+                model.AvatarPreview = currentProgrammer.FakePhotoUrl;
+                return View(model);
+            }
 
             Db.UpdateProgrammer(model);
             Session["UserName"] = model.Name;
